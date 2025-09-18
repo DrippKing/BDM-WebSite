@@ -11,6 +11,7 @@
 body {
     background-color: gainsboro;
     background-color: #00142b;
+    background-color: #093564;
 
 }
 .Topbar {
@@ -156,13 +157,13 @@ table {
     text-align: center;
   }
   #T1{
-    background-color: #3db28c;
-    color: #22654f;
+    background-color: #2fc1df;
+    color: #0a629c;
     grid-row: 1 / 2;
 }
 #T2{
-    background-color: #3db28c;
-    color: #22654f;
+    background-color: #2fc1df;
+    color: #0a629c;
     grid-row: 3 / 4;
 }
 
