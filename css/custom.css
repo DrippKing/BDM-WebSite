@@ -147,7 +147,7 @@ display: block;
 table {
     border-collapse:collapse; /* hace que los bordes se unan y se vea como una sola línea */
     width: 100%;
-    background-color: #11594c;
+    background-color: #00142b;
     color: whitesmoke;
   }
   
@@ -156,8 +156,8 @@ table {
     text-align: center;
   }
   #T1{
-    background-color:#0a332c;
-    color: white;
+    background-color: #3db28c;
+    color: #22654f;
     grid-row: 1 / 2;
 }
 #T2{
