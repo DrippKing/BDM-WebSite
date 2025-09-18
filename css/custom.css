@@ -148,8 +148,8 @@ display: block;
 table {
     border-collapse:collapse; /* hace que los bordes se unan y se vea como una sola línea */
     width: 100%;
-    background-color: #00142b;
-    color: whitesmoke;
+    background-color: #07292e;
+    color: #126d7a;
   }
   
   th, td {
