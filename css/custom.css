@@ -16,7 +16,7 @@ body {
 
 }
 .Topbar {
-background-image: linear-gradient(to right, #4dff00, #001433);
+background-image: linear-gradient(to right, #00C1A7, #001433);
 width: 100vw;
 height: 140px;
 display: block;
@@ -25,7 +25,7 @@ display: block;
 .SearchTopic{
     width: 100%;
     background-color: whitesmoke;
-    border:#2ba74a 5px solid;
+    border:#00C1A7 5px solid;
     border-radius: 15px;
     margin-left: 20px;
     margin-right: 20px;
@@ -149,8 +149,8 @@ display: block;
 table {
     border-collapse:collapse; /* hace que los bordes se unan y se vea como una sola línea */
     width: 100%;
-    background-color: #07292e;
-    color: gainsboro;
+    background-color: white;
+    color: #001433;
   }
   
   th, td {
@@ -158,13 +158,13 @@ table {
     text-align: center;
   }
   #T1{
-    background-color: #2fc1df;
-    color: #0a629c;
+    background-color: #00C1A7;
+    color: #007464;
     grid-row: 1 / 2;
 }
 #T2{
-    background-color: #2fc1df;
-    color: #0a629c;
+    background-color: #001433;
+    color: white;
     grid-row: 3 / 4;
 }
 
