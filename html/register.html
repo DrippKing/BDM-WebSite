@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<script src="../js/bootstrap.bundle.js"></script>
+	<script src="../js/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../css/custom.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+	<title>Registrarse - Mundial Twenty Six</title>
+</head>
+<body>
+	<nav id="MainNavBar" class="Topbar navbar navbar-expand-lg">
+		<div class="container-fluid">
+			<img src="../img/Logo.png" width="80" class="d-inline-block align-text-top" style="margin: 20px;">
+		</div>
+	</nav>
+	<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+		<div class="card p-4" style="border-radius: 30px; min-width: 350px; background: linear-gradient(to bottom, #cccccc, #ffffff, #646464); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+			<h2 class="text-center mb-4" style="color: #001433;">Registrarse</h2>
+			<form>
+				<div class="mb-3 text-center">
+					<div id="avatarPreview" style="width:120px; height:120px; margin:0 auto 10px auto; border-radius:50%; background:#e0e0e0; display:flex; align-items:center; justify-content:center; font-size:50px; color:#b0b0b0; border:3px solid #b0b0b0; overflow:hidden;">
+						<span id="avatarIcon">&#128100;</span>
+					</div>
+					<label for="photo" class="form-label" style="color: #001433;">Foto</label>
+					<input type="file" class="form-control SearchTopic" id="photo" accept="image/*">
+				</div>
+				<div class="mb-3">
+					<label for="fullname" class="form-label" style="color: #001433;">Nombre completo</label>
+					<input type="text" class="form-control SearchTopic" id="fullname" placeholder="Nombre completo" required>
+				</div>
+				<div class="mb-3">
+					<label for="birthdate" class="form-label" style="color: #001433;">Fecha de nacimiento</label>
+					<input type="date" class="form-control SearchTopic" id="birthdate" required>
+				</div>
+				<div class="mb-3">
+					<label for="gender" class="form-label" style="color: #001433;">Sexo</label>
+					<select class="form-control SearchTopic" id="gender" required>
+						<option value="">Selecciona una opción</option>
+						<option value="masculino">Masculino</option>
+						<option value="femenino">Femenino</option>
+						<option value="otro">Otro</option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label" style="color: #001433;">Correo electrónico</label>
+					<input type="email" class="form-control SearchTopic" id="email" placeholder="Correo electrónico" required>
+				</div>
+				<div class="mb-3">
+					<label for="birthcountry" class="form-label" style="color: #001433;">País de nacimiento</label>
+					<input type="text" class="form-control SearchTopic" id="birthcountry" placeholder="País de nacimiento" required>
+				</div>
+				<div class="mb-3">
+					<label for="nationality" class="form-label" style="color: #001433;">Nacionalidad</label>
+					<input type="text" class="form-control SearchTopic" id="nationality" placeholder="Nacionalidad" required>
+				</div>
+				<div class="mb-3">
+					<label for="username" class="form-label" style="color: #001433;">Nombre de usuario</label>
+					<input type="text" class="form-control SearchTopic" id="username" placeholder="Nombre de usuario" required>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label" style="color: #001433;">Contraseña</label>
+					<input type="password" class="form-control SearchTopic" id="password" placeholder="Contraseña" required>
+				</div>
+				<div class="d-grid gap-2">
+					<button type="submit" class="btn btn-success" style="border-radius: 15px; font-size: 25px;">Registrarse</button>
+					<a href="login.html" class="btn btn-outline-primary mt-2" style="border-radius: 15px; font-size: 22px;">¿Ya tienes cuenta? Inicia sesión</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
