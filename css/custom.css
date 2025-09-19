@@ -123,9 +123,8 @@ display: block;
     margin-left: 20px;
     border-radius: 15px;
     border: none;
-    background-color: white;
     width: 98%;
-    height: 50%;
+    height: 100%;
     grid-column: 2 / 4;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -142,24 +141,39 @@ display: block;
     padding-left: 20px;
 }
 #FP-Menu1{
-    border: black 2px solid;
     width: 100%;
     grid-row: 2 / 3;
 }
 table {
-    border-collapse:collapse; /* hace que los bordes se unan y se vea como una sola línea */
-    width: 100%;
     background-color: white;
+    border-collapse:collapse; 
+    width: 100%;
     color: #001433;
+    
   }
   
   th, td {
-    border: 1px solid black;  /* color y grosor de las líneas */
-    text-align: center;
+    border: none; /* Empezamos sin bordes en las celdas */
+    padding: 8px; /* Espacio interno para que el contenido no esté pegado a los bordes */
+    text-align: left;
+
+  }
+  th {
+    border-bottom: 1px solid #00C1A7; /* Borde inferior para los encabezados */
+  }
+  /* Aplica un borde a la derecha de todas las celdas excepto la última de cada fila */
+  td:not(:last-child), th:not(:last-child) {
+    border-right: 1px solid #00C1A7;
+  }
+
+  /* Aplica un borde en la parte inferior de todas las celdas excepto las de la última fila */
+  tr:not(:last-child) td, tr:not(:last-child) th {
+    border-bottom: 1px solid #00C1A7;
   }
   #T1{
-    background-color: #00C1A7;
-    color: #007464;
+    background-image: linear-gradient(to right, #001433,  #00C1A7);
+
+    color: white;
     grid-row: 1 / 2;
 }
 #T2{
