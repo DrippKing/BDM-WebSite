@@ -1,0 +1,74 @@
+/*
+  Archivo: custom-perfil.css
+  Este archivo contiene los estilos personalizados que estaban en el archivo perfil.html.
+*/
+
+body.custom-perfil-bg {
+    background: url('../img/cancha.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.card.custom-perfil-card {
+    border-radius: 30px;
+    min-width: 350px;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    backdrop-filter: blur(2px);
+    color: #001433;
+}
+
+h2.custom-perfil-username {
+    font-size: 2rem;
+}
+
+.perfil-stats {
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn.custom-perfil-btn {
+    border-radius: 20px;
+    border: 2px solid #00C1A7;
+    color: #07907d;
+    font-size: 1.2rem;
+}
+
+.custom-perfil-avatar {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border: 4px solid #00C1A7;
+    box-shadow: 0 0 20px #00C1A7;
+    background: white;
+    object-fit:cover;
+}
+
+hr.custom-perfil-hr {
+    border-color: #023730;
+}
+
+h4.custom-perfil-pub {
+    color:#00C1A7;
+}
+
+.custom-perfil-publicacion {
+    height:100px;
+    color:#001433;
+}
+
+.custom-perfil-add {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #00C1A7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4fafd;
+    cursor: pointer;
+    font-size: 60px;
+    color: #00C1A7;
+    transition: background 0.2s;
+    user-select: none;
+    margin-top: 1.5rem;
+}

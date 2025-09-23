@@ -7,12 +7,13 @@
 	<script src="../js/bootstrap.bundle.js"></script>
 	<script src="../js/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="../css/custom.css">
+	<link rel="stylesheet" href="../css/register.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 	<title>Registrarse - Mundial Twenty Six</title>
 </head>
-<body style="background: url('../img/cancha.jpg') no-repeat center center fixed; background-size: cover;">
+<body class="custom-register-bg">
 	<nav id="MainNavBar" class="Topbar navbar navbar-expand-lg">
 		<div class="container-fluid">
 			 <div id="logobg">
@@ -21,26 +22,26 @@
 		</div>		
 	</nav>
 	<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-		<div class="card p-4" style="border-radius: 30px; min-width: 350px; background: rgba(255,255,255,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.15); backdrop-filter: blur(2px); margin: 30px;">
-			<h2 class="text-center mb-4" style="color: #001433;">Registrarse</h2>
+		<div class="card p-4 custom-register-card">
+			<h2 class="text-center mb-4 custom-register-title">Registrarse</h2>
 			<form>
 				<div class="mb-3 text-center">
-					<div id="avatarPreview" style="width:120px; height:120px; margin:0 auto 10px auto; border-radius:50%; background:#e0e0e0; display:flex; align-items:center; justify-content:center; border:3px solid #b0b0b0; overflow:hidden;">
-						<img src="../img/profile-icon-defaultjpg.jpg" alt="Avatar" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+					<div id="avatarPreview">
+						<img src="../img/profile-icon-defaultjpg.jpg" alt="Avatar">
 					</div>
-					<label for="photo" class="form-label" style="color: #001433;">Foto</label>
+					<label for="photo" class="form-label custom-label">Foto</label>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="fullname" class="form-label w-100 text-center" style="color: #001433;">Nombre completo</label>
-					<input type="text" class="form-control SearchTopic" id="fullname" placeholder="Nombre completo" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="fullname" class="form-label w-100 text-center custom-label">Nombre completo</label>
+					<input type="text" class="form-control SearchTopic" id="fullname" placeholder="Nombre completo" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="birthdate" class="form-label w-100 text-center" style="color: #001433;">Fecha de nacimiento</label>
-					<input type="date" class="form-control SearchTopic" id="birthdate" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="birthdate" class="form-label w-100 text-center custom-label">Fecha de nacimiento</label>
+					<input type="date" class="form-control SearchTopic" id="birthdate" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					   <label class="form-label w-100 text-center" style="color: #001433;">Sexo</label>
-					   <div class="custom-radio-group justify-content-center">
+					<label class="form-label w-100 text-center custom-label">Sexo</label>
+					<div class="custom-radio-group">
 						   <label class="custom-radio">
 							   <input type="radio" name="gender" value="masculino" required>
 							   <span class="custom-radio-circle"></span>
@@ -59,24 +60,24 @@
 					   </div>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="email" class="form-label w-100 text-center" style="color: #001433;">Correo electrónico</label>
-					<input type="email" class="form-control SearchTopic" id="email" placeholder="Correo electrónico" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="email" class="form-label w-100 text-center custom-label">Correo electrónico</label>
+					<input type="email" class="form-control SearchTopic" id="email" placeholder="Correo electrónico" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="birthcountry" class="form-label w-100 text-center" style="color: #001433;">País </label>
-					<input type="text" class="form-control SearchTopic" id="birthcountry" placeholder="País de nacimiento" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="birthcountry" class="form-label w-100 text-center custom-label">País </label>
+					<input type="text" class="form-control SearchTopic" id="birthcountry" placeholder="País de nacimiento" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="nationality" class="form-label w-100 text-center" style="color: #001433;">Nacionalidad</label>
-					<input type="text" class="form-control SearchTopic" id="nationality" placeholder="Nacionalidad" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="nationality" class="form-label w-100 text-center custom-label">Nacionalidad</label>
+					<input type="text" class="form-control SearchTopic" id="nationality" placeholder="Nacionalidad" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="username" class="form-label w-100 text-center" style="color: #001433;">Nombre de usuario</label>
-					<input type="text" class="form-control SearchTopic" id="username" placeholder="Nombre de usuario" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="username" class="form-label w-100 text-center custom-label">Nombre de usuario</label>
+					<input type="text" class="form-control SearchTopic" id="username" placeholder="Nombre de usuario" required>
 				</div>
 				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="password" class="form-label w-100 text-center" style="color: #001433;">Contraseña</label>
-					<input type="password" class="form-control SearchTopic" id="password" placeholder="Contraseña" required style="max-width: 300px; text-align: center; margin: 0 auto;">
+					<label for="password" class="form-label w-100 text-center custom-label">Contraseña</label>
+					<input type="password" class="form-control SearchTopic" id="password" placeholder="Contraseña" required>
 				</div>
 				<div class="d-grid gap-2">
 					<button type="submit" class="btn btn-success" style="border-radius: 15px; font-size: 25px;">Registrarse</button>

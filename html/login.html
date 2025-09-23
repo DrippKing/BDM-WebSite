@@ -7,12 +7,13 @@
 	<script src="../js/bootstrap.bundle.js"></script>
 	<script src="../js/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="../css/custom.css">
+	<link rel="stylesheet" href="../css/login.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 	<title>Iniciar Sesión - Mundial Twenty Six</title>
 </head>
-<body style="background: url('../img/cancha.jpg') no-repeat center center fixed; background-size: cover;">
+<body class="custom-login-bg">
 	
 	<nav class="Topbar navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -22,20 +23,20 @@
 			</div>	
 	</nav>
 	<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-		<div class="card p-4" style="border-radius: 30px; min-width: 350px; background: rgba(255,255,255,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.15); backdrop-filter: blur(2px);">
-			<h2 class="text-center mb-4" style="color: #001433;">Iniciar Sesión</h2>
+		<div class="card p-4 custom-login-card">
+			<h2 class="text-center mb-4 custom-login-title">Iniciar Sesión</h2>
 			<form>
 				<div class="mb-3 text-center">
-					<label for="username" class="form-label" style="color: #001433;">Usuario</label>
-					<input type="text" class="form-control SearchTopic mx-auto" id="username" placeholder="Ingresa tu usuario" required style="max-width: 300px; text-align: center;">
+					<label for="username" class="form-label custom-label">Usuario</label>
+					<input type="text" class="form-control SearchTopic mx-auto" id="username" placeholder="Ingresa tu usuario" required>
 				</div>
 				<div class="mb-3 text-center">
-					<label for="password" class="form-label" style="color: #001433;">Contraseña</label>
-					<input type="password" class="form-control SearchTopic mx-auto" id="password" placeholder="Ingresa tu contraseña" required style="max-width: 300px; text-align: center;">
+					<label for="password" class="form-label custom-label">Contraseña</label>
+					<input type="password" class="form-control SearchTopic mx-auto" id="password" placeholder="Ingresa tu contraseña" required>
 				</div>
 				<div class="d-grid gap-2">
-					<button type="submit" class="btn btn-success" style="border-radius: 15px; font-size: 25px;">Iniciar sesión</button>
-					<a href="register.html" class="btn btn-outline-primary mt-2" style="border-radius: 15px; font-size: 22px;">¿No tienes cuenta? Regístrate</a>
+					<button type="submit" class="btn btn-success custom-login-btn">Iniciar sesión</button>
+					<a href="register.html" class="btn btn-outline-primary mt-2 custom-register-btn">¿No tienes cuenta? Regístrate</a>
 				</div>
 			</form>
 		</div>

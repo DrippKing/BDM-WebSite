@@ -1,0 +1,56 @@
+/*
+  Archivo: custom-register.css
+  Este archivo contiene los estilos personalizados que estaban en el archivo register.html.
+*/
+
+body.custom-register-bg {
+    background: url('../img/cancha.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.card.custom-register-card {
+    border-radius: 30px;
+    min-width: 350px;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    backdrop-filter: blur(2px);
+    margin: 30px;
+}
+
+h2.custom-register-title {
+    color: #001433;
+}
+
+#avatarPreview {
+    width:120px;
+    height:120px;
+    margin:0 auto 10px auto;
+    border-radius:50%;
+    background:#e0e0e0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:3px solid #b0b0b0;
+    overflow:hidden;
+}
+
+#avatarPreview img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.form-label.custom-label {
+    color: #001433;
+}
+
+input.SearchTopic {
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.custom-radio-group {
+    justify-content: center;
+}
