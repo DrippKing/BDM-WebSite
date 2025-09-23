@@ -249,6 +249,9 @@
     padding: 15px; /* Espacio para el texto */
     text-align: left;
 }
+#cards button:hover{
+    width: 75%;
+}
 
 #cards button img {
     /* --- NUEVO --- */
