@@ -1,0 +1,242 @@
+/* --- Global Styles & Fonts --- */
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+* {
+    font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #00142b;
+}
+
+/* --- Header / Navigation Bar --- */
+.Topbar {
+    background-image: linear-gradient(to left, #00C1A7, #001433);
+    width: 100%;
+    padding-block: 20px;
+}
+
+#logobg {
+    background: radial-gradient(circle, white 55%, gray);
+    border-radius: 50%;
+    width: 95px;
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin-right: 20px;
+    box-shadow: #96fff1 0px 0px 25px;
+    cursor: pointer;
+}
+
+.SearchTopic {
+    width: 100%;
+    height: 40px;
+    background-color: whitesmoke;
+    border: #00C1A7 3px solid;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #001433 !important;
+    font-size: 24px;
+}
+
+.SearchTopic::placeholder {
+    color: #0014334d;
+}
+
+.dropdown-menu.mt6 {
+    background-color: #001433de;
+    border: #00C1A7 2px solid;
+    box-shadow: #001433 0px 0px 20px 2px;
+}
+
+.dropdown-item.mt6 {
+    color: #00ffdd;
+}
+
+.nav-link.mt6 {
+    color: whitesmoke;
+}
+
+.nav-link.mt6:hover {
+    text-shadow: 0 0 5px #00ffdd, 0 0 20px #00ffdd;
+}
+
+.nav-link.mt6.show {
+    color: #00ffdd;
+}
+
+.btn.mt6{
+    background-color: #00C1A7;
+    border: none;
+}
+.btn.mt6:hover{
+    background-color: #004654;
+}
+.btn.mt6:active{
+    background-color: #00ffdd;
+    color:#004654 ;
+}
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 20px;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #00C1A7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.profile-picture img {
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid white;
+    color: whitesmoke;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #00C1A7;
+    color: #001433;
+    border: 1px solid #00ffdd;
+}
+
+/* --- Main Layout --- */
+.MainContainer {
+    padding: 20px;
+    width: 100%;
+}
+
+/* --- Sidebar (BN-Container) --- */
+#BN-Container {
+    border: 2px solid whitesmoke;
+    box-shadow: #ffffff 0px 0px 15px;
+    border-radius: 30px;
+    padding: 10px;
+    animation: pulsate-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulsate-glow {
+  0% { box-shadow: #ffffff 0px 0px 15px; }
+  50% { box-shadow: #ffffff 0px 0px 35px 5px; }
+  100% { box-shadow: #ffffff 0px 0px 15px; }
+}
+
+#BN-Container .SC1 {
+    position: relative;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+#BN-Container .SC1 h1 {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    text-shadow: #00ffdd 0px 0px 10px;
+}
+
+#BN-Container .SC1 .SC2 {
+    position: relative;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+#BN-Container .SC1 .SC3 {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70px;
+    overflow: hidden;
+    transition: height 0.4s ease, box-shadow 0.4s ease;
+}
+
+#BN-Container .SC1:hover .SC3 {
+    z-index: 1;
+}
+
+#BN-Container .SC1 .SC2:hover .SC3 {
+    height: 250px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 255, 221, 0.4);
+}
+
+.SC3 h2 {
+    margin: 0;
+    padding: 0 20px;
+    line-height: 70px;
+    font-size: 30px;
+    color: #001433;
+    user-select: none;
+}
+
+.SC3 .SC4 {
+    padding: 0 20px 20px 20px;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.SC3 .SC4 p {
+    text-align: justify;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #001433;
+    user-select: none;
+}
+
+/* --- Main Content Feed (General) --- */
+#Feed-Public {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-width: 0;
+}
+
+.FP-MenuTitle {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#T2 {
+    background-color: transparent;
+    color: white;
+    justify-content: center;
+}

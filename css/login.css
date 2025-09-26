@@ -1,22 +1,19 @@
-/*
-  Archivo: custom-login.css
-  Este archivo contiene los estilos personalizados que estaban en el archivo login.html.
-*/
+/* --- Estilos Únicos para la Página de Login --- */
 
 body.custom-login-bg {
     background: url('../img/cancha.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.card.custom-login-card {
+.custom-login-card {
     border-radius: 30px;
     min-width: 350px;
-    background: rgba(255,255,255,0.7);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(2px);
 }
 
-h2.custom-login-title {
+.custom-login-title {
     color: #001433;
 }
 
@@ -24,17 +21,19 @@ h2.custom-login-title {
     color: #001433;
 }
 
-input.SearchTopic {
+/* Nota: El estilo de .SearchTopic ahora vive en common.css */
+/* Ajustamos el ancho máximo para los inputs del formulario */
+.custom-login-card .SearchTopic {
     max-width: 300px;
     text-align: center;
 }
 
-.btn.custom-login-btn {
+.custom-login-btn {
     border-radius: 15px;
     font-size: 25px;
 }
 
-.btn.custom-register-btn {
+.custom-register-btn {
     border-radius: 15px;
     font-size: 22px;
 }

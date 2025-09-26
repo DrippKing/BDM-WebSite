@@ -1,89 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - Mundial Twenty Six</title>
+
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
-	<script src="../js/bootstrap.bundle.js"></script>
-	<script src="../js/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../css/index.css">
-	<link rel="stylesheet" href="../css/register.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-	<title>Registrarse - Mundial Twenty Six</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/register.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body class="custom-register-bg">
-	<nav id="MainNavBar" class="Topbar navbar navbar-expand-lg">
-		<div class="container-fluid">
-			 <div id="logobg">
-                    <img src="../img/Logo.png" width="80" class="d-inline-block align-text-top">
+    <div id="navbar-placeholder" data-template="navbar-simple"></div>
+
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh; padding: 20px 0;">
+        <div class="card p-4 custom-register-card">
+            <h2 class="text-center mb-4 custom-register-title">Registrarse</h2>
+            <form>
+                <div class="mb-3 text-center">
+                    <div id="avatarPreview">
+                        <img src="../img/profile-icon-default.jpg" alt="Avatar">
+                    </div>
+                    <label for="photo" class="form-label custom-label">Foto</label>
                 </div>
-		</div>		
-	</nav>
-	<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-		<div class="card p-4 custom-register-card">
-			<h2 class="text-center mb-4 custom-register-title">Registrarse</h2>
-			<form>
-				<div class="mb-3 text-center">
-					<div id="avatarPreview">
-						<img src="../img/profile-icon-default.jpg" alt="Avatar">
-					</div>
-					<label for="photo" class="form-label custom-label">Foto</label>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="fullname" class="form-label w-100 text-center custom-label">Nombre completo</label>
-					<input type="text" class="form-control SearchTopic" id="fullname" placeholder="Nombre completo" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="birthdate" class="form-label w-100 text-center custom-label">Fecha de nacimiento</label>
-					<input type="date" class="form-control SearchTopic" id="birthdate" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label class="form-label w-100 text-center custom-label">Sexo</label>
-					<div class="custom-radio-group">
-						   <label class="custom-radio">
-							   <input type="radio" name="gender" value="masculino" required>
-							   <span class="custom-radio-circle"></span>
-							   Masculino
-						   </label>
-						   <label class="custom-radio">
-							   <input type="radio" name="gender" value="femenino" required>
-							   <span class="custom-radio-circle"></span>
-							   Femenino
-						   </label>
-						   <label class="custom-radio">
-							   <input type="radio" name="gender" value="otro" required>
-							   <span class="custom-radio-circle"></span>
-							   Otro
-						   </label>
-					   </div>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="email" class="form-label w-100 text-center custom-label">Correo electrónico</label>
-					<input type="email" class="form-control SearchTopic" id="email" placeholder="Correo electrónico" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="birthcountry" class="form-label w-100 text-center custom-label">País </label>
-					<input type="text" class="form-control SearchTopic" id="birthcountry" placeholder="País de nacimiento" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="nationality" class="form-label w-100 text-center custom-label">Nacionalidad</label>
-					<input type="text" class="form-control SearchTopic" id="nationality" placeholder="Nacionalidad" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="username" class="form-label w-100 text-center custom-label">Nombre de usuario</label>
-					<input type="text" class="form-control SearchTopic" id="username" placeholder="Nombre de usuario" required>
-				</div>
-				<div class="mb-3 d-flex flex-column align-items-center">
-					<label for="password" class="form-label w-100 text-center custom-label">Contraseña</label>
-					<input type="password" class="form-control SearchTopic" id="password" placeholder="Contraseña" required>
-				</div>
-				<div class="d-grid gap-2">
-					<button type="submit" class="btn btn-success" style="border-radius: 15px; font-size: 25px;" onclick="event.preventDefault(); window.location.href='login.html';">Registrarse</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="fullname" class="form-label w-100 text-center custom-label">Nombre completo</label>
+                    <input type="text" class="form-control SearchTopic" id="fullname" placeholder="Nombre completo" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="birthdate" class="form-label w-100 text-center custom-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control SearchTopic" id="birthdate" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label class="form-label w-100 text-center custom-label">Sexo</label>
+                    <div class="custom-radio-group">
+                           <label class="custom-radio">
+                               <input type="radio" name="gender" value="masculino" required>
+                               <span class="custom-radio-circle"></span>
+                               Masculino
+                           </label>
+                           <label class="custom-radio">
+                               <input type="radio" name="gender" value="femenino" required>
+                               <span class="custom-radio-circle"></span>
+                               Femenino
+                           </label>
+                           <label class="custom-radio">
+                               <input type="radio" name="gender" value="otro" required>
+                               <span class="custom-radio-circle"></span>
+                               Otro
+                           </label>
+                       </div>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="email" class="form-label w-100 text-center custom-label">Correo electrónico</label>
+                    <input type="email" class="form-control SearchTopic" id="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="birthcountry" class="form-label w-100 text-center custom-label">País</label>
+                    <input type="text" class="form-control SearchTopic" id="birthcountry" placeholder="País de nacimiento" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="nationality" class="form-label w-100 text-center custom-label">Nacionalidad</label>
+                    <input type="text" class="form-control SearchTopic" id="nationality" placeholder="Nacionalidad" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="username" class="form-label w-100 text-center custom-label">Nombre de usuario</label>
+                    <input type="text" class="form-control SearchTopic" id="username" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <label for="password" class="form-label w-100 text-center custom-label">Contraseña</label>
+                    <input type="password" class="form-control SearchTopic" id="password" placeholder="Contraseña" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success mt6" style="border-radius: 15px; font-size: 25px;">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js"></script> </body>
 </html>

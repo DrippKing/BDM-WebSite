@@ -1,56 +1,68 @@
-/*
-  Archivo: custom-register.css
-  Este archivo contiene los estilos personalizados que estaban en el archivo register.html.
-*/
+/* --- Estilos Únicos para la Página de Registro --- */
 
 body.custom-register-bg {
     background: url('../img/cancha.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.card.custom-register-card {
+.custom-register-card {
     border-radius: 30px;
-    min-width: 350px;
-    background: rgba(255,255,255,0.7);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    backdrop-filter: blur(2px);
-    margin: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    color: #001433;
+    max-width: 500px;
+    width: 100%;
 }
 
-h2.custom-register-title {
+.custom-register-title {
     color: #001433;
 }
 
 #avatarPreview {
-    width:120px;
-    height:120px;
-    margin:0 auto 10px auto;
-    border-radius:50%;
-    background:#e0e0e0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:3px solid #b0b0b0;
-    overflow:hidden;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #00C1A7;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
 }
 
 #avatarPreview img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .form-label.custom-label {
     color: #001433;
+    font-size: 22px;
 }
 
-input.SearchTopic {
-    max-width: 300px;
+.custom-register-card .SearchTopic {
     text-align: center;
-    margin: 0 auto;
 }
 
 .custom-radio-group {
+    display: flex;
     justify-content: center;
+    gap: 20px;
+    color: #001433;
 }
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    user-select: none;
+}
+
+.custom-radio input[type="radio"] {
+    opacity: 0;
+    position: absolute;
