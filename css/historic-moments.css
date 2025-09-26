@@ -1,0 +1,27 @@
+/* --- Layout específico para esta página --- */
+.MainContainer {
+    display: grid;
+    /* Una columna angosta para el título y el resto para el contenido */
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+}
+
+/* --- Estilos del Título Vertical --- */
+#vertical-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    writing-mode: vertical-rl;
+    grid-column: 1 / 2; /* Posiciona en la primera columna */
+}
+
+.vertical-text {
+    transform: rotate(180deg);
+    white-space: nowrap;
+    font-size: 70px;
+    color: white;
+    text-shadow: #00ffdd 0px 0px 10px;
+    letter-spacing: 20px;
+    user-select: none;
+}

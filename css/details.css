@@ -22,24 +22,3 @@
     font-family: Arial, sans-serif;
     font-size: 18px;
 }
-
-/* Título vertical (puede ser usado en otras páginas pero es específico de este layout) */
-#vertical-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    grid-row: 1 / span 2;
-    grid-column: 1 / 2;
-    width: 150px;
-    writing-mode: vertical-rl;
-}
-
-.vertical-text {
-    transform: rotate(180deg);
-    white-space: nowrap;
-    font-size: 70px;
-    color: white;
-    text-shadow: #00ffdd 0px 0px 10px;
-    letter-spacing: 20px;
-    user-select: none;
-}

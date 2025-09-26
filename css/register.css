@@ -66,3 +66,33 @@ body.custom-register-bg {
 .custom-radio input[type="radio"] {
     opacity: 0;
     position: absolute;
+    cursor: pointer;
+}
+
+.custom-radio-circle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #00C1A7;
+    border-radius: 50%;
+    margin-right: 8px;
+    background: #fff;
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-radio-circle {
+    border-color: #0074d9;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-radio-circle::after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: #0074d9;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

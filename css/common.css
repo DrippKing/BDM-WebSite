@@ -171,7 +171,7 @@ body {
 }
 
 #BN-Container .SC1 .SC3 {
-    background-color: whitesmoke;
+    background-color: #ffffff25;
     border: 2px solid black;
     border-radius: 15px;
     width: 100%;
@@ -199,7 +199,7 @@ body {
     padding: 0 20px;
     line-height: 70px;
     font-size: 30px;
-    color: #001433;
+    color: #ffffff;
     user-select: none;
 }
 
