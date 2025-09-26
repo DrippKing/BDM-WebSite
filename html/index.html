@@ -1,336 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
-    <script src="../js/bootstrap.bundle.js"></script>
-    <script src="../js/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="../css/index.css">
+
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
+
+    <script src="/js/bootstrap.bundle.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>Mundial Twenty Six - News</title>
 </head>
-    <body>
-        <nav class="Topbar navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <div id="logobg" onclick="window.location.href='index.html'">
-                    <img src="../img/Logo.png" width="80" class="d-inline-block align-text-top">
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Momentos Históricos
-                            </a>
-                            <ul class="dropdown-menu mt6">
-                                <li><a class="dropdown-item mt6" href="#">Finales Inolvidables</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Goles Legendarios</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Grandes Controversias</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item mt6" href="#">Mascotas y Canciones</a></li>
-                            </ul>
-                        </li>
-        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Estadísticas
-                            </a>
-                            <ul class="dropdown-menu mt6">
-                                <li><a class="dropdown-item mt6" href="#">Tabla Histórica de Campeones</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Máximos Goleadores</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Ganadores del Balón de Oro</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item mt6" href="#">Récords y Curiosidades</a></li>
-                            </ul>
-                        </li>
-        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Jugadores y Equipos
-                            </a>
-                            <ul class="dropdown-menu mt6">
-                                <li><a class="dropdown-item mt6" href="#">Jugadores de Leyenda</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Selecciones Históricas</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item mt6" href="#">Buscar Jugador...</a></li>
-                                <li><a class="dropdown-item mt6" href="#">Buscar Equipo...</a></li>
-                            </ul>
-                        </li>
-        
-                    </ul>
-                    <form style="width: 100%;" class="d-flex" role="search">
-                        <input class="SearchTopic form-control" type="search" placeholder="Buscar" aria-label="Buscar">
-                    </form>
-                    
-                    <div class="profile-container">
-                        <div class="profile-picture">
-                            <img src="/img/profile-icon-default.jpg" alt="Foto de perfil">
-                        </div>
-                        <button class="btn-login">Iniciar Sesión</button>
-                    </div>
-                    
-                </div>
+
+<body>
+    <nav class="Topbar navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div id="logobg" onclick="window.location.href='index.html'">
+                <img src="../img/Logo.png" width="80" class="d-inline-block align-text-top">
             </div>
-        </nav>
-        <div class="MainContainer">
-<!--             <div id="BN-Container">
-                <div class="SC1">
-                    <h1>Categorias</h1>
-                    <div class="SC2">
-                        <h2>Jugadas</h2>
-                        <div class="SC3">
-                            <p>Las jugadas más memorables de los mundiales son aquellas que marcaron un antes y un después en la historia del fútbol: goles imposibles, atajadas heroicas y momentos de genialidad que definieron campeonatos. Estas acciones se convierten en recuerdos eternos para los aficionados.</p>
-                        </div>
-                    </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
 
-                    <div class="SC2">
-                        <h2>Entrevistas</h2>
-                        <div class="SC3">
-                            <p>Las entrevistas mas famosas de los jugadores, entrenadores y personalidades comparten sus experiencias, emociones y reflexiones sobre los triunfos, derrotas y aprendizajes que deja un mundial.</p>
-                        </div>
-                    </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Momentos Históricos
+                        </a>
+                        <ul class="dropdown-menu mt6">
+                            <li><a class="dropdown-item mt6" href="#">Finales Inolvidables</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Goles Legendarios</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Grandes Controversias</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item mt6" href="#">Mascotas y Canciones</a></li>
+                        </ul>
+                    </li>
 
-                    <div class="SC2">
-                        <h2>Partidos</h2>
-                        <div class="SC3">
-                            <p>Cada mundial está lleno de partidos históricos que se convierten en leyenda. Desde finales que mantuvieron al mundo en vilo, hasta encuentros sorpresivos donde los favoritos fueron derrotados, cada partido deja huella en la memoria de los fanáticos.</p>
-                        </div>
-                    </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Estadísticas
+                        </a>
+                        <ul class="dropdown-menu mt6">
+                            <li><a class="dropdown-item mt6" href="#">Tabla Histórica de Campeones</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Máximos Goleadores</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Ganadores del Balón de Oro</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item mt6" href="#">Récords y Curiosidades</a></li>
+                        </ul>
+                    </li>
 
-                    <div class="SC2">
-                        <h2>Estadisticas</h2>
-                        <div class="SC3">
-                            <p>Los números cuentan una parte fundamental de la historia del mundial: récords de goles, selecciones con más títulos, jugadores con mayor número de participaciones y datos curiosos que ayudan a dimensionar la grandeza del torneo.</p>
-                        </div>
-                    </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Jugadores y Equipos
+                        </a>
+                        <ul class="dropdown-menu mt6">
+                            <li><a class="dropdown-item mt6" href="#">Jugadores de Leyenda</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Selecciones Históricas</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item mt6" href="#">Buscar Jugador...</a></li>
+                            <li><a class="dropdown-item mt6" href="#">Buscar Equipo...</a></li>
+                        </ul>
+                    </li>
 
-                    <div class="SC2">
-                        <h2>Asistentes</h2>
-                        <div class="SC3">
-                            <p>El mundial no sería lo mismo sin la pasión de los aficionados. Los asistentes llevan la fiesta a los estadios con cánticos, banderas y colores que convierten cada encuentro en una celebración cultural y deportiva sin igual.</p>
-                        </div>
-                    </div>
+                </ul>
+                <form style="width: 100%;" class="d-flex" role="search">
+                    <input class="SearchTopic form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                </form>
 
-                    <div class="SC2">
-                        <h2>Incidentes</h2>
-                        <div class="SC3">
-                            <p>Incidentes que alteraron el curso de los mundiales: suspensiones, accidentes, altercados dentro y fuera de la cancha. Estos episodios forman parte del lado inesperado de la competencia.</p>
-                        </div>
+                <div class="profile-container">
+                    <div class="profile-picture">
+                        <img src="/img/profile-icon-default.jpg" alt="Foto de perfil">
                     </div>
-                    
-                    <div class="SC2">
-                        <h2>Polemicas</h2>
-                        <div class="SC3">
-                            <p>Decisiones arbitrales controvertidas, jugadas dudosas y situaciones que generaron intensos debates entre jugadores, prensa y aficionados. Las polémicas son parte del folclore del torneo.</p>
-                        </div>
-                    </div>
-
-                    <div class="SC2">
-                        <h2>Sedes</h2>
-                        <div class="SC3">
-                            <p>Cada país anfitrión le da una identidad única al mundial. Las ciudades, los estadios y la organización reflejan la cultura local y crean un ambiente especial donde el fútbol se mezcla con la hospitalidad y las tradiciones de cada nación.</p>
-                        </div>
-                    </div>
-
-                    <div class="SC2">
-                        <h2>Cultura</h2>
-                        <div class="SC3">
-                            <p>El mundial es mucho más que fútbol: es un fenómeno cultural. Representa un punto de encuentro donde la música, la danza, la gastronomía y las tradiciones locales se unen para mostrar al mundo la diversidad y riqueza cultural de cada país sede.</p>
-                        </div>
-                    </div>
-
+                    <button class="btn-login">Iniciar Sesión</button>
                 </div>
-            </div>
- -->            <div id="Feed-Public">
-                <h1 id="T1" class="FP-MenuTitle">Mundiales</h1>
-                <div id="cards">
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Uruguay_1930_WC.jpg" alt="Póster oficial del Mundial Uruguay 1930">
-                        <div class="card-content">
-                            <h2>Uruguay 1930</h2>
-                            <p>Campeón: Uruguay</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Italy_1934_WC.jpg" alt="Póster oficial del Mundial Italia 1934">
-                        <div class="card-content">
-                            <h2>Italia 1934</h2>
-                            <p>Campeón: Italia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/France_1938_WC.jpg" alt="Póster oficial del Mundial Francia 1938">
-                        <div class="card-content">
-                            <h2>Francia 1938</h2>
-                            <p>Campeón: Italia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Brazil_1950_WC.jpg" alt="Póster oficial del Mundial Brasil 1950">
-                        <div class="card-content">
-                            <h2>Brasil 1950</h2>
-                            <p>Campeón: Uruguay</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Switzerland_1954_WC.jpg" alt="Póster oficial del Mundial Suiza 1954">
-                        <div class="card-content">
-                            <h2>Suiza 1954</h2>
-                            <p>Campeón: Alemania Federal</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Sweden_1958_WC.jpg" alt="Póster oficial del Mundial Suecia 1958">
-                        <div class="card-content">
-                            <h2>Suecia 1958</h2>
-                            <p>Campeón: Brasil</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Chile_1962_WC.jpg" alt="Póster oficial del Mundial Chile 1962">
-                        <div class="card-content">
-                            <h2>Chile 1962</h2>
-                            <p>Campeón: Brasil</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/England_1966_WC.jpg" alt="Póster oficial del Mundial Inglaterra 1966">
-                        <div class="card-content">
-                            <h2>Inglaterra 1966</h2>
-                            <p>Campeón: Inglaterra</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Mexico_1970_WC.jpg" alt="Póster oficial del Mundial México 1970">
-                        <div class="card-content">
-                            <h2>México 1970</h2>
-                            <p>Campeón: Brasil</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Germany_1974_WC.jpg" alt="Póster oficial del Mundial Alemania 1974">
-                        <div class="card-content">
-                            <h2>Alemania 1974</h2>
-                            <p>Campeón: Alemania Federal</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Argentina_1978_WC.jpg" alt="Póster oficial del Mundial Argentina 1978">
-                        <div class="card-content">
-                            <h2>Argentina 1978</h2>
-                            <p>Campeón: Argentina</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Spain_1982_WC.jpg" alt="Póster oficial del Mundial España 1982">
-                        <div class="card-content">
-                            <h2>España 1982</h2>
-                            <p>Campeón: Italia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Mexico_1986_WC.jpg" alt="Póster oficial del Mundial México 1986">
-                        <div class="card-content">
-                            <h2>México 1986</h2>
-                            <p>Campeón: Argentina</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Italy_1990_WC.jpg" alt="Póster oficial del Mundial Italia 1990">
-                        <div class="card-content">
-                            <h2>Italia 1990</h2>
-                            <p>Campeón: Alemania Federal</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/UnitedStatesOfAmerica_1994_WC.jpg" alt="Póster oficial del Mundial EE.UU. 1994">
-                        <div class="card-content">
-                            <h2>EE.UU. 1994</h2>
-                            <p>Campeón: Brasil</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/France_1998_WC.jpg" alt="Póster oficial del Mundial Francia 1998">
-                        <div class="card-content">
-                            <h2>Francia 1998</h2>
-                            <p>Campeón: Francia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Japan_2002_WC.jpg" alt="Póster oficial del Mundial Corea/Japón 2002">
-                        <div class="card-content">
-                            <h2>Corea/Japón 2002</h2>
-                            <p>Campeón: Brasil</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Germany_2006_WC.jpg" alt="Póster oficial del Mundial Alemania 2006">
-                        <div class="card-content">
-                            <h2>Alemania 2006</h2>
-                            <p>Campeón: Italia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/SouthAfrica_2010_WC.jpg" alt="Póster oficial del Mundial Sudáfrica 2010">
-                        <div class="card-content">
-                            <h2>Sudáfrica 2010</h2>
-                            <p>Campeón: España</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Brazil_2014_WC.jpg" alt="Póster oficial del Mundial Brasil 2014">
-                        <div class="card-content">
-                            <h2>Brasil 2014</h2>
-                            <p>Campeón: Alemania</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Russia_2018_WC.jpg" alt="Póster oficial del Mundial Rusia 2018">
-                        <div class="card-content">
-                            <h2>Rusia 2018</h2>
-                            <p>Campeón: Francia</p>
-                        </div>
-                    </button>
-                    <button class="card">
-                        <img src="/assets/fifa world cup posters/Qatar_2022_WC.jpg" alt="Póster oficial del Mundial Qatar 2022">
-                        <div class="card-content">
-                            <h2>Qatar 2022</h2>
-                            <p>Campeón: Argentina</p>
-                        </div>
-                    </button>
-                </div>
-                                    <!-- <h1 id="T2" class="FP-MenuTitle">Live the experience like you're on the field</h1> -->
 
             </div>
-            
         </div>
-        <script>
-            // Espera a que todo el documento HTML esté completamente cargado
-            window.addEventListener('DOMContentLoaded', () => {
-                
-                // 1. Seleccionamos todas las tarjetas
-                const todasLasTarjetas = document.querySelectorAll('#cards .card');
-        
-                // 2. Recorremos cada tarjeta para añadirle el evento de clic
-                todasLasTarjetas.forEach(tarjeta => {
-                    tarjeta.addEventListener('click', () => {
-                        // 3. Dentro de la tarjeta clickeada, encontramos el título h2
-                        const titulo = tarjeta.querySelector('h2').textContent;
-        
-                        // 4. Reemplazamos espacios con guiones bajos para que sea seguro en una URL
-                        const tituloParaUrl = titulo.replace(/ /g, '_');
-        
-                        // 5. Redirigimos al usuario a la página de detalles con el parámetro en la URL
-                        window.location.href = `details.html?edicion=${tituloParaUrl}`;
-                    });
+    </nav>
+    <div class="MainContainer">
+        <div id="Feed-Public">
+            <h1 id="T1" class="FP-MenuTitle">Mundiales</h1>
+            <div id="cards">
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Uruguay_1930_WC.jpg"
+                        alt="Póster oficial del Mundial Uruguay 1930">
+                    <div class="card-content">
+                        <h2>Uruguay 1930</h2>
+                        <p>Campeón: Uruguay</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Italy_1934_WC.jpg"
+                        alt="Póster oficial del Mundial Italia 1934">
+                    <div class="card-content">
+                        <h2>Italia 1934</h2>
+                        <p>Campeón: Italia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/France_1938_WC.jpg"
+                        alt="Póster oficial del Mundial Francia 1938">
+                    <div class="card-content">
+                        <h2>Francia 1938</h2>
+                        <p>Campeón: Italia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Brazil_1950_WC.jpg"
+                        alt="Póster oficial del Mundial Brasil 1950">
+                    <div class="card-content">
+                        <h2>Brasil 1950</h2>
+                        <p>Campeón: Uruguay</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Switzerland_1954_WC.jpg"
+                        alt="Póster oficial del Mundial Suiza 1954">
+                    <div class="card-content">
+                        <h2>Suiza 1954</h2>
+                        <p>Campeón: Alemania Federal</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Sweden_1958_WC.jpg"
+                        alt="Póster oficial del Mundial Suecia 1958">
+                    <div class="card-content">
+                        <h2>Suecia 1958</h2>
+                        <p>Campeón: Brasil</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Chile_1962_WC.jpg"
+                        alt="Póster oficial del Mundial Chile 1962">
+                    <div class="card-content">
+                        <h2>Chile 1962</h2>
+                        <p>Campeón: Brasil</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/England_1966_WC.jpg"
+                        alt="Póster oficial del Mundial Inglaterra 1966">
+                    <div class="card-content">
+                        <h2>Inglaterra 1966</h2>
+                        <p>Campeón: Inglaterra</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Mexico_1970_WC.jpg"
+                        alt="Póster oficial del Mundial México 1970">
+                    <div class="card-content">
+                        <h2>México 1970</h2>
+                        <p>Campeón: Brasil</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Germany_1974_WC.jpg"
+                        alt="Póster oficial del Mundial Alemania 1974">
+                    <div class="card-content">
+                        <h2>Alemania 1974</h2>
+                        <p>Campeón: Alemania Federal</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Argentina_1978_WC.jpg"
+                        alt="Póster oficial del Mundial Argentina 1978">
+                    <div class="card-content">
+                        <h2>Argentina 1978</h2>
+                        <p>Campeón: Argentina</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Spain_1982_WC.jpg"
+                        alt="Póster oficial del Mundial España 1982">
+                    <div class="card-content">
+                        <h2>España 1982</h2>
+                        <p>Campeón: Italia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Mexico_1986_WC.jpg"
+                        alt="Póster oficial del Mundial México 1986">
+                    <div class="card-content">
+                        <h2>México 1986</h2>
+                        <p>Campeón: Argentina</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Italy_1990_WC.jpg"
+                        alt="Póster oficial del Mundial Italia 1990">
+                    <div class="card-content">
+                        <h2>Italia 1990</h2>
+                        <p>Campeón: Alemania Federal</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/UnitedStatesOfAmerica_1994_WC.jpg"
+                        alt="Póster oficial del Mundial EE.UU. 1994">
+                    <div class="card-content">
+                        <h2>EE.UU. 1994</h2>
+                        <p>Campeón: Brasil</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/France_1998_WC.jpg"
+                        alt="Póster oficial del Mundial Francia 1998">
+                    <div class="card-content">
+                        <h2>Francia 1998</h2>
+                        <p>Campeón: Francia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Japan_2002_WC.jpg"
+                        alt="Póster oficial del Mundial Corea/Japón 2002">
+                    <div class="card-content">
+                        <h2>Corea/Japón 2002</h2>
+                        <p>Campeón: Brasil</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Germany_2006_WC.jpg"
+                        alt="Póster oficial del Mundial Alemania 2006">
+                    <div class="card-content">
+                        <h2>Alemania 2006</h2>
+                        <p>Campeón: Italia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/SouthAfrica_2010_WC.jpg"
+                        alt="Póster oficial del Mundial Sudáfrica 2010">
+                    <div class="card-content">
+                        <h2>Sudáfrica 2010</h2>
+                        <p>Campeón: España</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Brazil_2014_WC.jpg"
+                        alt="Póster oficial del Mundial Brasil 2014">
+                    <div class="card-content">
+                        <h2>Brasil 2014</h2>
+                        <p>Campeón: Alemania</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Russia_2018_WC.jpg"
+                        alt="Póster oficial del Mundial Rusia 2018">
+                    <div class="card-content">
+                        <h2>Rusia 2018</h2>
+                        <p>Campeón: Francia</p>
+                    </div>
+                </button>
+                <button class="card">
+                    <img src="/assets/fifa world cup posters/Qatar_2022_WC.jpg"
+                        alt="Póster oficial del Mundial Qatar 2022">
+                    <div class="card-content">
+                        <h2>Qatar 2022</h2>
+                        <p>Campeón: Argentina</p>
+                    </div>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        // Espera a que todo el documento HTML esté completamente cargado
+        window.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Seleccionamos todas las tarjetas
+            const todasLasTarjetas = document.querySelectorAll('#cards .card');
+
+            // 2. Recorremos cada tarjeta para añadirle el evento de clic
+            todasLasTarjetas.forEach(tarjeta => {
+                tarjeta.addEventListener('click', () => {
+                    // 3. Dentro de la tarjeta clickeada, encontramos el título h2
+                    const titulo = tarjeta.querySelector('h2').textContent;
+
+                    // 4. Reemplazamos espacios con guiones bajos para que sea seguro en una URL
+                    const tituloParaUrl = titulo.replace(/ /g, '_');
+
+                    // 5. Redirigimos al usuario a la página de detalles con el parámetro en la URL
+                    window.location.href = `details.html?edicion=${tituloParaUrl}`;
                 });
-                
             });
-        </script>        </body>
+
+        });
+    </script>
+</body>
+
 </html>

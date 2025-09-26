@@ -1,27 +1,30 @@
 /* Título vertical para Finales Inolvidables */
 #vertical-title {
-    grid-row: 1 / span 2;
-    grid-column: 1 / 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 60px;
+    grid-row: 1 / span 2;
+    grid-column: 1 / 2;
     width: 150px;
     height: 100%;
     margin-right: 10px;
+    
+    /* 1. Establecemos el flujo de texto a vertical */
+    writing-mode: vertical-rl;
 }
 
 .vertical-text {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
+    /* 2. Giramos el texto 180 grados para que se lea de abajo hacia arriba */
+    transform: rotate(180deg);
+    
+    white-space: nowrap;
     font-size: 70px;
     color: white;
     text-shadow: #00ffdd 0px 0px 10px;
-    letter-spacing: 40px;
-    font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    letter-spacing: 20px;
     user-select: none;
 }
+
 .bebas-neue-regular {
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
@@ -146,7 +149,7 @@ body {
 
 .MainContainer {
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: auto 1fr;
     gap: 20px;
     padding: 20px;
     width: 100%;
