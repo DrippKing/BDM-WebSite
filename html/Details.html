@@ -15,7 +15,7 @@
     <body>
         <nav class="Topbar navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div id="logobg">
+                <div id="logobg" onclick="window.location.href='index.html'">
                     <img src="../img/Logo.png" width="80" class="d-inline-block align-text-top">
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,19 +175,24 @@
             
         </div>
         <script>
-            // Se ejecuta cuando todo el contenido de la página se ha cargado
-            window.addEventListener('DOMContentLoaded', (event) => {
-                // Seleccionamos todos los contenedores de las tarjetas
+            window.addEventListener('DOMContentLoaded', () => {
+                // --- LÓGICA PARA LA BARRA LATERAL (z-index) ---
                 const cards = document.querySelectorAll('#BN-Container .SC1 .SC2');
                 const totalCards = cards.length;
-        
-                // Recorremos cada tarjeta para asignarle su z-index
                 cards.forEach((card, index) => {
-                    // Asignamos un z-index descendente.
-                    // La primera tarjeta (index 0) tendrá el z-index más alto.
                     card.style.zIndex = totalCards - index;
                 });
+    
+                // --- LÓGICA PARA EL TÍTULO (URL Params) ---
+                const params = new URLSearchParams(window.location.search);
+                const edicionDesdeUrl = params.get('edicion');
+                if (edicionDesdeUrl) {
+                    const tituloFormateado = edicionDesdeUrl.replace(/_/g, ' ');
+                    const elementoTitulo = document.getElementById('T1');
+                    elementoTitulo.textContent = tituloFormateado;
+                }
             });
         </script>
+    
 </body>
 </html>
