@@ -26,5 +26,20 @@
 
     <script src="../js/bootstrap/bootstrap.bundle.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const temaDesdeUrl = params.get('tema'); // Leemos el parámetro 'tema'
+
+        if (temaDesdeUrl) {
+            const tituloFormateado = temaDesdeUrl.replace(/_/g, ' ');
+            const elementoTitulo = document.querySelector('.vertical-text');
+            
+            if (elementoTitulo) {
+                elementoTitulo.textContent = tituloFormateado;
+            }
+        }
+    });
+</script>
 </body>
 </html>
