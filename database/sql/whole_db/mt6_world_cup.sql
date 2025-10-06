@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2025 a las 22:11:38
+-- Tiempo de generación: 07-10-2025 a las 00:33:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -128,13 +128,17 @@ CREATE TABLE `roles` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID_User_PK` int(11) NOT NULL,
+  `ID_Role_FK` int(11) NOT NULL,
+  `Profile_Picture` varchar(100) NOT NULL,
   `First_Name` varchar(50) NOT NULL,
   `Last_Name` varchar(50) NOT NULL,
+  `Birthday` date NOT NULL,
+  `Gender` int(11) NOT NULL,
+  `ID_Country_FK` int(11) NOT NULL,
   `Phone_Number` int(11) NOT NULL,
+  `Nametag` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL,
-  `Profile_Picture` varchar(100) NOT NULL,
-  `ID_Role_FK` int(11) NOT NULL
+  `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -210,7 +214,8 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID_User_PK`),
-  ADD KEY `FK_Users_Roles` (`ID_Role_FK`);
+  ADD KEY `FK_Users_Roles` (`ID_Role_FK`),
+  ADD KEY `FK_Users_Countries` (`ID_Country_FK`);
 
 --
 -- Indices de la tabla `worldcup_editions`
@@ -307,6 +312,7 @@ ALTER TABLE `posts`
 -- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
+  ADD CONSTRAINT `FK_Users_Countries` FOREIGN KEY (`ID_Country_FK`) REFERENCES `countries` (`ID_Country_PK`),
   ADD CONSTRAINT `FK_Users_Roles` FOREIGN KEY (`ID_Role_FK`) REFERENCES `roles` (`ID_Role_PK`);
 
 --
