@@ -20,14 +20,14 @@
     <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card p-4 custom-login-card">
             <h2 class="text-center mb-4 custom-login-title">Iniciar Sesión</h2>
-            <form>
+            <form method="POST" action="../php/login.php">
                 <div class="mb-3 text-center">
                     <label for="username" class="form-label custom-label">Usuario</label>
-                    <input type="text" class="form-control SearchTopic mx-auto" id="username" placeholder="Ingresa tu usuario" required>
+                    <input type="text" class="form-control SearchTopic mx-auto" id="username" name="username" placeholder="Ingresa tu usuario" required>
                 </div>
                 <div class="mb-3 text-center">
                     <label for="password" class="form-label custom-label">Contraseña</label>
-                    <input type="password" class="form-control SearchTopic mx-auto" id="password" placeholder="Ingresa tu contraseña" required>
+                    <input type="password" class="form-control SearchTopic mx-auto" id="password" name="password" placeholder="Ingresa tu contraseña" required>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success custom-login-btn mt6">Iniciar sesión</button>

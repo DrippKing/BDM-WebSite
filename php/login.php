@@ -1,0 +1,80 @@
+<?php
+// Hacemos la variable $conn global para poder usarla dentro de este archivo.
+global $conn;
+$error_message = '';
+
+// Verificar si el formulario ha sido enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Prevenir inyección SQL usando sentencias preparadas
+    $stmt = $conn->prepare("SELECT ID_User_PK, Password FROM users WHERE Nametag = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        // Verificación simple de contraseña (temporal, no seguro para producción)
+        if ($password === $user['Password']) {
+            // Guardar datos del usuario en la sesión
+            $_SESSION['userid'] = $user['ID_User_PK'];
+            $_SESSION['username'] = $username;
+            // Redirigir al perfil del usuario
+            header("Location: index.php?page=home"); // Redirigir a la página principal por ahora
+            exit();
+        } else {
+            $error_message = "Contraseña incorrecta.";
+        }
+    } else {
+        $error_message = "El usuario no existe.";
+    }
+    $stmt->close();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Mundial Twenty Six</title>
+    <link rel="icon" href="img/Logo.png">
+
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body class="custom-login-bg">
+    <div id="navbar-placeholder" data-template="navbar-simple"></div>
+
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card p-4 custom-login-card">
+            <h2 class="text-center mb-4 custom-login-title">Iniciar Sesión</h2>
+            <?php if (!empty($error_message)): ?>
+                <div class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
+            <?php endif; ?>
+            <form method="POST" action="index.php?page=login">
+                <div class="mb-3 text-center">
+                    <label for="username" class="form-label custom-label">Usuario</label>
+                    <input type="text" class="form-control SearchTopic mx-auto" id="username" name="username" placeholder="Ingresa tu usuario" required>
+                </div>
+                <div class="mb-3 text-center">
+                    <label for="password" class="form-label custom-label">Contraseña</label>
+                    <input type="password" class="form-control SearchTopic mx-auto" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success custom-login-btn mt6">Iniciar sesión</button>
+                    <a href="index.php?page=register" class="btn btn-outline-primary mt-2 custom-register-btn">¿No tienes cuenta? Regístrate</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    <script src="js/main.js"></script> </body>
+</html>
