@@ -1,10 +1,4 @@
 /* --- Global Styles & Fonts --- */
-.bebas-neue-regular {
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-  
 * {
     font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
     font-size: 25px;
@@ -46,6 +40,11 @@ body {
     margin-right: 20px;
     color: #001433 !important;
     font-size: 24px;
+    /* Usamos una fuente estándar para los inputs para diferenciar mayúsculas y minúsculas */
+    font-family: Helvetica, sans-serif;
+}
+.SearchTopic.dropdown {
+    height: auto;
 }
 
 .SearchTopic::placeholder {
@@ -205,7 +204,7 @@ body {
 
 .SC3 .SC4 {
     padding: 0 20px 20px 20px;
-    background-color: whitesmoke;
+    background-color: #25364a;
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -215,7 +214,7 @@ body {
     text-align: justify;
     font-size: 16px;
     font-family: Arial, sans-serif;
-    color: #001433;
+    color: whitesmoke;
     user-select: none;
 }
 
@@ -239,4 +238,24 @@ body {
     background-color: transparent;
     color: white;
     justify-content: center;
+}
+
+/* Estilos y animación para el título principal de la sección */
+#T1 {
+    color: white;
+    justify-content: center;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 12px rgba(0, 255, 221, 0.5);
+    animation: breathing-glow 1s ease-in-out infinite;
+}
+
+@keyframes breathing-glow {
+    0% {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 12px rgba(0, 255, 221, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 24px rgba(0, 255, 221, 1);
+    }
+    100% {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 12px rgba(0, 255, 221, 0.5);
+    }
 }

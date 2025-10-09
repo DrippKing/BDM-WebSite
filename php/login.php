@@ -50,7 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body class="custom-login-bg">
-    <div id="navbar-placeholder" data-template="navbar-simple"></div>
+    <?php 
+        // Incluimos la barra de navegación simple.
+        $navbar_template = 'navbar-simple';
+        require 'html/templates/navbar.php'; 
+    ?>
 
     <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card p-4 custom-login-card">

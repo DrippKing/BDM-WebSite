@@ -89,7 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body class="custom-register-bg">
-    <div id="navbar-placeholder" data-template="navbar-simple"></div>
+    <?php 
+        // Incluimos la barra de navegación simple.
+        $navbar_template = 'navbar-simple';
+        require 'html/templates/navbar.php'; 
+    ?>
 
     <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh; padding: 20px 0;">
         <div class="card p-4 custom-register-card">
@@ -141,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="birthcountry" class="form-label w-100 text-center custom-label">País</label>
-                    <select class="form-select SearchTopic" id="birthcountry" name="birthcountry" required>
+                    <select class="form-select SearchTopic dropdown" id="birthcountry" name="birthcountry" required>
                         <option value="" disabled <?php if (empty($country)) echo 'selected'; ?>>Selecciona tu país</option>
                         <?php foreach ($countries_list as $country_item): ?>
                             <option value="<?php echo $country_item['ID_Country_PK']; ?>" <?php if ($country == $country_item['ID_Country_PK']) echo 'selected'; ?>>

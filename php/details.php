@@ -29,7 +29,7 @@ if (isset($_GET['edicion'])) {
 }
 
 // 3. Obtener todas las categorías de la base de datos
-$query_categories = "SELECT Name, Description FROM categories";
+$query_categories = "SELECT Name, Description FROM categories WHERE Is_Visible = 1";
 $result_categories = $conn->query($query_categories);
 if ($result_categories && $result_categories->num_rows > 0) {
     while ($row = $result_categories->fetch_assoc()) {
