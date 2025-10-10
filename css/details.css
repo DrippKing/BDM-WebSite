@@ -7,12 +7,13 @@
 
 /* --- Estilos únicos de la página de detalles --- */
 
-/* Título principal del feed en esta página */
-#T1 {
-    justify-content: center;
+/* Título principal del feed en esta página (el contenedor) */
+.FP-MenuTitle {
     background-image: linear-gradient(to left, #001433,  #00c1a7, #00143300);
-    color: white;
-    text-shadow: #00ffdd 0px 0px 10px;
+}
+
+#T1 {
+    /* Los estilos de animación y color ya están en common.css */
 }
 
 /* Contenedor para la información dinámica del mundial */

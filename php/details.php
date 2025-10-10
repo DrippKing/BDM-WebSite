@@ -82,17 +82,15 @@ if ($result_categories && $result_categories->num_rows > 0) {
             </div>
         </div>
         <div id="Feed-Public">
-            <h1 id="T1" class="FP-MenuTitle">[MUNDIAL SELECCIONADO]</h1>
+            <div class="FP-MenuTitle with-button">
+                <h1 id="T1">[MUNDIAL SELECCIONADO]</h1>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <button class="btn-add-post" onclick="window.location.href='index.php?page=create_post&edicion=<?php echo urlencode($world_cup_data['Name'] ?? ''); ?>'" title="Crear nueva publicación">+</button>
+                <?php endif; ?>
+            </div>
             <div class="details-container">
                 <?php if ($world_cup_data): ?>
-                    <div class="world-cup-header">
-                        <img src="assets/fifa world cup posters/<?php echo htmlspecialchars($world_cup_data['Official_Artwork_Multimedia']); ?>" alt="Artwork <?php echo htmlspecialchars($edicion_nombre); ?>" class="wc-artwork">
-                    </div>
-                    <div class="world-cup-info">
-                        <p><strong>Año:</strong> <?php echo htmlspecialchars($world_cup_data['ID_WorldCup_Year_PK']); ?></p>
-                        <p><strong>Ganador:</strong> <?php echo htmlspecialchars($world_cup_data['Final_Winner']); ?></p>
-                        <!-- Puedes añadir más campos aquí si los agregas a tu tabla -->
-                    </div>
+
                 <?php else: ?>
                     <p class="text-white p-4">No se encontró información para la edición solicitada. Por favor, selecciona un mundial de la página principal.</p>
                 <?php endif; ?>

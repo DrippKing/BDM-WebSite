@@ -55,8 +55,17 @@
             </form>
             <div class="profile-container">
                 <?php if (isset($_SESSION['username'])): ?>
+                    <?php
+                        // Obtenemos el nombre de la imagen de la sesión.
+                        $profile_pic_file = $_SESSION['profile_picture'] ?? 'default.jpg';
+                        // Si es la imagen por defecto, usamos la ruta correcta.
+                        // De lo contrario, construimos la ruta a la imagen personalizada del usuario.
+                        $profile_pic_path = ($profile_pic_file === 'default.jpg')
+                            ? 'img/profile-icon-default.jpg'
+                            : 'assets/users/profile_pictures/' . $profile_pic_file;
+                    ?>
                     <div class="profile-picture">
-                        <img src="img/profile-icon-default.jpg" alt="Foto de perfil"> <!-- Podríamos hacer esto dinámico también -->
+                        <img src="<?php echo htmlspecialchars($profile_pic_path); ?>" alt="Foto de perfil de <?php echo htmlspecialchars($_SESSION['username']); ?>">
                     </div>
                     <div class="d-flex align-items-center ms-2">
                         <span class="text-white me-3"><?php echo htmlspecialchars($_SESSION['username']); ?></span>

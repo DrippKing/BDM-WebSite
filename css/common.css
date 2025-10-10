@@ -105,8 +105,8 @@ body {
 }
 
 .profile-picture img {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -240,10 +240,42 @@ body {
     justify-content: center;
 }
 
+/* Contenedor del título con botón */
+.FP-MenuTitle.with-button {
+    position: relative; /* Necesario para posicionar el botón de forma absoluta */
+    justify-content: center; /* Centra el título h1 */
+}
+
+/* Botón para añadir nueva publicación */
+.btn-add-post {
+    background-color: #00C1A7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    
+    /* Posicionamiento absoluto a la derecha */
+    position: absolute;
+    right: 15px; /* Espacio desde el borde derecho */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-add-post:hover {
+    background-color: #00ffdd;
+    color: #001433;
+    transform: translateY(-50%) scale(1.1); /* Mantenemos la transformación Y */
+}
+
 /* Estilos y animación para el título principal de la sección */
 #T1 {
     color: white;
-    justify-content: center;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 12px rgba(0, 255, 221, 0.5);
     animation: breathing-glow 1s ease-in-out infinite;
 }

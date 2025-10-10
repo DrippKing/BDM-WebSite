@@ -9,18 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prevenir inyección SQL usando sentencias preparadas
-    $stmt = $conn->prepare("SELECT ID_User_PK, Password FROM users WHERE Nametag = ?");
+    $stmt = $conn->prepare("SELECT ID_User_PK, Password, Profile_Picture FROM users WHERE Nametag = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // Verificación simple de contraseña (temporal, no seguro para producción)
+        // TODO: Cambiar esto por password_verify() para mayor seguridad.
         if ($password === $user['Password']) {
             // Guardar datos del usuario en la sesión
             $_SESSION['userid'] = $user['ID_User_PK'];
             $_SESSION['username'] = $username;
+            $_SESSION['profile_picture'] = $user['Profile_Picture']; // Guardamos la foto de perfil
             // Redirigir al perfil del usuario
             header("Location: index.php?page=home"); // Redirigir a la página principal por ahora
             exit();
