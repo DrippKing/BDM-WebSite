@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/crearpublicacion.css">
+   <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="icon" href="../img/Logo.png">
+    
+  <title>Crear publicación</title>
+   </head>
+  <body class="custom-perfil-bg">
+
+<div id="navbar-placeholder" data-template="navbar-main"></div>
+
+  <div class="publicacion">
+    <div class="encabezado">
+      Crear publicación
+      <span style="cursor:pointer;">✖</span>
+    </div>
+
+    <div class="perfil">
+      <img src="../img/profile-icon-default.jpg" alt="Foto de perfil">
+      <div>
+        <div class="nombre">Usuario</div>
+        
+      </div>
+    </div>
+
+    <textarea placeholder="¿Qué estás pensando?"></textarea>
+
+    <div class="acciones">
+      <button>📷 Foto/video</button>
+      
+      <button>😊 Emoción</button>
+      <button># Hashtag</button>
+    </div>
+
+    <button class="publicar">Publicar</button>
+  </div>
+</body>
+</html>

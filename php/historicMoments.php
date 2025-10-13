@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundial Twenty Six - News</title>
+    <link rel="icon" href="../img/Logo.png">
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/historic-moments.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder" data-template="navbar-main"></div>
+
+    <div class="MainContainer">
+        <div id="vertical-title">
+            <span class="vertical-text bebas-neue-regular">[SUB-BOTON TEMA]</span>
+        </div>
+        <div style="width:100%">
+            </div>
+    </div>
+
+    <script src="../js/bootstrap/bootstrap.bundle.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const temaDesdeUrl = params.get('tema'); // Leemos el parámetro 'tema'
+
+        if (temaDesdeUrl) {
+            const tituloFormateado = temaDesdeUrl.replace(/_/g, ' ');
+            const elementoTitulo = document.querySelector('.vertical-text');
+            
+            if (elementoTitulo) {
+                elementoTitulo.textContent = tituloFormateado;
+            }
+        }
+    });
+</script>
+</body>
+</html>

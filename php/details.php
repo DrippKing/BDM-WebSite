@@ -85,7 +85,7 @@ if ($result_categories && $result_categories->num_rows > 0) {
             <div class="FP-MenuTitle with-button">
                 <h1 id="T1">[MUNDIAL SELECCIONADO]</h1>
                 <?php if (isset($_SESSION['username'])): ?>
-                    <button class="btn-add-post" onclick="window.location.href='index.php?page=create_post&edicion=<?php echo urlencode($world_cup_data['Name'] ?? ''); ?>'" title="Crear nueva publicación">+</button>
+                    <button class="btn-add-post" onclick="window.location.href='index.php?page=makepost&worldcup_id=<?php echo $world_cup_data['ID_WorldCup_Year_PK'] ?? ''; ?>'" title="Crear nueva publicación">+</button>
                 <?php endif; ?>
             </div>
             <div class="details-container">

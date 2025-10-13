@@ -18,12 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         // TODO: Cambiar esto por password_verify() para mayor seguridad.
         if ($password === $user['Password']) {
-            // Guardar datos del usuario en la sesión
-            $_SESSION['userid'] = $user['ID_User_PK'];
+            // CORRECCIÓN: Usar 'user_id' para que sea consistente con las otras páginas.
+            $_SESSION['user_id'] = $user['ID_User_PK'];
             $_SESSION['username'] = $username;
             $_SESSION['profile_picture'] = $user['Profile_Picture']; // Guardamos la foto de perfil
-            // Redirigir al perfil del usuario
-            header("Location: index.php?page=home"); // Redirigir a la página principal por ahora
+
+            // CORRECCIÓN: Redirigir a la página anterior si existe, si no, a home.
+            if (isset($_GET['redirect_url'])) {
+                // Decodificamos la URL y redirigimos al usuario a donde quería ir.
+                $redirect_url = urldecode($_GET['redirect_url']);
+                header("Location: " . $redirect_url);
+            } else {
+                // Si no hay URL de redirección, lo mandamos a home.
+                header("Location: index.php?page=home");
+            }
             exit();
         } else {
             $error_message = "Contraseña incorrecta.";
