@@ -1,0 +1,129 @@
+/* Estadisticas page styles */
+:root{
+  --accent: #00C1A7;
+  --accent-2: #07907d;
+}
+
+body{
+  background: url('../img/cancha.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.MainContainer{
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 40px;
+}
+
+#vertical-title{ display:flex; align-items:center; justify-content:center; writing-mode: vertical-rl; position: sticky; top: 20px; height: calc(100vh - 40px); }
+.vertical-text{ transform: rotate(180deg); font-size: 58px; color: white; letter-spacing: 12px; text-shadow: 0 0 12px var(--accent); }
+
+.stats-content{ grid-column: 2 / 3; }
+
+.stats-grid-container{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:20px; }
+.stat-card{ background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.06); border-radius:12px; padding:18px; text-align:center; }
+.stat-icon{ font-size:36px; margin-bottom:8px }
+.stat-title{ color: var(--accent); font-size:18px }
+.stat-value{ font-size:22px; font-weight:700 }
+.stat-detail{ color:#dcdcdc }
+
+.chart-card{ background: rgba(255,255,255,0.05); border-radius:10px; }
+.chart-card canvas{ width:100% !important; height:300px !important; }
+
+.team-card img{ width:100%; height:140px; object-fit:cover }
+.team-card{ background: rgba(255,255,255,0.04); border-radius:8px }
+
+/* Tabs customization */
+.nav-tabs .nav-link{ color: #ddd }
+.nav-tabs .nav-link.active{ color: #fff; background: transparent; border-bottom: 2px solid var(--accent); }
+
+@media (max-width: 768px){
+  .MainContainer{ grid-template-columns: 1fr; padding: 20px }
+  #vertical-title{ display:none }
+}
+/* --- Layout específico para esta página --- */
+.MainContainer {
+    display: grid;
+    /* Una columna angosta para el título y el resto para el contenido */
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    align-items: flex-start; /* Alinea los items al inicio */
+}
+
+/* --- Estilos del Título Vertical (ya lo tienes, pero lo incluyo por si acaso) --- */
+#vertical-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    grid-column: 1 / 2; /* Posiciona en la primera columna */
+    position: sticky; /* Fija el título al hacer scroll */
+    top: 20px;
+    height: calc(100vh - 40px); /* Ocupa casi toda la altura visible */
+}
+
+.vertical-text {
+    transform: rotate(180deg);
+    white-space: nowrap;
+    font-size: 70px;
+    color: white;
+    text-shadow: #00ffdd 0px 0px 10px;
+    letter-spacing: 20px;
+    user-select: none;
+}
+
+/* --- NUEVOS ESTILOS PARA LA PÁGINA DE ESTADÍSTICAS --- */
+
+.stats-content {
+    grid-column: 2 / 3; /* El contenido ocupa la segunda columna */
+    padding: 20px;
+}
+
+.stats-grid-container {
+    display: grid;
+    /* Crea columnas flexibles: mínimo 250px, se ajustan para llenar el espacio */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px; /* Espacio entre las tarjetas */
+}
+
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo oscuro semi-transparente */
+    border: 1px solid #00ffdd; /* Borde con el color de acento */
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px); /* La tarjeta se eleva al pasar el cursor */
+    box-shadow: 0 10px 20px rgba(0, 255, 221, 0.2); /* Sombra con el color de acento */
+}
+
+.stat-card .stat-icon {
+    font-size: 3rem; /* Tamaño grande para el ícono */
+    margin-bottom: 15px;
+}
+
+.stat-card .stat-title {
+    font-size: 1.8rem;
+    color: #00ffdd; /* Título con el color de acento */
+    margin-bottom: 10px;
+}
+
+.stat-card .stat-value {
+    font-size: 2.2rem;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+}
+
+.stat-card .stat-detail {
+    font-size: 1rem;
+    color: #ccc; /* Un gris claro para el detalle */
+    margin-top: 5px;
+}

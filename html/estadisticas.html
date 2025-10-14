@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundial Twenty Six - Estadísticas</title>
+    <link rel="icon" href="../img/Logo.png">
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/estadisticas.css"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder" data-template="navbar-main"></div>
+
+    <div class="MainContainer">
+        <div id="vertical-title">
+            <span class="vertical-text bebas-neue-regular">ESTADISTICAS</span>
+        </div>
+
+        <div class="stats-content">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-3" id="statsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="resumen-tab" data-bs-toggle="tab" data-bs-target="#resumen" type="button" role="tab" aria-controls="resumen" aria-selected="true">Resumen</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="graficas-tab" data-bs-toggle="tab" data-bs-target="#graficas" type="button" role="tab" aria-controls="graficas" aria-selected="false">Gráficas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="equipos-tab" data-bs-toggle="tab" data-bs-target="#equipos" type="button" role="tab" aria-controls="equipos" aria-selected="false">Equipos</button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="resumen" role="tabpanel" aria-labelledby="resumen-tab">
+                    <div class="stats-grid-container">
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <h3 class="stat-title bebas-neue-regular">Máximo Goleador</h3>
+                            <p class="stat-value">Lionel Messi</p>
+                            <p class="stat-detail">8 Goles</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <h3 class="stat-title bebas-neue-regular">Más Asistencias</h3>
+                            <p class="stat-value">Antoine Griezmann</p>
+                            <p class="stat-detail">7 Asistencias</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🧤</div>
+                            <h3 class="stat-title bebas-neue-regular">Guante de Oro</h3>
+                            <p class="stat-value">Emiliano Martínez</p>
+                            <p class="stat-detail">3 Porterías a Cero</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">⚽</div>
+                            <h3 class="stat-title bebas-neue-regular">Equipo Más Goleador</h3>
+                            <p class="stat-value">Francia</p>
+                            <p class="stat-detail">16 Goles</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🌟</div>
+                            <h3 class="stat-title bebas-neue-regular">Mejor Jugador</h3>
+                            <p class="stat-value">Kylian Mbappé</p>
+                            <p class="stat-detail">Balón de Oro</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🤝</div>
+                            <h3 class="stat-title bebas-neue-regular">Premio Fair Play</h3>
+                            <p class="stat-value">Japón</p>
+                            <p class="stat-detail">Menos Faltas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="graficas" role="tabpanel" aria-labelledby="graficas-tab">
+                    <div class="row gy-4">
+                        <div class="col-md-6">
+                            <div class="chart-card p-3">
+                                <h4 class="mb-2">Posesión por equipo</h4>
+                                <canvas id="possessionChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-card p-3">
+                                <h4 class="mb-2">Top goleadores</h4>
+                                <canvas id="topScorersChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="chart-card p-3">
+                                <h4 class="mb-2">Evolución goles por jornada</h4>
+                                <canvas id="goalsTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="equipos" role="tabpanel" aria-labelledby="equipos-tab">
+                    <p>Aquí puedes listar equipos, banderas y estadísticas por selección. (Ejemplo estático por ahora.)</p>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="team-card p-3 mb-3">
+                                <img src="../img/Argentina_1978_WC.jpg" alt="Argentina" class="img-fluid rounded mb-2">
+                                <h5>Argentina</h5>
+                                <p>Goles: 12 • P: 5 • GJ: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team-card p-3 mb-3">
+                                <img src="../img/Brazil_2014_WC.jpg" alt="Brasil" class="img-fluid rounded mb-2">
+                                <h5>Brasil</h5>
+                                <p>Goles: 10 • P: 4 • GJ: 2</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team-card p-3 mb-3">
+                                <img src="../img/France_1998_WC.jpg" alt="Francia" class="img-fluid rounded mb-2">
+                                <h5>Francia</h5>
+                                <p>Goles: 16 • P: 6 • GJ: 5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap/bootstrap.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+    // Este script sigue funcionando igual para cambiar el título si es necesario
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const temaDesdeUrl = params.get('tema');
+
+        if (temaDesdeUrl) {
+            const tituloFormateado = temaDesdeUrl.replace(/_/g, ' ');
+            const elementoTitulo = document.querySelector('.vertical-text');
+            
+            if (elementoTitulo) {
+                elementoTitulo.textContent = tituloFormateado;
+            }
+        }
+
+        // Inicializar gráficos de ejemplo
+        const possessionCtx = document.getElementById('possessionChart');
+        if (possessionCtx) {
+            new Chart(possessionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Argentina','Brasil','Francia','Inglaterra','España'],
+                    datasets: [{ data: [55,48,52,49,46], backgroundColor: ['#00C1A7','#FFCE56','#36A2EB','#FF6384','#A9A9A9'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        const topScorersCtx = document.getElementById('topScorersChart');
+        if (topScorersCtx) {
+            new Chart(topScorersCtx, {
+                type: 'bar',
+                data: { labels: ['L. Messi','K. Mbappé','R. Lewandowski','Cristiano R.','Neymar'], datasets: [{ label: 'Goles', data: [8,6,5,5,4], backgroundColor: '#00C1A7' }] },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+        }
+
+        const goalsTrendCtx = document.getElementById('goalsTrendChart');
+        if (goalsTrendCtx) {
+            new Chart(goalsTrendCtx, {
+                type: 'line',
+                data: { labels: ['J1','J2','J3','J4','J5','J6'], datasets: [{ label: 'Goles', data: [2,3,1,4,2,3], borderColor: '#00C1A7', backgroundColor: 'rgba(0,193,167,0.1)', fill: true }] },
+                options: { responsive: true }
+            });
+        }
+
+    });
+    </script>
+</body>
+</html>
