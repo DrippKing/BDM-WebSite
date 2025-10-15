@@ -22,11 +22,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Estadísticas</a>
                     <ul class="dropdown-menu mt6">
-                        <li><a class="dropdown-item mt6" href="#">Tabla Histórica de Campeones</a></li>
                         <li><a class="dropdown-item mt6" href="#">Máximos Goleadores</a></li>
                         <li><a class="dropdown-item mt6" href="#">Ganadores del Balón de Oro</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item mt6" href="#">Récords y Curiosidades</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -34,20 +32,10 @@
                     <ul class="dropdown-menu mt6">
                         <li><a class="dropdown-item mt6" href="#">Jugadores de Leyenda</a></li>
                         <li><a class="dropdown-item mt6" href="#">Selecciones Históricas</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item mt6" href="#">Buscar Jugador...</a></li>
-                        <li><a class="dropdown-item mt6" href="#">Buscar Equipo...</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mis Aportes</a>
-                    <ul class="dropdown-menu mt6">
-                        <li><a class="dropdown-item mt6" href="#">Crear Nueva Publicacion</a></li>
-                        <li><a class="dropdown-item mt6" href="#">Mis Publicaciones</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item mt6" href="#">Donar al Sitio Web</a></li>
-                        <li><a class="dropdown-item mt6" href="#">Reportar Publicacion</a></li>
-                    </ul>
+                    <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mis Publicaciones</a>
                 </li>
             </ul>
             <form style="width: 100%;" class="d-flex" role="search">
