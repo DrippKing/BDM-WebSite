@@ -24,7 +24,6 @@
                     <ul class="dropdown-menu mt6">
                         <li><a class="dropdown-item mt6" href="#">Máximos Goleadores</a></li>
                         <li><a class="dropdown-item mt6" href="#">Ganadores del Balón de Oro</a></li>
-                        <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

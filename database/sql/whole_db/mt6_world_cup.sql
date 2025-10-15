@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2025 a las 08:36:38
+-- Tiempo de generación: 15-10-2025 a las 05:33:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -34,22 +34,23 @@ CREATE TABLE `categories` (
   `ID_Category_PK` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
   `ID_Hashtag_FK` int(11) NOT NULL,
-  `Description` varchar(2048) NOT NULL
+  `Description` varchar(2048) NOT NULL,
+  `Is_Visible` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categories`
 --
 
-INSERT INTO `categories` VALUES(10, 'Jugadas', 23, 'Las jugadas más memorables de los mundiales son aquellas que marcaron un antes y un después en la historia del fútbol: goles imposibles, atajadas heroicas y momentos de genialidad que definieron campeonatos. Estas acciones se convierten en recuerdos eternos para los aficionados.');
-INSERT INTO `categories` VALUES(11, 'Entrevistas', 24, 'Las entrevistas mas famosas de los jugadores, entrenadores y personalidades comparten sus experiencias, emociones y reflexiones sobre los triunfos, derrotas y aprendizajes que deja un mundial.');
-INSERT INTO `categories` VALUES(12, 'Partidos', 25, 'Cada mundial está lleno de partidos históricos que se convierten en leyenda. Desde finales que mantuvieron al mundo en vilo, hasta encuentros sorpresivos donde los favoritos fueron derrotados, cada partido deja huella en la memoria de los fanáticos.');
-INSERT INTO `categories` VALUES(13, 'Estadisticas', 26, 'Los números cuentan una parte fundamental de la historia del mundial: récords de goles, selecciones con más títulos, jugadores con mayor número de participaciones y datos curiosos que ayudan a dimensionar la grandeza del torneo.');
-INSERT INTO `categories` VALUES(14, 'Asistentes', 27, 'El mundial no sería lo mismo sin la pasión de los aficionados. Los asistentes llevan la fiesta a los estadios con cánticos, banderas y colores que convierten cada encuentro en una celebración cultural y deportiva sin igual.');
-INSERT INTO `categories` VALUES(15, 'Incidentes', 28, 'Incidentes que alteraron el curso de los mundiales: suspensiones, accidentes, altercados dentro y fuera de la cancha. Estos episodios forman parte del lado inesperado de la competencia.');
-INSERT INTO `categories` VALUES(16, 'Polemicas', 29, 'Decisiones arbitrales controvertidas, jugadas dudosas y situaciones que generaron intensos debates entre jugadores, prensa y aficionados. Las polémicas son parte del folclore del torneo.');
-INSERT INTO `categories` VALUES(17, 'Sedes', 30, 'Cada país anfitrión le da una identidad única al mundial. Las ciudades, los estadios y la organización reflejan la cultura local y crean un ambiente especial donde el fútbol se mezcla con la hospitalidad y las tradiciones de cada nación.');
-INSERT INTO `categories` VALUES(18, 'Cultura', 31, 'El mundial es mucho más que fútbol: es un fenómeno cultural. Representa un punto de encuentro donde la música, la danza, la gastronomía y las tradiciones locales se unen para mostrar al mundo la diversidad y riqueza cultural de cada país sede.');
+INSERT INTO `categories` VALUES(10, 'Jugadas', 23, 'Las jugadas más memorables de los mundiales son aquellas que marcaron un antes y un después en la historia del fútbol: goles imposibles, atajadas heroicas y momentos de genialidad que definieron campeonatos. Estas acciones se convierten en recuerdos eternos para los aficionados.', 1);
+INSERT INTO `categories` VALUES(11, 'Entrevistas', 24, 'Las entrevistas mas famosas de los jugadores, entrenadores y personalidades comparten sus experiencias, emociones y reflexiones sobre los triunfos, derrotas y aprendizajes que deja un mundial.', 0);
+INSERT INTO `categories` VALUES(12, 'Partidos', 25, 'Cada mundial está lleno de partidos históricos que se convierten en leyenda. Desde finales que mantuvieron al mundo en vilo, hasta encuentros sorpresivos donde los favoritos fueron derrotados, cada partido deja huella en la memoria de los fanáticos.', 1);
+INSERT INTO `categories` VALUES(13, 'Estadisticas', 26, 'Los números cuentan una parte fundamental de la historia del mundial: récords de goles, selecciones con más títulos, jugadores con mayor número de participaciones y datos curiosos que ayudan a dimensionar la grandeza del torneo.', 0);
+INSERT INTO `categories` VALUES(14, 'Asistentes', 27, 'El mundial no sería lo mismo sin la pasión de los aficionados. Los asistentes llevan la fiesta a los estadios con cánticos, banderas y colores que convierten cada encuentro en una celebración cultural y deportiva sin igual.', 0);
+INSERT INTO `categories` VALUES(15, 'Incidentes', 28, 'Incidentes que alteraron el curso de los mundiales: suspensiones, accidentes, altercados dentro y fuera de la cancha. Estos episodios forman parte del lado inesperado de la competencia.', 1);
+INSERT INTO `categories` VALUES(16, 'Polemicas', 29, 'Decisiones arbitrales controvertidas, jugadas dudosas y situaciones que generaron intensos debates entre jugadores, prensa y aficionados. Las polémicas son parte del folclore del torneo.', 0);
+INSERT INTO `categories` VALUES(17, 'Sedes', 30, 'Cada país anfitrión le da una identidad única al mundial. Las ciudades, los estadios y la organización reflejan la cultura local y crean un ambiente especial donde el fútbol se mezcla con la hospitalidad y las tradiciones de cada nación.', 1);
+INSERT INTO `categories` VALUES(18, 'Cultura', 31, 'El mundial es mucho más que fútbol: es un fenómeno cultural. Representa un punto de encuentro donde la música, la danza, la gastronomía y las tradiciones locales se unen para mostrar al mundo la diversidad y riqueza cultural de cada país sede.', 0);
 
 -- --------------------------------------------------------
 
@@ -369,6 +370,12 @@ CREATE TABLE `posts` (
   `Visibility_State` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `posts`
+--
+
+INSERT INTO `posts` VALUES(1, 'Pero que ha pasao\'', 'no se esto es un test', NULL, '2025-10-15 05:21:36', NULL, NULL, 1930, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -415,7 +422,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` VALUES(2, 2, 'default.jpg', 'Christian Eduardo', 'Salazar Fuentes', '2005-12-29', 0, 118, 2147483647, 'DrippKing', 'christiansalazar2005@gmail.com', 'Tigres5545');
+INSERT INTO `users` VALUES(2, 2, '481390336_545781551177041_738940.jpg', 'Christian Eduardo', 'Salazar Fuentes', '2005-12-29', 0, 118, 2147483647, 'DrippKing', 'christiansalazar2005@gmail.com', 'Tigres5545');
+INSERT INTO `users` VALUES(3, 2, 'Imagen de WhatsApp 2025-10-08 a las 23.50.46_39d3e0ed.jpg', 'Danna Yamileth', 'Hernández Soto', '2004-02-08', 0, 118, 2147483647, 'Dona', 'dannahernandezsoto4@gmail.com', '8180982293');
 
 -- --------------------------------------------------------
 
@@ -566,7 +574,7 @@ ALTER TABLE `hashtags`
 -- AUTO_INCREMENT de la tabla `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `ID_Post_PK` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Post_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -578,7 +586,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID_User_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_User_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `worldcup_editions`

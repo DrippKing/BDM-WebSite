@@ -1,15 +1,18 @@
+/* Fondo para la página de crear publicación */
+body.custom-makepost-bg {
+  background: url('../img/cancha.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
 
-    body 
-   
-    
-    {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+/* Contenedor que centra el formulario en la página */
+.makepost-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Ocupa el espacio disponible menos la altura aproximada de la navbar */
+  min-height: calc(100vh - 135px); 
+  padding: 20px;
+}
 
     .publicacion {
       width: 600px;
@@ -21,18 +24,24 @@
 
     .encabezado {
       cursor: not-allowed;
+      position: relative;
+      text-align: center;
       justify-content: space-between;
       align-items: center;
-      
-
-
-.publicar.custom-login-btn:hover {
-  background-color: #07907d; /* color secundario de perfil.css */
-}
       padding: 25px 16px;
       border-bottom: 1px solid #b9c5d1;
-      font-weight: bold;
-      font-size: 20px;
+      font-size: 30px;
+    }
+
+    .encabezado .close-button {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: #657786;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .perfil {
@@ -62,10 +71,20 @@
       display: inline-block;
     }
 
+    .post-title {
+      width: calc(100% - 32px);
+      margin: 0 16px 10px 16px;
+      padding: 10px;
+      font-size: 22px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
     textarea {
       width: 100%;
       border: none;
-    
       resize: none;
       padding: 90px 16px;
       font-size: 20px;
@@ -81,19 +100,19 @@
       padding: 10px 0;
     }
 
-    .acciones button {
+    .acciones .btn-accion {
       background: none;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 5px;
-      font-size: 15px;
+      font-size: 20px;
       color: #030303;
       transition: 0.2s;
     }
 
-    .acciones button:hover {
+    .acciones .btn-accion:hover {
       background-color: #f0f2f5;
       border-radius: 8px;
       padding: 5px 10px;
@@ -109,9 +128,11 @@
       padding: 10px;
       border-radius: 8px;
       font-weight: bold;
-      cursor: not-allowed;
+      cursor: pointer; /* Cambiamos el cursor a pointer */
       display: block;
       font-size: 25px
     }
 
-
+    .publicar:hover {
+      background-color: #07907d; /* color secundario de perfil.css */
+    }

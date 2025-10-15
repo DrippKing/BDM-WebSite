@@ -1,42 +1,109 @@
+<?php
+global $conn;
+
+// 1. Proteger la página: si no hay sesión, redirigir al login.
+if (!isset($_SESSION['user_id'])) {
+    // Guardamos la URL actual para redirigir al usuario de vuelta después del login.
+    $redirect_url = urlencode($_SERVER['REQUEST_URI']);
+    header("Location: index.php?page=login&redirect_url=$redirect_url");
+    exit;
+}
+
+// 2. Procesar el formulario cuando se envía
+$error_message = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $post_title = trim($_POST['post_title']);
+    $post_content = trim($_POST['post_content']);
+    $user_id = $_SESSION['user_id'];
+    $worldcup_id = $_GET['worldcup_id'] ?? null; // Obtenemos el ID del mundial de la URL
+
+    if (empty($post_title) || empty($post_content) || empty($worldcup_id)) {
+        $error_message = "El título y el contenido no pueden estar vacíos.";
+    } else {
+        $upload_date = date('Y-m-d H:i:s');
+        $visibility = 1; // 1 = visible
+
+        $sql = "INSERT INTO posts (Content_Title, Content_Body, Upload_Date, ID_WorldCup_Year_FK, ID_User_FK, Visibility_State) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssiii", $post_title, $post_content, $upload_date, $worldcup_id, $user_id, $visibility);
+
+        if ($stmt->execute()) {
+            // Redirigir a la página de detalles del mundial para ver la publicación.
+            header("Location: index.php?page=details&edicion=" . $_GET['edicion_name']);
+            exit;
+        } else {
+            $error_message = "Error al guardar la publicación: " . $stmt->error;
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/crearpublicacion.css">
-   <link rel="stylesheet" href="../css/perfil.css">
-    <link rel="icon" href="../img/Logo.png">
+  <title>Crear Publicación - Mundial Twenty Six</title>
+  <link rel="icon" href="img/Logo.png">
+
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/makepost.css"> <!-- Asumo que el archivo se llama o debería llamarse así -->
     
-  <title>Crear publicación</title>
-   </head>
-  <body class="custom-perfil-bg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body class="custom-makepost-bg">
 
-<div id="navbar-placeholder" data-template="navbar-main"></div>
+<?php 
+    $navbar_template = 'navbar-main';
+    require 'html/templates/navbar.php'; 
+?>
 
-  <div class="publicacion">
-    <div class="encabezado">
-      Crear publicación
-      <span style="cursor:pointer;">✖</span>
-    </div>
+<div class="makepost-container">
+    <!-- Usamos un formulario que envía los datos a la misma página -->
+    <form class="publicacion" method="POST" action="index.php?page=makepost&worldcup_id=<?php echo htmlspecialchars($_GET['worldcup_id'] ?? ''); ?>&edicion_name=<?php echo htmlspecialchars($_GET['edicion_name'] ?? ''); ?>">
+        <div class="encabezado">
+            Crear publicación
+            <a href="javascript:history.back()" class="close-button" title="Cancelar">✖</a>
+        </div>
 
-    <div class="perfil">
-      <img src="../img/profile-icon-default.jpg" alt="Foto de perfil">
-      <div>
-        <div class="nombre">Usuario</div>
-        
-      </div>
-    </div>
+        <?php if (!empty($error_message)): ?>
+            <div class="alert alert-danger mx-3" role="alert"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
-    <textarea placeholder="¿Qué estás pensando?"></textarea>
+        <div class="perfil">
+            <?php
+                // Lógica para mostrar la imagen de perfil del usuario logueado
+                $profile_pic_file = $_SESSION['profile_picture'] ?? 'default.jpg';
+                $profile_pic_path = ($profile_pic_file === 'default.jpg')
+                    ? 'img/profile-icon-default.jpg'
+                    : 'assets/users/profile_pictures/' . $profile_pic_file;
+            ?>
+            <img src="<?php echo htmlspecialchars($profile_pic_path); ?>" alt="Foto de perfil">
+            <div>
+                <div class="nombre"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
+            </div>
+        </div>
 
-    <div class="acciones">
-      <button>📷 Foto/video</button>
-      
-      <button>😊 Emoción</button>
-      <button># Hashtag</button>
-    </div>
+        <!-- Campo para el título -->
+        <input type="text" name="post_title" class="form-control post-title" placeholder="Dale un título a tu publicación" required>
 
-    <button class="publicar">Publicar</button>
-  </div>
+        <!-- Campo para el contenido -->
+        <textarea name="post_content" placeholder="¿Qué estás pensando, <?php echo htmlspecialchars($_SESSION['username']); ?>?" required></textarea>
+
+        <div class="acciones">
+            <button type="button" class="btn-accion">📷 Foto/video</button>
+            <button type="button" class="btn-accion">😊 Emoción</button>
+            <button type="button" class="btn-accion"># Hashtag</button>
+        </div>
+
+        <!-- El botón de publicar ahora es de tipo submit -->
+        <button type="submit" class="publicar">Publicar</button>
+    </form>
+</div>
+
+  <script src="js/bootstrap/bootstrap.bundle.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
