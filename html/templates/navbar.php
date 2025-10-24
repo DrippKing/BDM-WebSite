@@ -11,7 +11,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Momentos Históricos</a>
-                    <ul class="dropdown-menu mt6"> <!-- Los enlaces de JS en main.js se encargarán de esto -->
+                    <ul class="dropdown-menu mt6">
                         <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Finales_Inolvidables">Finales Inolvidables</a></li>
                         <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Goles_Legendarios">Goles Legendarios</a></li>
                         <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Grandes_Controversias">Grandes Controversias</a></li>
@@ -22,24 +22,28 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Estadísticas</a>
                     <ul class="dropdown-menu mt6">
-                        <li><a class="dropdown-item mt6" href="#">Máximos Goleadores</a></li>
-                        <li><a class="dropdown-item mt6" href="#">Ganadores del Balón de Oro</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=maximos_goleadores">Máximos Goleadores</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=balon_de_oro">Ganadores del Balón de Oro</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jugadores y Equipos</a>
                     <ul class="dropdown-menu mt6">
-                        <li><a class="dropdown-item mt6" href="#">Jugadores de Leyenda</a></li>
-                        <li><a class="dropdown-item mt6" href="#">Selecciones Históricas</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=jugadores_leyenda">Jugadores de Leyenda</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=selecciones_historicas">Selecciones Históricas</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mis Publicaciones</a>
-                </li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link mt6" href="index.php?page=mis_publicaciones">Mis Publicaciones</a>
+                    </li>
+                <?php endif; ?>
             </ul>
+            <!-- Campo de búsqueda comentado temporalmente
             <form style="width: 100%;" class="d-flex" role="search">
                 <input class="SearchTopic form-control" type="search" placeholder="Buscar" aria-label="Buscar">
-            </form>
+            </form> 
+            -->
             <div class="profile-container">
                 <?php if (isset($_SESSION['username'])): ?>
                     <?php
@@ -51,13 +55,15 @@
                             ? 'img/profile-icon-default.jpg'
                             : 'assets/users/profile_pictures/' . $profile_pic_file;
                     ?>
-                    <div class="profile-picture">
-                        <img src="<?php echo htmlspecialchars($profile_pic_path); ?>" alt="Foto de perfil de <?php echo htmlspecialchars($_SESSION['username']); ?>">
-                    </div>
-                    <div class="d-flex align-items-center ms-2">
-                        <span class="text-white me-3"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                        <a href="index.php?page=logout" class="btn-login">Cerrar Sesión</a>
-                    </div>
+                    <a href="index.php?page=perfil" class="d-flex align-items-center text-decoration-none">
+                        <div class="profile-picture">
+                            <img src="<?php echo htmlspecialchars($profile_pic_path); ?>" alt="Foto de perfil de <?php echo htmlspecialchars($_SESSION['username']); ?>">
+                        </div>
+                        <div class="d-flex align-items-center ms-2">
+                            <span class="text-white me-3"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                        </div>
+                    </a>
+                    <a href="index.php?page=logout" class="btn-login ms-3">Cerrar Sesión</a>
                 <?php else: ?>
                     <button class="btn-login" onclick="window.location.href='index.php?page=login'">Iniciar Sesión</button>
                 <?php endif; ?>

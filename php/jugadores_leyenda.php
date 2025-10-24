@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugadores Leyenda — Mundial Twenty Six</title>
-    <link rel="icon" href="../img/Logo.png">
+    <link rel="icon" href="img/Logo.png">
 
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/common.css">
  
-  <link rel="stylesheet" href="css/maximosgoleadores.css">
+    <link rel="stylesheet" href="css/maximosgoleadores.css">
   
-  <!-- Small overrides to adapt leyendas cards to the maximosgoleadores theme -->
-  <link rel="stylesheet" href="css/jugadores_leyenda_theme.css">
+    <!-- Small overrides to adapt leyendas cards to the maximosgoleadores theme -->
+    <link rel="stylesheet" href="css/jugadores_leyenda_theme.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="navbar-placeholder" data-template="navbar-main"></div>
+    <?php 
+        // Incluimos la barra de navegación principal.
+        $navbar_template = 'navbar-main';
+        require __DIR__ . '/../html/templates/navbar.php'; 
+    ?>
 
   <main class="MainContainer">
     <div id="vertical-title">

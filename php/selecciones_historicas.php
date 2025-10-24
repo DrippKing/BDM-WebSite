@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selecciones Históricas — Mundial Twenty Six</title>
-    <link rel="icon" href="../img/Logo.png">
+    <link rel="icon" href="img/Logo.png">
 
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/common.css">
@@ -18,7 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body class="theme-selecciones">
-    <div id="navbar-placeholder" data-template="navbar-main"></div>
+    <?php 
+        // Incluimos la barra de navegación principal.
+        $navbar_template = 'navbar-main';
+        require __DIR__ . '/../html/templates/navbar.php'; 
+    ?>
 
     <main class="MainContainer">
         <div id="vertical-title">
