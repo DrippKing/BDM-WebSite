@@ -2,19 +2,32 @@
 // Hacemos la variable $conn global para poder usarla dentro de este archivo.
 global $conn;
 
+// --- INICIALIZACIÓN DE VARIABLES ---
 $edicion_nombre = 'Mundial no encontrado';
 $world_cup_data = null;
 $posts = [];
 $categories = [];
 
-// 1. Obtener la edición de la URL
-if (isset($_GET['edicion'])) {
-    $edicion_param = $_GET['edicion'];
+// Capturamos los parámetros de la URL de forma segura.
+$category_filter = isset($_GET['category']) ? trim($_GET['category']) : null;
+$edicion_param = $_GET['edicion'] ?? '';
+
+// --- LÓGICA PRINCIPAL ---
+
+// 1. Obtener todas las categorías visibles. Esto se ejecuta siempre para que nunca desaparezcan.
+$query_categories = "SELECT Name, Description FROM categories WHERE Is_Visible = 1";
+$result_categories = $conn->query($query_categories);
+if ($result_categories && $result_categories->num_rows > 0) {
+    while ($row = $result_categories->fetch_assoc()) {
+        $categories[] = $row;
+    }
+}
+
+// 2. Si se especificó una edición en la URL, buscar sus datos y publicaciones.
+if (!empty($edicion_param)) {
     // Formateamos el nombre para buscar en la BD (ej. QATAR_2022 -> QATAR 2022, KOREA-JAPAN_2002 -> KOREA/JAPAN 2002)
     $edicion_busqueda = str_replace(['_', '-'], [' ', '/'], $edicion_param);
 
-    // 2. Preparar y ejecutar la consulta para obtener los datos del mundial
-    // Usaremos Name para buscar
     $stmt = $conn->prepare("SELECT * FROM worldcup_editions WHERE Name = ?");
 
     if ($stmt) {
@@ -25,17 +38,36 @@ if (isset($_GET['edicion'])) {
             $world_cup_data = $result->fetch_assoc();
             $edicion_nombre = $world_cup_data['Name'];
 
-            // Una vez que tenemos los datos del mundial, buscamos sus posts.
+            // 2.1. Construir la consulta para obtener los posts.
             $worldcup_id = $world_cup_data['ID_WorldCup_Year_PK'];
-            $stmt_posts = $conn->prepare(
-                "SELECT p.Content_Title, p.Content_Body, p.Upload_Date, u.Nametag, u.Profile_Picture
+
+            // Construcción dinámica de la consulta de posts
+            $sql_posts = "SELECT p.ID_Post_PK, p.Content_Title, p.Content_Body, p.Upload_Date, u.Nametag, u.Profile_Picture
                  FROM posts p
-                 JOIN users u ON p.ID_User_FK = u.ID_User_PK
-                 WHERE p.ID_WorldCup_Year_FK = ? AND p.Visibility_State = 1
-                 ORDER BY p.Upload_Date DESC"
-            );
+                 JOIN users u ON p.ID_User_FK = u.ID_User_PK";
+            
+            $where_clauses = ["p.ID_WorldCup_Year_FK = ?", "p.Visibility_State = 1"];
+            $params = [];
+            $params[] = $worldcup_id;
+            $types = "i";
+
+            // Si se está filtrando por categoría, se modifica la consulta.
+            if ($category_filter) {
+                $sql_posts .= " JOIN `categories-posts` cp ON p.ID_Post_PK = cp.ID_Post_FK
+                                JOIN `categories` c ON cp.ID_Category_FK = c.ID_Category_PK";
+                $where_clauses[] = "c.Name = ?";
+                $params[] = $category_filter; // Añadimos el nombre de la categoría a los parámetros.
+                $types .= "s";
+            }
+
+            $sql_posts .= " WHERE " . implode(" AND ", $where_clauses) . " ORDER BY p.Upload_Date DESC";
+
+            $stmt_posts = $conn->prepare($sql_posts);
             if ($stmt_posts) {
-                $stmt_posts->bind_param("i", $worldcup_id);
+                // Vinculamos los parámetros a la consulta.
+                // El operador '...' (splat) pasa los elementos del array como argumentos individuales.
+                $stmt_posts->bind_param($types, ...$params);
+                
                 $stmt_posts->execute();
                 $result_posts = $stmt_posts->get_result();
                 while ($row = $result_posts->fetch_assoc()) {
@@ -44,16 +76,7 @@ if (isset($_GET['edicion'])) {
                 $stmt_posts->close();
             }
         }
-    }
-    $stmt->close();
-}
-
-// 3. Obtener todas las categorías de la base de datos
-$query_categories = "SELECT Name, Description FROM categories WHERE Is_Visible = 1"; // Esta es la consulta correcta
-$result_categories = $conn->query($query_categories);
-if ($result_categories && $result_categories->num_rows > 0) {
-    while ($row = $result_categories->fetch_assoc()) {
-        $categories[] = $row;
+        $stmt->close();
     }
 }
 ?>
@@ -87,13 +110,20 @@ if ($result_categories && $result_categories->num_rows > 0) {
                 
                 <?php if (count($categories) > 0): ?>
                     <?php foreach ($categories as $category): ?>
-                        <div class="SC2">
-                            <div class="SC3">
-                                <h2><?php echo htmlspecialchars($category['Name']); ?></h2>
-                                <div class="SC4">
-                                    <p><?php echo htmlspecialchars($category['Description']); ?></p>
+                        <?php
+                            $category_name = htmlspecialchars($category['Name']);
+                            $is_active = ($category_filter === $category['Name']);
+                            $filter_url = $is_active 
+                                ? "index.php?page=details&edicion=" . urlencode($edicion_param) // Si está activa, el link quita el filtro
+                                : "index.php?page=details&edicion=" . urlencode($edicion_param) . "&category=" . urlencode($category['Name']);
+                        ?>
+                        <div class="SC2" data-url="<?php echo $filter_url; ?>" style="cursor: pointer;">
+                                <div class="SC3">
+                                    <h2><?php echo $category_name; ?></h2>
+                                    <div class="SC4">
+                                        <p><?php echo htmlspecialchars($category['Description']); ?></p>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -176,6 +206,14 @@ if ($result_categories && $result_categories->num_rows > 0) {
                     elementoTitulo.textContent = tituloFormateado;
                 }
             }
+
+            // Script para hacer las categorías clickeables sin romper el diseño.
+            const categoryCards = document.querySelectorAll('#BN-Container .SC2');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    window.location.href = card.dataset.url;
+                });
+            });
         });
     </script>
 </body>

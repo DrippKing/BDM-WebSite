@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2025 a las 05:33:39
+-- Tiempo de generación: 24-10-2025 a las 04:59:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -375,6 +375,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` VALUES(1, 'Pero que ha pasao\'', 'no se esto es un test', NULL, '2025-10-15 05:21:36', NULL, NULL, 1930, 2, 1);
+INSERT INTO `posts` VALUES(2, 'hola esto titulo', 'publicacion 2', NULL, '2025-10-15 05:43:47', NULL, NULL, 1930, 2, 1);
+INSERT INTO `posts` VALUES(3, 'Hola soy la mujer mas hermosa del universo', 'Ya estoy apartada por @DrippKing', NULL, '2025-10-15 05:49:52', NULL, NULL, 1930, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -574,7 +576,7 @@ ALTER TABLE `hashtags`
 -- AUTO_INCREMENT de la tabla `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `ID_Post_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_Post_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

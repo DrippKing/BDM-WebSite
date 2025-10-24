@@ -126,22 +126,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label class="form-label w-100 text-center custom-label">Sexo</label>
                     <div class="custom-radio-group">
-                           <label class="custom-radio">
-                               <input type="radio" name="gender" value="Masculino" <?php if ($gender === 'Masculino') echo 'checked'; ?> required>
-                               <span class="custom-radio-circle"></span>
-                               Masculino
-                           </label>
-                           <label class="custom-radio">
-                               <input type="radio" name="gender" value="Femenino" <?php if ($gender === 'Femenino') echo 'checked'; ?> required>
-                               <span class="custom-radio-circle"></span>
-                               Femenino
-                           </label>
-                           <label class="custom-radio">
-                               <input type="radio" name="gender" value="Otro" <?php if ($gender === 'Otro') echo 'checked'; ?> required>
-                               <span class="custom-radio-circle"></span>
-                               Otro
-                           </label>
-                       </div>
+                        <label class="custom-radio">
+                            <input type="radio" name="gender" value="0" <?php if ($gender === '0') echo 'checked'; ?> required>
+                            <span class="custom-radio-circle"></span>
+                            Masculino
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="gender" value="1" <?php if ($gender === '1') echo 'checked'; ?> required>
+                            <span class="custom-radio-circle"></span>
+                            Femenino
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="gender" value="2" <?php if ($gender === '2') echo 'checked'; ?> required>
+                            <span class="custom-radio-circle"></span>
+                            Otro
+                        </label>
+                    </div>
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="birthcountry" class="form-label w-100 text-center custom-label">País</label>
