@@ -4,13 +4,14 @@
  * Rellena los datos con tus credenciales de MySQL.
  */
 
-$servername = "127.0.0.1"; // o "localhost"
-$username = "root"; // tu usuario de MySQL (por defecto en XAMPP es 'root')
-$password = ""; // tu contraseña de MySQL (por defecto en XAMPP está vacía)
-$dbname = "mt6_world_cup";
+$servername = "162.241.62.63"; // ¡IMPORTANTE! Usa tu dominio o la IP del servidor de HostGator.
+$username = "drippkin_Host"; // El usuario de la BD de HostGator (ej: drippkin_user).
+$password = "DrippKing5545"; // La contraseña para ese usuario.
+$dbname = "drippkin_mt6_world_cup"; // El nombre completo de la BD en HostGator.
+$port = 3306; // El puerto estándar de MySQL.
 
 // Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Verificar la conexión
 if ($conn->connect_error) {
