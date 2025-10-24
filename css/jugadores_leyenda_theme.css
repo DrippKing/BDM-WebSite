@@ -1,0 +1,68 @@
+/* Overrides to make jugadores_leyenda use maximosgoleadores visual style */
+:root{
+  --jl-accent: #00C1A7;
+}
+
+/* Use the stats grid layout from maximosgoleadores */
+#legendsGrid{ /* mirror stats-grid-container */
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap:20px;
+}
+
+/* Make legend cards look like stat-cards */
+.legend-card{
+  background-color:  rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:0;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  transition: transform .3s ease, box-shadow .3s ease;
+  overflow:hidden;
+}
+
+.legend-card:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,255,221,0.12);
+}
+
+.card-media{position:relative}
+.card-img{width:100%; height:160px; object-fit:cover; display:block}
+.card-badge{left:12px; top:12px;}
+
+.card-body{padding:14px}
+.player-name{font-size:18px; color:var(--jl-accent); margin:0 0 6px}
+.player-meta{color:#dcdcdc; margin:0 0 10px}
+.card-actions{display:flex; justify-content:space-between; align-items:center}
+.stat{color:#fff}
+
+/* Make hero area fit into the stats layout */
+.hero{margin-bottom:18px; padding:18px; background: rgba(255, 255, 255, 0.05); border-radius:12px; border:1px solid rgba(255,255,255,0.04)}
+.hero-title{font-size:36px}
+
+/* Responsive tweaks to match the stats page */
+@media (max-width:768px){
+  .hero-title{font-size:28px}
+  .card-img{height:140px}
+}
+
+/* ---------- Vertical title spacing controls (ajusta aquí) ---------- */
+:root{
+  /* ajusta estos valores para cambiar la separación del título vertical */
+  --vertical-letter-spacing: 7px; /* espacio entre letras */
+  --vertical-word-spacing: 18px;  /* espacio entre palabras */
+}
+
+/* Aplica la separación al texto vertical. Se carga al final como override. */
+.vertical-text{
+  letter-spacing: var(--vertical-letter-spacing);
+  word-spacing: var(--vertical-word-spacing);
+  /* conserva transform/writing-mode que ya aplica en otros archivos */
+}
+
+/* Opcional: si quieres controlar separación palabra por palabra, envuelve cada palabra
+   en un <span class="word">...</span> y usa esta regla para ajustar margenes. */
+.vertical-text .word{display:inline-block; margin:0 6px}
+
