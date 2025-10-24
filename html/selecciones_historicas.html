@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciones Históricas — Mundial Twenty Six</title>
+    <link rel="icon" href="../img/Logo.png">
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/maximosgoleadores.css">
+    
+    <!-- Reutilizamos el tema de jugadores leyenda para mantener la consistencia visual -->
+    <link rel="stylesheet" href="../css/jugadores_leyenda_theme.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="theme-selecciones">
+    <div id="navbar-placeholder" data-template="navbar-main"></div>
+
+    <main class="MainContainer">
+        <div id="vertical-title">
+            <span class="vertical-text bebas-neue-regular">JUGADORES Y EQUIPOS</span>
+        </div>
+
+        <div class="content-area">
+            <!-- Header removed as requested (was: Selecciones Históricas box) -->
+
+            <section class="grid-header">
+                <h2 class="section-title"> Selecciones Historicas</h2>
+                <p class="section-desc">Haz clic en una carta para ver su historia y logros.</p>
+            </section>
+
+            <section class="grid-container" id="legendsGrid">
+                <!-- Tarjeta de ejemplo: Brasil 1970 -->
+                <article class="legend-card" data-team="Brasil 1970" data-img="../img/teams/brazil_1970.jpg" data-era="1970-1990">
+                    <div class="card-media">
+                        <img src="https://via.placeholder.com/600x400?text=Brasil+1970" alt="Brasil 1970" class="card-img">
+                        <div class="card-badge">Histórica</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="player-name">Brasil 1970</h3>
+                        <p class="player-meta">Campeón del Mundo • "El Equipo Dorado"</p>
+                        <p class="short-desc">Ofensiva brillante, ataque rápido y dominio absoluto en 1970.</p>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-outline-light open-team" data-bs-toggle="modal" data-bs-target="#teamModal">Ver</button>
+                            <span class="stat">Jugador Clave: <strong>Pelé</strong></span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta de ejemplo: Holanda 1974 -->
+                <article class="legend-card" data-team="Holanda 1974" data-img="../img/teams/holanda_1974.jpg" data-era="1970-1990">
+                    <div class="card-media">
+                        <img src="https://via.placeholder.com/600x400?text=Holanda+1974" alt="Holanda 1974" class="card-img">
+                        <div class="card-badge gradient">Histórica</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="player-name">Holanda 1974</h3>
+                        <p class="player-meta">Subcampeón • "La Naranja Mecánica"</p>
+                        <p class="short-desc">Juego total, presión alta y filosofía ofensiva revolucionaria.</p>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-outline-light open-team" data-bs-toggle="modal" data-bs-target="#teamModal">Ver</button>
+                            <span class="stat">Jugador Clave: <strong>Cruyff</strong></span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjeta de ejemplo: España 2010 -->
+                <article class="legend-card" data-team="España 2010" data-img="../img/teams/spain_2010.jpg" data-era="2010-2025">
+                    <div class="card-media">
+                        <img src="https://via.placeholder.com/600x400?text=Espa%C3%B1a+2010" alt="España 2010" class="card-img">
+                        <div class="card-badge">Histórica</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="player-name">España 2010</h3>
+                        <p class="player-meta">Campeón del Mundo • "El Tiki-Taka"</p>
+                        <p class="short-desc">Posesión y pases cortos, control absoluto del ritmo del juego.</p>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-outline-light open-team" data-bs-toggle="modal" data-bs-target="#teamModal">Ver</button>
+                            <span class="stat">Jugador Clave: <strong>Iniesta</strong></span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Añade más tarjetas de selecciones aquí -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para Selecciones -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="teamModalLabel">Selección Histórica</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img id="teamModalImg" src="../img/teams/placeholder.jpg" alt="Selección" class="img-fluid rounded mb-2">
+                            <h4 id="teamModalName">Nombre de la Selección</h4>
+                            <p id="teamModalMeta" class="text-muted">Era • Logro Principal</p>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Historia y Tácticas</h5>
+                            <p id="teamModalBio" class="mb-4">Breve historia de la selección, su estilo de juego, tácticas y el impacto que tuvo en el fútbol mundial.</p>
+                            <div class="stats-container">
+                                <div class="stat-item">
+                                    <span class="stat-label">Logro Principal</span>
+                                    <span class="stat-value" id="teamModalAchievement">Campeón del Mundo</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Jugador Clave</span>
+                                    <span class="stat-value" id="teamModalKeyPlayer">Pelé</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap/bootstrap.bundle.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Rellenar modal usando data-attributes de la carta
+        function openTeamModalFromCard(card) {
+            const name = card.getAttribute('data-team');
+            const img = card.getAttribute('data-img');
+            const era = card.getAttribute('data-era');
+            const achievement = card.querySelector('.player-meta').textContent.split('•')[0].trim();
+            const keyPlayer = card.querySelector('.stat strong').textContent;
+
+            const modal = document.getElementById('teamModal');
+            modal.querySelector('#teamModalName').textContent = name;
+            modal.querySelector('#teamModalImg').src = img || 'https://via.placeholder.com/400x400';
+            modal.querySelector('#teamModalMeta').textContent = 'Era: ' + era;
+            
+            // Rellenar nuevos campos del modal
+            modal.querySelector('#teamModalAchievement').textContent = achievement;
+            modal.querySelector('#teamModalKeyPlayer').textContent = keyPlayer;
+            modal.querySelector('#teamModalBio').textContent = 'Historia de la selección ' + name + '. Aquí puedes añadir detalles sobre su estilo de juego, su legado y los momentos que la definieron.';
+        }
+
+        document.querySelectorAll('.legend-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList.contains('open-team')) return;
+                
+                openTeamModalFromCard(card);
+                const modalEl = document.getElementById('teamModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            });
+        });
+
+        // Filtrado por chips
+        const chips = document.querySelectorAll('.filters .chip');
+        const cards = document.querySelectorAll('.legend-card');
+
+        function normalize(text) { return (text || '').trim().toLowerCase(); }
+
+        function filterByChip(filterText) {
+            const t = normalize(filterText);
+            cards.forEach(card => {
+                const era = normalize(card.getAttribute('data-era'));
+                card.style.display = (t === 'todos' || t === '' || era === t) ? '' : 'none';
+            });
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                filterByChip(chip.textContent || chip.innerText);
+            });
+        });
+
+        // Inicializar filtro
+        (function() {
+            const active = document.querySelector('.filters .chip.active');
+            filterByChip(active ? (active.textContent || active.innerText) : 'todos');
+        })();
+    </script>
+</body>
+</html>

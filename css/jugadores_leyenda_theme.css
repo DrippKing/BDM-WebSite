@@ -6,7 +6,7 @@
 /* Use the stats grid layout from maximosgoleadores */
 #legendsGrid{ /* mirror stats-grid-container */
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
   gap:20px;
 }
 
@@ -32,11 +32,56 @@
 .card-img{width:100%; height:160px; object-fit:cover; display:block}
 .card-badge{left:12px; top:12px;}
 
+/* Ribbon that shows the era (usa el atributo data-era del article) */
+.theme-selecciones .legend-card::before{
+  content: attr(data-era);
+  position: absolute;
+  right: -36px;
+  top: 12px;
+  background: linear-gradient(90deg, rgba(0,193,167,0.12), rgba(0,193,167,0.02));
+  color: var(--jl-accent);
+  font-weight:700;
+  padding:6px 48px;
+  transform: rotate(40deg);
+  font-size:12px;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 6px 18px rgba(2,8,20,0.45);
+  z-index:3;
+}
+
+/* subtle overlay at bottom of image with team name */
+.theme-selecciones .card-media::after{
+  content: attr(data-team);
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:10px 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.7) 100%);
+  color: #fff;
+  font-weight:600;
+  font-size:15px;
+  text-align:left;
+  z-index:2;
+}
+
 .card-body{padding:14px}
 .player-name{font-size:18px; color:var(--jl-accent); margin:0 0 6px}
 .player-meta{color:#dcdcdc; margin:0 0 10px}
 .card-actions{display:flex; justify-content:space-between; align-items:center}
 .stat{color:#fff}
+
+/* Button and stat tweaks */
+.theme-selecciones .card-actions .btn{
+  border-radius:8px;
+  padding:6px 10px;
+  font-size:0.9rem;
+}
+.theme-selecciones .stat{color:#f8f9fa; font-size:0.95rem}
+.theme-selecciones .stat strong{color:var(--jl-accent); font-weight:700}
+
+/* Make the card body a bit taller and add small description line */
+.theme-selecciones .card-body{padding:12px 14px 16px}
+.theme-selecciones .card-body .short-desc{color:#9fb0c7; font-size:0.95rem; margin-top:6px}
 
 /* Make hero area fit into the stats layout */
 .hero{margin-bottom:18px; padding:18px; background: rgba(255, 255, 255, 0.05); border-radius:12px; border:1px solid rgba(255,255,255,0.04)}
@@ -66,3 +111,59 @@
    en un <span class="word">...</span> y usa esta regla para ajustar margenes. */
 .vertical-text .word{display:inline-block; margin:0 6px}
 
+
+/* --- Estilos específicos para la página de Selecciones Históricas --- */
+
+.theme-selecciones .legend-card {
+  position: relative; /* Necesario para el overlay */
+}
+
+.theme-selecciones .card-media {
+  overflow: hidden; /* Oculta el exceso de la imagen al hacer zoom */
+}
+
+.theme-selecciones .legend-card .card-img {
+  transition: transform 0.4s ease;
+}
+
+.theme-selecciones .legend-card:hover .card-img {
+  transform: scale(1.1); /* Efecto de zoom en la imagen */
+}
+
+.theme-selecciones .legend-card .card-body {
+  position: relative;
+  z-index: 2; /* Asegura que el texto esté sobre el degradado */
+  background: linear-gradient(to top, rgba(0, 20, 43, 0.9) 20%, rgba(0, 20, 43, 0.6) 60%, transparent 100%);
+}
+
+/* --- Estilos para el Modal de Selecciones --- */
+.theme-selecciones .modal-content {
+  border: 1px solid var(--jl-accent) !important;
+  box-shadow: 0 0 25px rgba(0, 193, 167, 0.3);
+}
+
+.theme-selecciones .stats-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-selecciones .stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-selecciones .stat-label {
+  font-size: 0.9rem;
+  color: #adb5bd; /* Color grisáceo para la etiqueta */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.theme-selecciones .stat-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--jl-accent); /* Color de acento para el valor */
+}
