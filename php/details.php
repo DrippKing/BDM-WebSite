@@ -1,20 +1,11 @@
 <?php
-// Hacemos la variable $conn global para poder usarla dentro de este archivo.
 global $conn;
-
-// --- INICIALIZACIÓN DE VARIABLES ---
 $edicion_nombre = 'Mundial no encontrado';
 $world_cup_data = null;
 $posts = [];
 $categories = [];
-
-// Capturamos los parámetros de la URL de forma segura.
 $category_filter = isset($_GET['category']) ? trim($_GET['category']) : null;
 $edicion_param = $_GET['edicion'] ?? '';
-
-// --- LÓGICA PRINCIPAL ---
-
-// 1. Obtener todas las categorías visibles. Esto se ejecuta siempre para que nunca desaparezcan.
 $query_categories = "SELECT Name, Description FROM categories WHERE Is_Visible = 1";
 $result_categories = $conn->query($query_categories);
 if ($result_categories && $result_categories->num_rows > 0) {
@@ -22,14 +13,9 @@ if ($result_categories && $result_categories->num_rows > 0) {
         $categories[] = $row;
     }
 }
-
-// 2. Si se especificó una edición en la URL, buscar sus datos y publicaciones.
 if (!empty($edicion_param)) {
-    // Formateamos el nombre para buscar en la BD (ej. QATAR_2022 -> QATAR 2022, KOREA-JAPAN_2002 -> KOREA/JAPAN 2002)
     $edicion_busqueda = str_replace(['_', '-'], [' ', '/'], $edicion_param);
-
     $stmt = $conn->prepare("SELECT * FROM worldcup_editions WHERE Name = ?");
-
     if ($stmt) {
         $stmt->bind_param("s", $edicion_busqueda);
         $stmt->execute();
@@ -37,11 +23,7 @@ if (!empty($edicion_param)) {
         if ($result->num_rows > 0) {
             $world_cup_data = $result->fetch_assoc();
             $edicion_nombre = $world_cup_data['Name'];
-
-            // 2.1. Construir la consulta para obtener los posts.
             $worldcup_id = $world_cup_data['ID_WorldCup_Year_PK'];
-
-            // Construcción dinámica de la consulta de posts
             $sql_posts = "SELECT p.ID_Post_PK, p.Content_Title, p.Content_Body, p.Upload_Date, u.Nametag, u.Profile_Picture
                  FROM posts p
                  JOIN users u ON p.ID_User_FK = u.ID_User_PK";
@@ -50,22 +32,16 @@ if (!empty($edicion_param)) {
             $params = [];
             $params[] = $worldcup_id;
             $types = "i";
-
-            // Si se está filtrando por categoría, se modifica la consulta.
             if ($category_filter) {
                 $sql_posts .= " JOIN `categories-posts` cp ON p.ID_Post_PK = cp.ID_Post_FK
                                 JOIN `categories` c ON cp.ID_Category_FK = c.ID_Category_PK";
                 $where_clauses[] = "c.Name = ?";
-                $params[] = $category_filter; // Añadimos el nombre de la categoría a los parámetros.
+                $params[] = $category_filter;
                 $types .= "s";
             }
-
             $sql_posts .= " WHERE " . implode(" AND ", $where_clauses) . " ORDER BY p.Upload_Date DESC";
-
             $stmt_posts = $conn->prepare($sql_posts);
             if ($stmt_posts) {
-                // Vinculamos los parámetros a la consulta.
-                // El operador '...' (splat) pasa los elementos del array como argumentos individuales.
                 $stmt_posts->bind_param($types, ...$params);
                 
                 $stmt_posts->execute();
@@ -90,7 +66,7 @@ if (!empty($edicion_param)) {
 
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/details.css"> <!-- ¡Esta es la línea que faltaba! -->
+    <link rel="stylesheet" href="css/details.css"> 
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,7 +74,6 @@ if (!empty($edicion_param)) {
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
         $navbar_template = 'navbar-main';
         require __DIR__ . '/../html/templates/navbar.php'; 
     ?>
@@ -114,7 +89,7 @@ if (!empty($edicion_param)) {
                             $category_name = htmlspecialchars($category['Name']);
                             $is_active = ($category_filter === $category['Name']);
                             $filter_url = $is_active 
-                                ? "index.php?page=details&edicion=" . urlencode($edicion_param) // Si está activa, el link quita el filtro
+                                ? "index.php?page=details&edicion=" . urlencode($edicion_param)
                                 : "index.php?page=details&edicion=" . urlencode($edicion_param) . "&category=" . urlencode($category['Name']);
                         ?>
                         <div class="SC2" data-url="<?php echo $filter_url; ?>" style="cursor: pointer;">
@@ -146,7 +121,6 @@ if (!empty($edicion_param)) {
                                 <div class="post-card">
                                     <div class="post-header">
                                         <?php
-                                            // Lógica para la foto de perfil del autor del post
                                             $post_author_pic_file = $post['Profile_Picture'] ?? 'default.jpg';
                                             $post_author_pic_path = ($post_author_pic_file === 'default.jpg')
                                                 ? 'img/profile-icon-default.jpg'
@@ -159,7 +133,7 @@ if (!empty($edicion_param)) {
                                         </div>
                                     </div>
                                     <div class="post-body">
-                                        <!-- Unificamos título y cuerpo para un look más limpio -->
+                                        
                                         <div class="post-content">
                                             <p class="post-title"><?php echo htmlspecialchars($post['Content_Title']); ?></p>
                                             <p><?php echo nl2br(htmlspecialchars($post['Content_Body'])); ?></p>
@@ -168,7 +142,7 @@ if (!empty($edicion_param)) {
                                     <div class="post-footer">
                                         <button class="footer-btn">❤️ Me gusta</button>
                                         <button class="footer-btn">💬 Comentar</button>
-                                        <button class="footer-btn">🔗 Compartir</button>
+                                        <!-- <button class="footer-btn">🔗 Compartir</button> -->
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -189,14 +163,14 @@ if (!empty($edicion_param)) {
     <script src="js/main.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // Script para la barra lateral (z-index)
+            
             const cards = document.querySelectorAll('#BN-Container .SC1 .SC2');
             const totalCards = cards.length;
             cards.forEach((card, index) => {
                 card.style.zIndex = totalCards - index;
             });
 
-            // Script para leer el título de la URL
+            
             const params = new URLSearchParams(window.location.search);
             const edicionDesdeUrl = params.get('edicion');
             if (edicionDesdeUrl) {
@@ -207,7 +181,7 @@ if (!empty($edicion_param)) {
                 }
             }
 
-            // Script para hacer las categorías clickeables sin romper el diseño.
+            
             const categoryCards = document.querySelectorAll('#BN-Container .SC2');
             categoryCards.forEach(card => {
                 card.addEventListener('click', () => {

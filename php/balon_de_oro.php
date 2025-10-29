@@ -17,7 +17,6 @@
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
         $navbar_template = 'navbar-main';
         require __DIR__ . '/../html/templates/navbar.php'; 
     ?>

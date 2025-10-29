@@ -11,7 +11,7 @@
  
     <link rel="stylesheet" href="css/maximosgoleadores.css">
   
-    <!-- Small overrides to adapt leyendas cards to the maximosgoleadores theme -->
+    
     <link rel="stylesheet" href="css/jugadores_leyenda_theme.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
+        
         $navbar_template = 'navbar-main';
         require __DIR__ . '/../html/templates/navbar.php'; 
     ?>
@@ -54,7 +54,7 @@
       </section>
 
       <section class="grid-container" id="legendsGrid">
-            <!-- Example card: copiar/duplicar según necesites -->
+            
             <article class="legend-card" data-player="Pelé" data-img="img/players/pele.jpg" data-era="Antes 1990" data-position="Delantero">
                 <div class="card-media">
                     <img src="https://via.placeholder.com/600x400?text=Pel%C3%A9" alt="Pelé" class="card-img">
@@ -100,12 +100,12 @@
                 </div>
             </article>
 
-            <!-- Añade más tarjetas según sea necesario -->
+            
         </section>
 
     </main>
 
-    <!-- Player modal -->
+    
     <div class="modal fade" id="playerModal" tabindex="-1" aria-labelledby="playerModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-dark text-white border-0">
@@ -139,7 +139,7 @@
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
     <script src="js/main.js"></script>
     <script>
-    // Rellenar modal usando data-attributes de la carta
+    
     function openPlayerModalFromCard(card){
       var name = card.getAttribute('data-player');
       var img = card.getAttribute('data-img');
@@ -155,14 +155,13 @@
 
     document.querySelectorAll('.legend-card').forEach(function(card){
       card.addEventListener('click', function(e){
-        // Si el usuario clickea específicamente el botón "Ver", deja que el botón abra el modal via data-bs attrs
+        
         var target = e.target;
         if(target.classList.contains('open-player')) return;
-        // abre modal manualmente (Bootstrap actual lo abrirá cuando se haga click en el botón), pero
-        // queremos rellenar el contenido antes de mostrarlo. Para consistencia, rellenamos y luego
-        // disparamos el modal si no fue ya disparado por el botón.
+        
+        
         openPlayerModalFromCard(card);
-        // Si el click no fue sobre el botón, abrimos el modal programáticamente
+        
         if(!target.classList.contains('open-player')){
           var modalEl = document.getElementById('playerModal');
           var modal = new bootstrap.Modal(modalEl);
@@ -171,7 +170,7 @@
       });
     });
 
-    // Filtrado: muestra/oculta cards según chip selecionado
+    
     const chips = document.querySelectorAll('.filters .chip');
     const cards = document.querySelectorAll('.legend-card');
 
@@ -184,7 +183,7 @@
       cards.forEach(card => {
         const pos = normalize(card.getAttribute('data-position'));
         const era = normalize(card.getAttribute('data-era'));
-        // Mostrar si coincide con posición o era; 'todos' muestra todo
+        
         if(t === 'todos' || t === '' ){
           card.style.display = '';
           return;
@@ -206,7 +205,7 @@
       });
     });
 
-    // inicializa mostrando todo (en caso de que no haya 'Todos' activo)
+    
     (function(){
       const active = document.querySelector('.filters .chip.active');
       if(active) filterByChip(active.textContent || active.innerText);

@@ -39,18 +39,11 @@
                     </li>
                 <?php endif; ?>
             </ul>
-            <!-- Campo de búsqueda comentado temporalmente
-            <form style="width: 100%;" class="d-flex" role="search">
-                <input class="SearchTopic form-control" type="search" placeholder="Buscar" aria-label="Buscar">
-            </form> 
-            -->
+            
             <div class="profile-container">
                 <?php if (isset($_SESSION['username'])): ?>
                     <?php
-                        // Obtenemos el nombre de la imagen de la sesión.
                         $profile_pic_file = $_SESSION['profile_picture'] ?? 'default.jpg';
-                        // Si es la imagen por defecto, usamos la ruta correcta.
-                        // De lo contrario, construimos la ruta a la imagen personalizada del usuario.
                         $profile_pic_path = ($profile_pic_file === 'default.jpg')
                             ? 'img/profile-icon-default.jpg'
                             : 'assets/users/profile_pictures/' . $profile_pic_file;

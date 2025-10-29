@@ -1,5 +1,4 @@
 <?php
-// Lógica para obtener el tema de la URL.
 $tema = $_GET['tema'] ?? 'Momentos Históricos';
 $titulo_formateado = str_replace('_', ' ', $tema);
 ?>
@@ -21,7 +20,6 @@ $titulo_formateado = str_replace('_', ' ', $tema);
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
         $navbar_template = 'navbar-main';
         require __DIR__ . '/../html/templates/navbar.php'; 
     ?>
@@ -31,7 +29,7 @@ $titulo_formateado = str_replace('_', ' ', $tema);
             <span class="vertical-text bebas-neue-regular"><?php echo htmlspecialchars(strtoupper($titulo_formateado)); ?></span>
         </div>
         <div style="width:100%">
-            <!-- Aquí irá el contenido dinámico de los momentos históricos -->
+            
             <h1 class="text-white text-center p-5">Contenido para '<?php echo htmlspecialchars($titulo_formateado); ?>' en construcción...</h1>
         </div>
     </div>

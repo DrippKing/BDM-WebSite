@@ -1,17 +1,10 @@
 <?php
-// Hacemos la variable $conn global para poder usarla dentro de este archivo.
 global $conn;
-
-// Consultar todos los mundiales de la base de datos, ordenados por año
 $query = "SELECT Name, Final_Winner, Official_Artwork_Multimedia, ID_WorldCup_Year_PK FROM worldcup_editions ORDER BY ID_WorldCup_Year_PK ASC";
 $result = $conn->query($query);
-
-// --- Bloque de depuración ---
-// Si la consulta falla, $result será `false`. Mostramos el error exacto.
 if ($result === false) {
     die("Error en la consulta SQL: " . htmlspecialchars($conn->error));
 }
-
 $editions = [];
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -37,8 +30,6 @@ if ($result && $result->num_rows > 0) {
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
-        // Usamos una variable para indicar qué plantilla cargar.
         $navbar_template = 'navbar-main';
         require 'html/templates/navbar.php'; 
     ?>
@@ -50,12 +41,10 @@ if ($result && $result->num_rows > 0) {
                 <?php if (count($editions) > 0): ?>
                     <?php foreach ($editions as $edition): ?>
                         <?php
-                            // Preparamos los datos para usarlos en el HTML
                             $edition_name = htmlspecialchars($edition['Name']);
                             $winner = htmlspecialchars($edition['Final_Winner']);
                             $poster_image = htmlspecialchars($edition['Official_Artwork_Multimedia']);
                             
-                            // Creamos el identificador para la URL, ej: "QATAR 2022" -> "QATAR_2022"
                             $url_edicion = str_replace([' ', '/'], ['_', '-'], $edition['Name']);
                         ?>
                         <button class="card" data-edicion="<?php echo $url_edicion; ?>">
@@ -76,7 +65,7 @@ if ($result && $result->num_rows > 0) {
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // Script específico del index (el que hace los botones clickables)
+        
         window.addEventListener('DOMContentLoaded', () => {
             const allCards = document.querySelectorAll('#cards .card');
             allCards.forEach(card => {
