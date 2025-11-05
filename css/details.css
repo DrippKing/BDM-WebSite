@@ -107,3 +107,14 @@
 .footer-btn:hover {
     background-color: #F0F2F5; /* Color de fondo al pasar el cursor */
 }
+
+/* Estilo para el botón de "Me gusta" cuando está activo */
+.footer-btn.liked {
+    color: #FF5C5C; /* Un color rojo para indicar que le gusta */
+    font-weight: bold;
+}
+
+/* Estilos para la sección de comentarios */
+.comments-section {
+    background-color: #F0F2F5; /* Un fondo ligeramente gris para separar los comentarios */
+}
