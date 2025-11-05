@@ -34,14 +34,13 @@
 
             <section class="grid-header">
                 <h2 class="section-title"> Selecciones Historicas</h2>
-                <p class="section-desc">Haz clic en una carta para ver su historia y logros.</p>
             </section>
 
             <section class="grid-container" id="legendsGrid">
                 <!-- Tarjeta de ejemplo: Brasil 1970 -->
                 <article class="legend-card" data-team="Brasil 1970" data-img="img/teams/brazil_1970.jpg" data-era="1970-1990">
                     <div class="card-media">
-                        <img src="https://via.placeholder.com/600x400?text=Brasil+1970" alt="Brasil 1970" class="card-img">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.npm-7Vu36wmT3_cdKlJIMQHaD4?w=1200&h=630&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Brasil 1970" class="card-img">
                         <div class="card-badge">Histórica</div>
                     </div>
                     <div class="card-body">
@@ -58,7 +57,7 @@
                 <!-- Tarjeta de ejemplo: Holanda 1974 -->
                 <article class="legend-card" data-team="Holanda 1974" data-img="img/teams/holanda_1974.jpg" data-era="1970-1990">
                     <div class="card-media">
-                        <img src="https://via.placeholder.com/600x400?text=Holanda+1974" alt="Holanda 1974" class="card-img">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.npm-7Vu36wmT3_cdKlJIMQHaD4?w=1200&h=630&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Holanda 1974" class="card-img">
                         <div class="card-badge gradient">Histórica</div>
                     </div>
                     <div class="card-body">
@@ -75,7 +74,7 @@
                 <!-- Tarjeta de ejemplo: España 2010 -->
                 <article class="legend-card" data-team="España 2010" data-img="img/teams/spain_2010.jpg" data-era="2010-2025">
                     <div class="card-media">
-                        <img src="https://via.placeholder.com/600x400?text=Espa%C3%B1a+2010" alt="España 2010" class="card-img">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.npm-7Vu36wmT3_cdKlJIMQHaD4?w=1200&h=630&rs=1&pid=ImgDetMain&o=7&rm=3" alt="España 2010" class="card-img">
                         <div class="card-badge">Histórica</div>
                     </div>
                     <div class="card-body">

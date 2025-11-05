@@ -31,33 +31,18 @@
     </div>
 
     <div class="content-area">
-      <header class="hero">
-        <div class="hero-inner">
-          <h1 class="hero-title bebas-neue-regular">Jugadores Leyenda</h1>
-          <p class="hero-sub">Una selección curada de las estrellas que marcaron épocas. Historias, estadísticas y momentos.</p>
-          <div class="filters">
-            <div class="chip active">Todos</div>
-            <div class="chip">Delanteros</div>
-            <div class="chip">Mediocampistas</div>
-            <div class="chip">Defensas</div>
-            <div class="chip">Porteros</div>
-            <div class="chip">Antes 1990</div>
-            <div class="chip">1990-2010</div>
-            <div class="chip">2010-2025</div>
-          </div>
-        </div>
-      </header>
+      
 
       <section class="grid-header">
-        <h2 class="section-title">Galería de Leyendas</h2>
-        <p class="section-desc">Haz clic en una carta para ver la biografía y logros.</p>
+        <h2 class="section-title">Jugadores Leyenda</h2>
+      
       </section>
 
       <section class="grid-container" id="legendsGrid">
             
             <article class="legend-card" data-player="Pelé" data-img="img/players/pele.jpg" data-era="Antes 1990" data-position="Delantero">
                 <div class="card-media">
-                    <img src="https://via.placeholder.com/600x400?text=Pel%C3%A9" alt="Pelé" class="card-img">
+                    <img src="https://s1.1zoom.me/big0/335/Footbal_Men_Ball_Legs_493200.jpg" alt="Pelé" class="card-img">
                     <div class="card-badge">Leyenda</div>
                 </div>
                 <div class="card-body">
@@ -72,7 +57,7 @@
 
             <article class="legend-card" data-player="Diego Maradona" data-img="img/players/maradona.jpg" data-era="Antes 1990" data-position="Delantero">
                 <div class="card-media">
-                    <img src="https://via.placeholder.com/600x400?text=Maradona" alt="Maradona" class="card-img">
+                    <img src="https://s1.1zoom.me/big0/335/Footbal_Men_Ball_Legs_493200.jpg" alt="Maradona" class="card-img">
                     <div class="card-badge gradient">Leyenda</div>
                 </div>
                 <div class="card-body">
@@ -87,7 +72,7 @@
 
             <article class="legend-card" data-player="Zinedine Zidane" data-img="img/players/zidane.jpg" data-era="1990-2010" data-position="Mediocampista">
                 <div class="card-media">
-                    <img src="https://via.placeholder.com/600x400?text=Zidane" alt="Zidane" class="card-img">
+                    <img src="https://s1.1zoom.me/big0/335/Footbal_Men_Ball_Legs_493200.jpg" alt="Zidane" class="card-img">
                     <div class="card-badge">Leyenda</div>
                 </div>
                 <div class="card-body">

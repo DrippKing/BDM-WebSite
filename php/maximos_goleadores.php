@@ -73,6 +73,21 @@
                     <p class="stat-value">Name</p>
                     <p class="stat-detail">8 Goles</p>
                 </div>
+                
+                 <div class="stat-card">
+                    <div class="stat-icon">⚽</div>
+                    <h3 class="stat-title bebas-neue-regular">Máximo Goleador</h3>
+                    <p class="stat-value">Name</p>
+                    <p class="stat-detail">8 Goles</p>
+                </div>
+
+                 <div class="stat-card">
+                    <div class="stat-icon">⚽</div>
+                    <h3 class="stat-title bebas-neue-regular">Máximo Goleador</h3>
+                    <p class="stat-value">Name</p>
+                    <p class="stat-detail">8 Goles</p>
+                </div>
+
             </div>
         </div>
     </div>
