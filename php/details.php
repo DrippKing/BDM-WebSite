@@ -140,9 +140,18 @@ if (!empty($edicion_param)) {
                                         </div>
                                     </div>
                                     <div class="post-footer">
-                                        <button class="footer-btn">❤️ Me gusta</button>
-                                        <button class="footer-btn">💬 Comentar</button>
-                                        <!-- <button class="footer-btn">🔗 Compartir</button> -->
+                                        <button class="footer-btn like-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">❤️ Me gusta</button>
+                                        <button class="footer-btn comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">💬 Comentar</button>
+                                    </div>
+                                    <!-- Sección de comentarios (inicialmente oculta) -->
+                                    <div class="comments-section" id="comments-<?php echo $post['ID_Post_PK']; ?>" style="display: none;">
+                                        <hr>
+                                        <div class="p-3">
+                                            
+                                            <!-- Aquí se cargarían los comentarios existentes -->
+                                            <textarea class="form-control" rows="2" placeholder="Escribe un comentario..."></textarea>
+                                            <button class="btn btn-primary btn-sm mt-2">Publicar</button>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -188,6 +197,25 @@ if (!empty($edicion_param)) {
                     window.location.href = card.dataset.url;
                 });
             });
+
+            // Funcionalidad para botones de "Me gusta" y "Comentar"
+            const postFeed = document.querySelector('.posts-feed');
+            if (postFeed) {
+                postFeed.addEventListener('click', function(e) {
+                    // Botón de Comentar
+                    if (e.target.classList.contains('comment-btn')) {
+                        const postId = e.target.dataset.postId;
+                        const commentsSection = document.getElementById(`comments-${postId}`);
+                        if (commentsSection) {
+                            commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
+                        }
+                    }
+                    // Botón de Me gusta
+                    if (e.target.classList.contains('like-btn')) {
+                        e.target.classList.toggle('liked');
+                    }
+                });
+            }
         });
     </script>
 </body>
