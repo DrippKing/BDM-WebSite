@@ -68,7 +68,6 @@ if (!empty($edicion_param)) {
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/details.css"> 
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
@@ -129,7 +128,20 @@ if (!empty($edicion_param)) {
                                         <img src="<?php echo htmlspecialchars($post_author_pic_path); ?>" alt="Foto de perfil de <?php echo htmlspecialchars($post['Nametag']); ?>" class="post-author-avatar">
                                         <div class="post-author-info">
                                             <span class="post-author-name"><?php echo htmlspecialchars($post['Nametag']); ?></span>
-                                            <span class="post-date"><?php echo date('d M, Y \a \l\a\s H:i', strtotime($post['Upload_Date'])); ?></span>
+                                            <?php
+                                                // `Upload_Date` is stored in UTC (Y-m-d H:i:s). Export as ISO Z for client parsing.
+                                                $utc_raw = $post['Upload_Date'];
+                                                $utc_iso = htmlspecialchars(str_replace(' ', 'T', $utc_raw) . 'Z');
+                                                // Fallback readable string (UTC) shown until JS converts to local time.
+                                                $readable_utc = '';
+                                                try {
+                                                    $dt = new DateTime($utc_raw, new DateTimeZone('UTC'));
+                                                    $readable_utc = $dt->format('d M, Y \a \l\a\s H:i');
+                                                } catch (Exception $e) {
+                                                    $readable_utc = htmlspecialchars($utc_raw);
+                                                }
+                                            ?>
+                                            <span class="post-date" data-upload-utc="<?php echo $utc_iso; ?>"><?php echo $readable_utc; ?></span>
                                         </div>
                                     </div>
                                     <div class="post-body">
@@ -140,17 +152,19 @@ if (!empty($edicion_param)) {
                                         </div>
                                     </div>
                                     <div class="post-footer">
-                                        <button class="footer-btn like-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">❤️ Me gusta</button>
+                                        <button class="footer-btn like-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">♡ Me gusta</button>
                                         <button class="footer-btn comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">💬 Comentar</button>
                                     </div>
                                     <!-- Sección de comentarios (inicialmente oculta) -->
                                     <div class="comments-section" id="comments-<?php echo $post['ID_Post_PK']; ?>" style="display: none;">
                                         <hr>
-                                        <div class="p-3">
-                                            
-                                            <!-- Aquí se cargarían los comentarios existentes -->
-                                            <textarea class="form-control" rows="2" placeholder="Escribe un comentario..."></textarea>
-                                            <button class="btn btn-primary btn-sm mt-2">Publicar</button>
+                                        <div class="p-3 comment-area-container">
+                                            <!-- Aquí se cargarán los comentarios existentes -->
+                                            <div class="existing-comments mb-3">
+                                                <!-- Los comentarios existentes se cargarán aquí dinámicamente -->
+                                            </div>
+                                            <textarea class="form-control comment-input" rows="2" placeholder="Escribe un comentario..."></textarea>
+                                            <button class="btn btn-primary btn-sm mt-2 publish-comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">Publicar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -198,24 +212,7 @@ if (!empty($edicion_param)) {
                 });
             });
 
-            // Funcionalidad para botones de "Me gusta" y "Comentar"
-            const postFeed = document.querySelector('.posts-feed');
-            if (postFeed) {
-                postFeed.addEventListener('click', function(e) {
-                    // Botón de Comentar
-                    if (e.target.classList.contains('comment-btn')) {
-                        const postId = e.target.dataset.postId;
-                        const commentsSection = document.getElementById(`comments-${postId}`);
-                        if (commentsSection) {
-                            commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
-                        }
-                    }
-                    // Botón de Me gusta
-                    if (e.target.classList.contains('like-btn')) {
-                        e.target.classList.toggle('liked');
-                    }
-                });
-            }
+            // Nota: el manejo del botón "Me gusta" se realiza desde `js/main.js` (manejo delegado)
         });
     </script>
 </body>

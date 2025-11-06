@@ -31,8 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($post_title) || empty($post_content) || empty($worldcup_id) || empty($category_id)) {
         $error_message = "Todos los campos (título, contenido y categoría) son obligatorios.";
     } else {
-        $upload_date = date('Y-m-d H:i:s');
-        $visibility = 1; // 1 = visible
+    // Guardar la hora de publicación en la hora local del servidor (registrar la hora en la que se publica)
+    // Si prefieres otra zona, podemos ajustar `date_default_timezone_set()` aquí.
+    $upload_date = date('Y-m-d H:i:s');
+    // Publicar directamente (visibilidad por defecto = 1). La lógica de aprobación por rol fue removida.
+    $visibility = 1; // 1 = visible
 
         $sql = "INSERT INTO posts (Content_Title, Content_Body, Upload_Date, ID_WorldCup_Year_FK, ID_User_FK, Visibility_State) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
@@ -47,8 +50,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_cat_post->bind_param("ii", $category_id, $new_post_id);
             
             if ($stmt_cat_post->execute()) {
-                // Redirigir a la página de detalles del mundial para ver la publicación.
-                header("Location: index.php?page=details&edicion=" . $_GET['edicion_name']);
+                // Intentar obtener el nombre de la categoría para redirigir al apartado correspondiente
+                $category_name = '';
+                $stmt_cat_name = $conn->prepare("SELECT Name FROM categories WHERE ID_Category_PK = ? LIMIT 1");
+                if ($stmt_cat_name) {
+                    $stmt_cat_name->bind_param('i', $category_id);
+                    if ($stmt_cat_name->execute()) {
+                        $res_cat = $stmt_cat_name->get_result();
+                        if ($res_cat && $res_cat->num_rows > 0) {
+                            $category_name = $res_cat->fetch_assoc()['Name'];
+                        }
+                    }
+                    $stmt_cat_name->close();
+                }
+                // Redirigir a la página de detalles del mundial filtrando por la categoría seleccionada (si se obtuvo el nombre)
+                $redirect = "index.php?page=details&edicion=" . urlencode($_GET['edicion_name']);
+                if (!empty($category_name)) {
+                    $redirect .= "&category=" . urlencode($category_name);
+                }
+                header("Location: " . $redirect);
                 exit;
             } else {
                 $error_message = "Publicación creada, pero hubo un error al asignar la categoría: " . $stmt_cat_post->error;

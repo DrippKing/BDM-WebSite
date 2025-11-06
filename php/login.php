@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prevenir inyección SQL usando sentencias preparadas
-    $stmt = $conn->prepare("SELECT ID_User_PK, Password, Profile_Picture FROM users WHERE Nametag = ?");
+    $stmt = $conn->prepare("SELECT ID_User_PK, Password, Profile_Picture, ID_Role_FK FROM users WHERE Nametag = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // CORRECCIÓN: Usar 'user_id' para que sea consistente con las otras páginas.
             $_SESSION['user_id'] = $user['ID_User_PK'];
             $_SESSION['username'] = $username;
+            // Nota: ya no almacenamos rol en la sesión (se retiró lógica de administrador)
             $_SESSION['profile_picture'] = $user['Profile_Picture']; // Guardamos la foto de perfil
 
             // CORRECCIÓN: Redirigir a la página anterior si existe, si no, a home.

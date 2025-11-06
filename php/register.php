@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
     $birthdate = $_POST['birthdate'];
-    $gender = $_POST['gender'] ?? ''; // Usamos ?? '' para evitar errores si no se selecciona.
+    // Usamos isset() porque empty('0') devuelve true en PHP y '0' es un valor válido para masculino
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
     $country = trim($_POST['birthcountry']);
     $phone = trim($_POST['phonenumber']);
     $nametag = trim($_POST['username']);
@@ -38,36 +39,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // 2. Validar que los campos no estén vacíos (puedes añadir más validaciones)
-    if (empty($nametag) || empty($email) || empty($password) || empty($firstname) || empty($gender)) {
+    // Comprobamos que los campos obligatorios estén presentes. Para gender verificamos null
+    if (empty($nametag) || empty($email) || empty($password) || empty($firstname) || $gender === null) {
         $error_message = "Por favor, completa todos los campos obligatorios.";
     } else {
-        // 4. Preparar la consulta SQL para insertar el usuario
-        $sql = "INSERT INTO users (Nametag, Password, First_Name, Last_Name, Birthdate, Gender, ID_Country_FK, Phone_Number, Email, ID_Role_FK, Profile_Picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, 'default.jpg')";
-        
-        $stmt = $conn->prepare($sql);
-
-        if ($stmt) {
-            // 5. Vincular los parámetros y ejecutar la consulta
-            $stmt->bind_param("ssssssiss", $nametag, $password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email);
-            
-            if ($stmt->execute()) {
-                $success_message = "¡Registro exitoso! Ahora puedes iniciar sesión.";
-                // Vaciamos las variables para limpiar el formulario solo en caso de éxito.
-                $firstname = '';
-                $lastname = '';
-                $birthdate = '';
-                $gender = '';
-                $country = '';
-                $phone = '';
-                $nametag = '';
-                $email = '';
+        // Procesar subida de imagen (opcional)
+        $profile_picture = 'default.jpg';
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $file = $_FILES['profile_image'];
+            if ($file['error'] === UPLOAD_ERR_OK) {
+                $maxSize = 2 * 1024 * 1024; // 2MB
+                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                $allowed = ['jpg','jpeg','png','webp'];
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $file['tmp_name']);
+                finfo_close($finfo);
+                if (!in_array($ext, $allowed) || strpos($mime, 'image/') !== 0) {
+                    $error_message = 'Formato de imagen no permitido. Usa JPG, PNG o WEBP.';
+                } elseif ($file['size'] > $maxSize) {
+                    $error_message = 'Imagen demasiado grande (max 2MB).';
+                } else {
+                    $newName = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                    $destDir = __DIR__ . '/../assets/users/profile_pictures/';
+                    if (!is_dir($destDir)) mkdir($destDir, 0755, true);
+                    $destPath = $destDir . $newName;
+                    if (move_uploaded_file($file['tmp_name'], $destPath)) {
+                        $profile_picture = $newName;
+                    } else {
+                        $error_message = 'No se pudo mover la imagen subida.';
+                    }
+                }
             } else {
-                // Manejar errores, como un usuario o email duplicado
-                $error_message = "Error al registrar: " . $stmt->error;
+                $error_message = 'Error al subir la imagen.';
             }
-            $stmt->close();
-        } else {
-            $error_message = "Error al preparar la consulta: " . $conn->error;
+        }
+
+        // 4. Preparar la consulta SQL para insertar el usuario (incluyendo la foto)
+        if ($error_message === '') {
+            $sql = "INSERT INTO users (Nametag, Password, First_Name, Last_Name, Birthdate, Gender, ID_Country_FK, Phone_Number, Email, ID_Role_FK, Profile_Picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?)";
+            $stmt = $conn->prepare($sql);
+            if ($stmt) {
+                // 5. Vincular los parámetros y ejecutar la consulta
+                $stmt->bind_param("ssssssisss", $nametag, $password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email, $profile_picture);
+                if ($stmt->execute()) {
+                    $success_message = "¡Registro exitoso! Ahora puedes iniciar sesión.";
+                    // Vaciamos las variables para limpiar el formulario solo en caso de éxito.
+                    $firstname = '';
+                    $lastname = '';
+                    $birthdate = '';
+                    $gender = '';
+                    $country = '';
+                    $phone = '';
+                    $nametag = '';
+                    $email = '';
+                } else {
+                    // Manejar errores, como un usuario o email duplicado
+                    $error_message = "Error al registrar: " . $stmt->error;
+                    // Si se subió una imagen y falla el registro, eliminarla para no dejar archivos huérfanos
+                    if ($profile_picture !== 'default.jpg') {
+                        $maybe = __DIR__ . '/../assets/users/profile_pictures/' . $profile_picture;
+                        if (is_file($maybe)) @unlink($maybe);
+                    }
+                }
+                $stmt->close();
+            } else {
+                $error_message = "Error al preparar la consulta: " . $conn->error;
+            }
         }
     }
 }
@@ -104,13 +141,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (!empty($error_message)): ?>
                 <div class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
             <?php endif; ?>
-            <form method="POST" action="index.php?page=register">
-                <div class="mb-3 text-center">
-                    <div id="avatarPreview">
-                        <img src="img/profile-icon-default.jpg" alt="Avatar">
+            <form method="POST" action="index.php?page=register" enctype="multipart/form-data">
+                    <div class="mb-3 text-center">
+                        <div id="avatarPreview">
+                            <img src="img/profile-icon-default.jpg" alt="Avatar" id="registerAvatar" style="cursor:pointer; width:120px; height:120px; object-fit:cover; border-radius:50%;">
+                        </div>
+                        <label for="photo" class="form-label custom-label">Foto (opcional)</label>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*" style="display:none;">
                     </div>
-                    <label for="photo" class="form-label custom-label">Foto</label>
-                </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="firstname" class="form-label w-100 text-center custom-label">Nombre/s</label>
                     <input type="text" class="form-control SearchTopic" id="firstname" name="firstname" placeholder="Nombre" value="<?php echo htmlspecialchars($firstname); ?>" required>
@@ -177,6 +215,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <script src="js/bootstrap/bootstrap.bundle.js"></script>
-    <script src="js/main.js"></script> </body>
+        <script src="js/bootstrap/bootstrap.bundle.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+        // Hacer clickable el avatar y mostrar vista previa en el registro
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatar = document.getElementById('registerAvatar');
+            const fileInput = document.getElementById('profile_image');
+            if (!avatar || !fileInput) return;
+
+            avatar.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = this.files && this.files[0];
+                if (!file) return;
+                const allowed = ['image/jpeg','image/png','image/webp'];
+                if (!allowed.includes(file.type)) {
+                    alert('Formato no permitido. Usa JPG, PNG o WEBP.');
+                    this.value = '';
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) { avatar.src = e.target.result; };
+                reader.readAsDataURL(file);
+            });
+        });
+        </script>
+    </body>
 </html>

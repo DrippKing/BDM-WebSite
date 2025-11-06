@@ -1,27 +1,63 @@
-/* --- Layout específico para esta página --- */
-.MainContainer {
+/* --- Estilos para la cuadrícula de momentos históricos --- */
+.moments-grid {
     display: grid;
-    /* Una columna angosta para el título y el resto para el contenido */
-    grid-template-columns: 150px 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Aumentamos el tamaño mínimo */
+    gap: 25px;
+    padding: 20px;
 }
 
-/* --- Estilos del Título Vertical --- */
-#vertical-title {
+.moment-card {
+    background-color: rgba(0, 20, 51, 0.7); /* Fondo oscuro semi-transparente */
+    border: 1px solid rgba(0, 193, 167, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    writing-mode: vertical-rl;
-    grid-column: 1 / 2; /* Posiciona en la primera columna */
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(4px);
 }
 
-.vertical-text {
-    transform: rotate(180deg);
-    white-space: nowrap;
-    font-size: 70px;
-    color: white;
-    text-shadow: #00ffdd 0px 0px 10px;
-    letter-spacing: 20px;
-    user-select: none;
+.moment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(115, 199, 188, 0.25);
+}
+
+.moment-image {
+    width: 100%;
+    height: 180px;
+    height: 200px; /* Hacemos la imagen un poco más alta */
+    object-fit: cover;
+    display: block;
+}
+
+.moment-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.moment-worldcup {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #00c1a7;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.moment-title {
+    font-size: 22px;
+    font-size: 24px; /* Título un poco más grande */
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.moment-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #e0e0e0;
+    line-height: 1.6;
+    flex-grow: 1;
 }
