@@ -16,7 +16,20 @@
 </head>
 <body>
     <?php 
-        // Incluimos la barra de navegación principal.
+        // 1. Incluir la conexión a la base de datos
+        require_once __DIR__ . '/db_connect.php';
+
+        // 2. Obtener los goleadores de la base de datos
+        $scorers = [];
+        $sql = "SELECT `name`, `country`, `goals`, `image` FROM `top_scorers` ORDER BY `goals` DESC, `name` ASC";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $scorers[] = $row;
+            }
+        }
+
+        // 3. Incluimos la barra de navegación principal.
         $navbar_template = 'navbar-main';
         require __DIR__ . '/../html/templates/navbar.php'; 
     ?>
@@ -31,89 +44,18 @@
 
             <!-- Mantener solo el Resumen y la palabra ESTADISTICAS (título vertical ya presente) -->
             <div class="stats-grid-container">
-                <div class="stat-card" data-player="Miroslav Klose" data-img="https://tse2.mm.bing.net/th/id/OIP.RBiNsXBVF103isdxHUI85wHaEK?rs=1&pid=ImgDetMain&o=7&rm=3">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Alemania</h3>
-                    <p class="stat-value">Miroslav Klose</p>
-                    <p class="stat-detail">16 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Ronaldo Nazário" data-img="img/players/ronaldo_nazario.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Brasil</h3>
-                    <p class="stat-value">Ronaldo Nazário</p>
-                    <p class="stat-detail">15 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Gerd Müller" data-img="img/players/gerd_mueller.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Alemania</h3>
-                    <p class="stat-value">Gerd Müller</p>
-                    <p class="stat-detail">14 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Just Fontaine" data-img="img/players/just_fontaine.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Francia</h3>
-                    <p class="stat-value">Just Fontaine</p>
-                    <p class="stat-detail">13 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Lionel Messi" data-img="img/players/lionel_messi.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Argentina</h3>
-                    <p class="stat-value">Lionel Messi</p>
-                    <p class="stat-detail">13 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Pelé" data-img="img/players/pele.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Brasil</h3>
-                    <p class="stat-value">Pelé</p>
-                    <p class="stat-detail">12 Goles</p>
-                </div>
-                
-                 <div class="stat-card" data-player="Kylian Mbappé" data-img="img/players/kylian_mbappe.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Francia</h3>
-                    <p class="stat-value">Kylian Mbappé</p>
-                    <p class="stat-detail">12 Goles</p>
-                </div>
-
-                 <div class="stat-card" data-player="Sándor Kocsis" data-img="img/players/sandor_kocsis.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Hungría</h3>
-                    <p class="stat-value">Sándor Kocsis</p>
-                    <p class="stat-detail">11 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Jürgen Klinsmann" data-img="img/players/jurgen_klinsmann.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Alemania</h3>
-                    <p class="stat-value">Jürgen Klinsmann</p>
-                    <p class="stat-detail">11 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Helmut Rahn" data-img="img/players/helmut_rahn.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Alemania</h3>
-                    <p class="stat-value">Helmut Rahn</p>
-                    <p class="stat-detail">10 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Gary Lineker" data-img="img/players/gary_lineker.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Inglaterra</h3>
-                    <p class="stat-value">Gary Lineker</p>
-                    <p class="stat-detail">10 Goles</p>
-                </div>
-
-                <div class="stat-card" data-player="Gabriel Batistuta" data-img="img/players/gabriel_batistuta.jpg">
-                    <div class="stat-icon">⚽</div>
-                    <h3 class="stat-title bebas-neue-regular">Argentina</h3>
-                    <p class="stat-value">Gabriel Batistuta</p>
-                    <p class="stat-detail">10 Goles</p>
-                </div>
+                <?php if (count($scorers) > 0): ?>
+                    <?php foreach ($scorers as $scorer): ?>
+                        <div class="stat-card" data-player="<?php echo htmlspecialchars($scorer['name']); ?>" data-img="<?php echo htmlspecialchars($scorer['image']); ?>">
+                            <div class="stat-icon">⚽</div>
+                            <h3 class="stat-title bebas-neue-regular"><?php echo htmlspecialchars($scorer['country']); ?></h3>
+                            <p class="stat-value"><?php echo htmlspecialchars($scorer['name']); ?></p>
+                            <p class="stat-detail"><?php echo htmlspecialchars($scorer['goals']); ?> Goles</p>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-white text-center fs-4">No hay goleadores para mostrar.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
