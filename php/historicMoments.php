@@ -12,7 +12,7 @@ $sql = "SELECT
             p.Content_Body AS descripcion,
             p.Content_Multimedia AS imagen,
             we.Name AS mundial
-        FROM posts p
+        FROM post p
         JOIN `categories-posts` cp ON p.ID_Post_PK = cp.ID_Post_FK
         JOIN categories c ON cp.ID_Category_FK = c.ID_Category_PK
         JOIN worldcup_editions we ON p.ID_WorldCup_Year_FK = we.ID_WorldCup_Year_PK
