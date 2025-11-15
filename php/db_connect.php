@@ -1,5 +1,5 @@
 <?php
-$servername = "162.241.62.63";
+$servername = "Drippking.com";
 $username = "drippkin_Host";
 $password = "DrippKing5545";
 $dbname = "drippkin_mt6_world_cup";
