@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // TODO: Cambiar esto por password_verify() para mayor seguridad.
+        // Verificar la contraseña contra el hash almacenado en la base de datos
+        // ADVERTENCIA: Se revierte a comparación de texto plano. Esto no es seguro.
         if ($password === $user['Password']) {
             // CORRECCIÓN: Usar 'user_id' para que sea consistente con las otras páginas.
             $_SESSION['user_id'] = $user['ID_User_PK'];

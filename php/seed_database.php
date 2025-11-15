@@ -67,7 +67,7 @@ try {
         );
         $gender = $faker->numberBetween(0, 2);
         $phone = $faker->numerify('##########');
-        $stmt_user->bind_param("sssiisss", $firstName, $lastName, $birthdate, $gender, $random_country_id, $phone, $nametag, $email, $password_plain);
+        $stmt_user->bind_param("ssssiisss", $firstName, $lastName, $birthdate, $gender, $random_country_id, $phone, $nametag, $email, $password_plain);
         $stmt_user->execute();
         $new_user_id = $stmt_user->insert_id;
         $stmt_user->close();

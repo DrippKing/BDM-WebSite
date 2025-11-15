@@ -76,11 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // 4. Preparar la consulta SQL para insertar el usuario (incluyendo la foto)
         if ($error_message === '') {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users (Nametag, Password, First_Name, Last_Name, Birthdate, Gender, ID_Country_FK, Phone_Number, Email, ID_Role_FK, Profile_Picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?)";
             $stmt = $conn->prepare($sql);
             if ($stmt) {
                 // 5. Vincular los parámetros y ejecutar la consulta
-                $stmt->bind_param("ssssssisss", $nametag, $password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email, $profile_picture);
+                $stmt->bind_param("ssssssisss", $nametag, $hashed_password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email, $profile_picture);
                 if ($stmt->execute()) {
                     $success_message = "¡Registro exitoso! Ahora puedes iniciar sesión.";
                     // Vaciamos las variables para limpiar el formulario solo en caso de éxito.
