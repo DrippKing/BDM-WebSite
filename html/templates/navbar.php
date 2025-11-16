@@ -12,11 +12,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link mt6 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Momentos Históricos</a>
                     <ul class="dropdown-menu mt6">
-                        <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Finales_Inolvidables">Finales Inolvidables</a></li>
-                        <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Goles_Legendarios">Goles Legendarios</a></li>
-                        <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Grandes_Controversias">Grandes Controversias</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=finales_inolvidables">Finales Inolvidables</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=goles_legendarios">Goles Legendarios</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=grandes_controversias">Grandes Controversias</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item mt6" href="index.php?page=historicMoments&tema=Mascotas_y_Canciones">Mascotas y Canciones</a></li>
+                        <li><a class="dropdown-item mt6" href="index.php?page=mascotas_y_canciones">Mascotas y Canciones</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
