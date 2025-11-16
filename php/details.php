@@ -152,8 +152,12 @@ if (!empty($edicion_param)) {
                                         </div>
                                     </div>
                                     <div class="post-footer">
-                                        <button class="footer-btn like-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">♡ Me gusta</button>
-                                        <button class="footer-btn comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">💬 Comentar</button>
+                                        <?php if (isset($_SESSION['user_id'])): ?>
+                                            <button class="footer-btn like-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">♡ Me gusta</button>
+                                        <?php else: ?>
+                                            <button class="footer-btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">♡ Me gusta</button>
+                                        <?php endif; ?>
+                                        <button class="footer-btn comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>"> Comentar</button>
                                     </div>
                                     <!-- Sección de comentarios (inicialmente oculta) -->
                                     <div class="comments-section" id="comments-<?php echo $post['ID_Post_PK']; ?>" style="display: none;">
@@ -163,8 +167,14 @@ if (!empty($edicion_param)) {
                                             <div class="existing-comments mb-3">
                                                 <!-- Los comentarios existentes se cargarán aquí dinámicamente -->
                                             </div>
-                                            <textarea class="form-control comment-input" rows="2" placeholder="Escribe un comentario..."></textarea>
-                                            <button class="btn btn-primary btn-sm mt-2 publish-comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">Publicar</button>
+                                            <?php if (isset($_SESSION['user_id'])): ?>
+                                                <textarea class="form-control comment-input" rows="2" placeholder="Escribe un comentario..."></textarea>
+                                                <button class="btn btn-primary btn-sm mt-2 publish-comment-btn" data-post-id="<?php echo $post['ID_Post_PK']; ?>">Publicar</button>
+                                            <?php else: ?>
+                                                <!-- Si no ha iniciado sesión, muestra un área de texto desactivada que abre el modal -->
+                                                <textarea class="form-control" rows="2" placeholder="Inicia sesión para comentar..." readonly data-bs-toggle="modal" data-bs-target="#loginRequiredModal" style="cursor: pointer;"></textarea>
+                                                <button class="btn btn-primary btn-sm mt-2" disabled>Publicar</button>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -179,6 +189,22 @@ if (!empty($edicion_param)) {
             </div>
 
             <h1 id="T2" class="FP-MenuTitle">¡Vive La Experiencia Como Si Estuvieras En El Campo!</h1>
+        </div>
+    </div>
+
+    <!-- Modal para requerir inicio de sesión -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="loginRequiredModalLabel">¡Únete a la comunidad!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Necesitas iniciar sesión para realizar esta acción.</p>
+                    <a href="index.php?page=login&redirect_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" class="btn btn-primary custom-login-btn">Iniciar Sesión</a>
+                </div>
+            </div>
         </div>
     </div>
 

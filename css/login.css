@@ -31,12 +31,23 @@ body.custom-login-bg {
 .custom-login-btn {
     border-radius: 15px;
     font-size: 25px;
+    background-color: #007bff; /* <-- CAMBIA ESTE VALOR POR EL COLOR QUE QUIERAS */
+    border-color: #007bff;     /* <-- Y ESTE TAMBIÉN */
+}
+
+/* Sobrescribimos el color de Bootstrap para que siempre sea el personalizado */
+.btn.custom-login-btn {
+    background-color: #007bff; /* <-- CAMBIA ESTE VALOR */
+}
+
+.btn.custom-login-btn:hover {
+    background-color: #0069d9; /* <-- CAMBIA ESTE VALOR POR UN TONO MÁS OSCURO */
 }
 
 .custom-register-btn {
     border-radius: 15px;
     font-size: 22px;
-    background-color: #042966;
+    background-color: #004654; 
     color: #f0f1f1;
 }
 

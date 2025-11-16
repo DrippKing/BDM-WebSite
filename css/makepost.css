@@ -1,151 +1,173 @@
-/* Fondo para la página de crear publicación */
-body.custom-makepost-bg {
-  background: url('../img/cancha.jpg') no-repeat center center fixed;
-  background-size: cover;
+/* --- Estilos para la página de Crear Publicación --- */
+
+.custom-makepost-bg {
+    background: url('../img/cancha.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Contenedor que centra el formulario en la página */
 .makepost-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Ocupa el espacio disponible menos la altura aproximada de la navbar */
-  min-height: calc(100vh - 135px); 
-  padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+    padding-bottom: 50px;
 }
 
-    .publicacion {
-      width: 600px;
-      background-color:   rgba(255, 255, 255, 0.7);
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
+.publicacion {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
 
-    .encabezado {
-      cursor: not-allowed;
-      position: relative;
-      text-align: center;
-      justify-content: space-between;
-      align-items: center;
-      padding: 25px 16px;
-      border-bottom: 1px solid #b9c5d1;
-      font-size: 30px;
-    }
+.publicacion .encabezado {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #dddfe2;
+    position: relative;
+}
 
-    .encabezado .close-button {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 24px;
-      color: #657786;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.publicacion .close-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #606770;
+    text-decoration: none;
+}
 
-    .perfil {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-    }
+.publicacion .perfil {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
 
-    .perfil img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+.publicacion .perfil img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
-    .nombre {
-      font-weight: bold;
-    }
+.publicacion textarea, .publicacion .post-title {
+    width: 100%;
+    border: none;
+    padding: 0 15px 15px 15px;
+    font-size: 18px;
+    resize: vertical;
+    min-height: 120px;
+}
 
-    .amigos {
-      font-size: 13px;
-      color: #555;
-      background: #e4e6eb;
-      border-radius: 5px;
-      padding: 2px 6px;
-      margin-top: 3px;
-      display: inline-block;
-    }
+.publicacion .post-title {
+    min-height: auto;
+    font-size: 22px;
+    font-weight: bold;
+}
 
-    .post-title {
-      width: calc(100% - 32px);
-      margin: 0 16px 10px 16px;
-      padding: 10px;
-      font-size: 22px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-      background-color: rgba(255, 255, 255, 0.5);
-    }
+.publicacion .acciones {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-top: 1px solid #dddfe2;
+}
 
-    textarea {
-      width: 100%;
-      border: none;
-      resize: none;
-      padding: 90px 16px;
-      font-size: 20px;
-      outline: none;
-      height: 80px;
-      background-color: rgba(255, 255, 255, 0); /* 👈 Fondo semitransparente */
-    }
+.publicacion .btn-accion {
+    background: none;
+    border: none;
+    color: #606770;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.publicacion .publicar {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.publicacion .publicar:hover {
+    background-color: #166fe5;
+}
 
 .category-selector {
-    padding: 0 16px 12px;
+    padding: 0 15px 15px;
 }
 
-.category-selector .form-select {
-    background-color: #f0f2f5;
-    border: 1px solid #ccd0d5;
+/* Estilos para la vista previa */
+.media-preview-container {
+    position: relative;
+    margin: 0 15px 15px;
+    border: 1px solid #dddfe2;
     border-radius: 8px;
-    color: #050505;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 16px;
+    padding: 8px;
 }
 
-    .acciones {
-      display: flex;
-      justify-content: space-around;
-      border-top: 1px solid #ddd;
-      padding: 10px 0;
-    }
+.media-preview-container img,
+.media-preview-container video {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
 
-    .acciones .btn-accion {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 20px;
-      color: #030303;
-      transition: 0.2s;
-    }
+.remove-media-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+}
 
-    .acciones .btn-accion:hover {
-      background-color: #f0f2f5;
-      border-radius: 8px;
-      padding: 5px 10px;
-      
-    }
+/* Estilos para la vista previa */
+.media-preview-container {
+    position: relative;
+    margin: 0 15px 15px;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 8px;
+}
 
-    .publicar {
-      background-color: #00C1A7;
-      color: #fcf8f8;
-      border: none;
-      width: 90%;
-      margin: 10px auto;
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer; /* Cambiamos el cursor a pointer */
-      display: block;
-      font-size: 25px
-    }
+.media-preview-container img,
+.media-preview-container video {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
 
-    .publicar:hover {
-      background-color: #07907d; /* color secundario de perfil.css */
-    }
+.remove-media-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+}

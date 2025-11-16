@@ -1,15 +1,17 @@
 <?php
 global $conn;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// 1. Proteger la página: si no hay sesión, redirigir al login.
+// 1. Proteger la página
 if (!isset($_SESSION['user_id'])) {
-    // Guardamos la URL actual para redirigir al usuario de vuelta después del login.
     $redirect_url = urlencode($_SERVER['REQUEST_URI']);
     header("Location: index.php?page=login&redirect_url=$redirect_url");
     exit;
 }
 
-// 2. Obtener categorías para el dropdown
+// 2. Obtener categorías
 $categories = [];
 $sql_categories = "SELECT ID_Category_PK, Name FROM categories WHERE Is_Visible = 1 ORDER BY Name ASC";
 $result_categories = $conn->query($sql_categories);
@@ -19,15 +21,17 @@ if ($result_categories) {
     }
 }
 
-// 2. Procesar el formulario cuando se envía
 $error_message = '';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $post_title = trim($_POST['post_title']);
-    $post_content = trim($_POST['post_content']);
-    $category_id = $_POST['post_category'] ?? null;
-    $user_id = $_SESSION['user_id'];
-    $worldcup_id = $_GET['worldcup_id'] ?? null; // Obtenemos el ID del mundial de la URL
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $post_title   = trim($_POST['post_title']);
+    $post_content = trim($_POST['post_content']);
+    $category_id  = $_POST['post_category'] ?? null;
+    $user_id      = $_SESSION['user_id'];
+    $worldcup_id  = $_GET['worldcup_id'] ?? null;
+
+    // VALIDACIÓN
     if (empty($post_title) || empty($post_content) || empty($worldcup_id) || empty($category_id)) {
         $error_message = "Todos los campos (título, contenido y categoría) son obligatorios.";
     } else {
@@ -82,82 +86,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Publicación - Mundial Twenty Six</title>
-  <link rel="icon" href="img/Logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear Publicación - Mundial Twenty Six</title>
+<link rel="icon" href="img/Logo.png">
 
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/makepost.css"> <!-- Asumo que el archivo se llama o debería llamarse así -->
-    
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/makepost.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
 </head>
 <body class="custom-makepost-bg">
 
 <?php 
-    $navbar_template = 'navbar-main';
-    require 'html/templates/navbar.php'; 
+$navbar_template = 'navbar-main';
+require 'html/templates/navbar.php'; 
 ?>
 
 <div class="makepost-container">
-    <!-- Usamos un formulario que envía los datos a la misma página -->
-    <form class="publicacion" method="POST" action="index.php?page=makepost&worldcup_id=<?php echo htmlspecialchars($_GET['worldcup_id'] ?? ''); ?>&edicion_name=<?php echo htmlspecialchars($_GET['edicion_name'] ?? ''); ?>">
-        <div class="encabezado">
-            Crear publicación
-            <a href="javascript:history.back()" class="close-button" title="Cancelar">✖</a>
+
+<form class="publicacion" method="POST"
+      action="index.php?page=makepost&worldcup_id=<?php 
+          echo htmlspecialchars($_GET['worldcup_id'] ?? ''); 
+      ?>&edicion_name=<?php 
+          echo htmlspecialchars($_GET['edicion_name'] ?? ''); 
+      ?>">
+
+    <div class="encabezado">
+        Crear publicación
+        <a href="javascript:history.back()" class="close-button">✖</a>
+    </div>
+
+    <?php if (!empty($error_message)): ?>
+        <div class="alert alert-danger mx-3"><?php echo $error_message; ?></div>
+    <?php endif; ?>
+
+    <div class="perfil">
+        <?php
+        $profile_pic_file = $_SESSION['profile_picture'] ?? 'default.jpg';
+        $profile_pic_path = ($profile_pic_file === 'default.jpg')
+            ? 'img/profile-icon-default.jpg'
+            : 'assets/users/profile_pictures/' . $profile_pic_file;
+        ?>
+        <img src="<?php echo htmlspecialchars($profile_pic_path); ?>">
+        <div>
+            <div class="nombre"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
         </div>
+    </div>
 
-        <?php if (!empty($error_message)): ?>
-            <div class="alert alert-danger mx-3" role="alert"><?php echo $error_message; ?></div>
-        <?php endif; ?>
+    <input type="text" name="post_title" class="form-control post-title" 
+           placeholder="Dale un título a tu publicación" required>
 
-        <div class="perfil">
-            <?php
-                // Lógica para mostrar la imagen de perfil del usuario logueado
-                $profile_pic_file = $_SESSION['profile_picture'] ?? 'default.jpg';
-                $profile_pic_path = ($profile_pic_file === 'default.jpg')
-                    ? 'img/profile-icon-default.jpg'
-                    : 'assets/users/profile_pictures/' . $profile_pic_file;
-            ?>
-            <img src="<?php echo htmlspecialchars($profile_pic_path); ?>" alt="Foto de perfil">
-            <div>
-                <div class="nombre"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
-            </div>
-        </div>
+    <textarea name="post_content" 
+              placeholder="¿Qué estás pensando, <?php echo htmlspecialchars($_SESSION['username']); ?>?"
+              required></textarea>
 
-        <!-- Campo para el título -->
-        <input type="text" name="post_title" class="form-control post-title" placeholder="Dale un título a tu publicación" required>
+    <div class="category-selector">
+        <select name="post_category" class="form-select" required>
+            <option value="" disabled selected>Selecciona una categoría...</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?php echo $category['ID_Category_PK']; ?>">
+                    <?php echo htmlspecialchars($category['Name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-        <!-- Campo para el contenido -->
-        <textarea name="post_content" placeholder="¿Qué estás pensando, <?php echo htmlspecialchars($_SESSION['username']); ?>?" required></textarea>
+    <div class="acciones">
+        <button type="button" class="btn-accion"> Foto/video</button>
+        <button type="button" class="btn-accion"> Emoción</button>
+        <button type="button" class="btn-accion"># Hashtag</button>
+    </div>
 
-        <!-- Selector de Categoría -->
-        <div class="category-selector">
-            <select name="post_category" id="post_category" class="form-select" required>
-                <option value="" disabled selected>Selecciona una categoría...</option>
-                <?php if (count($categories) > 0): ?>
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $category['ID_Category_PK']; ?>"><?php echo htmlspecialchars($category['Name']); ?></option>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </select>
-        </div>
+    <button type="submit" class="publicar">Publicar</button>
+</form>
 
-        <div class="acciones">
-            <button type="button" class="btn-accion">📷 Foto/video</button>
-            <button type="button" class="btn-accion">😊 Emoción</button>
-            <button type="button" class="btn-accion"># Hashtag</button>
-        </div>
-
-        <!-- El botón de publicar ahora es de tipo submit -->
-        <button type="submit" class="publicar">Publicar</button>
-    </form>
 </div>
 
-  <script src="js/bootstrap/bootstrap.bundle.js"></script>
-  <script src="js/main.js"></script>
+<script src="js/bootstrap/bootstrap.bundle.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

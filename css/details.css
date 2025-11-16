@@ -138,3 +138,33 @@
 .publish-comment-btn {
     align-self: flex-end;
 }
+
+
+/* Contenido del modal */
+#loginRequiredModal .modal-content {
+    background: linear-gradient(145deg, #001e3c, #0eccb0e8); /* Degradado oscuro */
+    border: 1px solid rgba(0, 193, 167, 0.4); /* Borde con color de acento */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* Título del modal */
+#loginRequiredModal .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Tamaño más grande */
+    color: #00c1a7; /* Color de acento */
+    text-shadow: 0 0 10px rgba(0, 193, 167, 0.5);
+}
+
+/* Botón de cerrar (la 'X') */
+#loginRequiredModal .btn-close {
+    filter: invert(80%) sepia(50%) saturate(500%) hue-rotate(120deg);
+    transition: transform 0.2s ease;
+}
+
+#loginRequiredModal .btn-close:hover {
+    transform: scale(1.2);
+}
+
+/* El botón de Iniciar Sesión ya hereda el estilo de `custom-login-btn` de login.css */
