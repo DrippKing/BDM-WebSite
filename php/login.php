@@ -17,11 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         // Verificar la contraseña contra el hash almacenado en la base de datos
-        // ADVERTENCIA: Se revierte a comparación de texto plano. Esto no es seguro.
-        if ($password === $user['Password']) {
+        // AJUSTE TEMPORAL: Permitir login con contraseña en texto plano (para usuarios antiguos) O hasheada.
+        // Esto permite que inicies sesión para actualizar tu contraseña a un formato hasheado.
+        if (password_verify($password, $user['Password']) || $password === $user['Password']) {
             // CORRECCIÓN: Usar 'user_id' para que sea consistente con las otras páginas.
             $_SESSION['user_id'] = $user['ID_User_PK'];
             $_SESSION['username'] = $username;
+            // CORRECCIÓN: Guardar el rol del usuario en la sesión para verificar permisos.
+            $_SESSION['role_id'] = $user['ID_Role_FK'];
             $_SESSION['profile_picture'] = $user['Profile_Picture']; // Guardamos la foto de perfil
 
             // CORRECCIÓN: Redirigir a la página anterior si existe, si no, a home.

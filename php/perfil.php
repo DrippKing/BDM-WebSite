@@ -60,8 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['profile_action']) && 
       // Ejecutar actualización según los campos provistos
       if ($new_username !== '' && $new_password !== '') {
         $stmt_upd = $conn->prepare('UPDATE users SET Nametag = ?, Password = ? WHERE ID_User_PK = ?');
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         if ($stmt_upd) {
-          $stmt_upd->bind_param('ssi', $new_username, $new_password, $user_id);
+          $stmt_upd->bind_param('ssi', $new_username, $hashed_password, $user_id);
         }
       } elseif ($new_username !== '') {
         $stmt_upd = $conn->prepare('UPDATE users SET Nametag = ? WHERE ID_User_PK = ?');
@@ -70,8 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['profile_action']) && 
         }
       } elseif ($new_password !== '') {
         $stmt_upd = $conn->prepare('UPDATE users SET Password = ? WHERE ID_User_PK = ?');
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         if ($stmt_upd) {
-          $stmt_upd->bind_param('si', $new_password, $user_id);
+          $stmt_upd->bind_param('si', $hashed_password, $user_id);
         }
       } else {
         $stmt_upd = null;

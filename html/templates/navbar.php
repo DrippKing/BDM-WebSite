@@ -38,6 +38,13 @@
                         <a class="nav-link mt6" href="index.php?page=mis_publicaciones">Mis Publicaciones</a>
                     </li>
                 <?php endif; ?>
+                
+                <?php // AÑADIR ESTE BLOQUE: Enlace al panel de administración ?>
+                <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1): ?>
+                    <li class="nav-item">
+                       <a class="nav-link mt6" href="index.php?page=approve_posts">Panel de Admin</a>
+                    </li>
+                <?php endif; ?>
             </ul>
             
             <div class="profile-container">
