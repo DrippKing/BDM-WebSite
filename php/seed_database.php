@@ -57,6 +57,7 @@ try {
         $nametag = $faker->unique()->userName;
         $email = $faker->unique()->safeEmail;
         $password_plain = '1234'; // Contraseña simple para pruebas
+        $hashed_password = password_hash($password_plain, PASSWORD_DEFAULT); // Se hashea la contraseña
         $birthdate = $faker->date('Y-m-d', '2004-01-01');
         $random_country_id = $country_ids[array_rand($country_ids)];
 
@@ -67,7 +68,7 @@ try {
         );
         $gender = $faker->numberBetween(0, 2);
         $phone = $faker->numerify('##########');
-        $stmt_user->bind_param("ssssiisss", $firstName, $lastName, $birthdate, $gender, $random_country_id, $phone, $nametag, $email, $password_plain);
+        $stmt_user->bind_param("ssssiisss", $firstName, $lastName, $birthdate, $gender, $random_country_id, $phone, $nametag, $email, $hashed_password); // Se usa la contraseña hasheada
         $stmt_user->execute();
         $new_user_id = $stmt_user->insert_id;
         $stmt_user->close();

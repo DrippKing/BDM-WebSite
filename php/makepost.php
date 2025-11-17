@@ -35,11 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($post_title) || empty($post_content) || empty($worldcup_id) || empty($category_id)) {
         $error_message = "Todos los campos (título, contenido y categoría) son obligatorios.";
     } else {
-    // Guardar la hora de publicación en la hora local del servidor (registrar la hora en la que se publica)
-    // Si prefieres otra zona, podemos ajustar `date_default_timezone_set()` aquí.
-    $upload_date = date('Y-m-d H:i:s');
-    // Publicar directamente (visibilidad por defecto = 1). La lógica de aprobación por rol fue removida.
-    $visibility = 1; // 1 = visible
+        // Guardar la hora de publicación en la hora local del servidor.
+        $upload_date = date('Y-m-d H:i:s');
+
+        // Si el usuario es Administrador (role_id = 1), la publicación es visible de inmediato.
+        // Si es un usuario normal, la publicación queda pendiente (Visibility_State = 0).
+        $is_admin = (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1);
+        $visibility = $is_admin ? 1 : 0; // 1 = visible, 0 = pendiente
 
         $sql = "INSERT INTO posts (Content_Title, Content_Body, Upload_Date, ID_WorldCup_Year_FK, ID_User_FK, Visibility_State) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
