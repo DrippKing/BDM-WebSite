@@ -106,6 +106,13 @@
     background-color: #F0F2F5; /* Color de fondo al pasar el cursor */
 }
 
+/* --- Contenedor para la imagen/video de la publicación --- */
+.post-media-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* --- Comentarios (sección dentro de cada post) --- */
 .comments-section {
     padding: 10px 16px 16px 16px;

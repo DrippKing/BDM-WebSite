@@ -72,7 +72,8 @@
 
 .publicacion .acciones {
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Centramos el contenido */
+    align-items: center;
     padding: 10px;
     border-top: 1px solid #dddfe2;
 }
@@ -80,9 +81,14 @@
 .publicacion .btn-accion {
     background: none;
     border: none;
-    color: #606770;
+    color: #00C1A7; /* Color de acento del sitio */
     font-weight: bold;
     cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+.publicacion .btn-accion:hover {
+    color: #00ffdd; /* Un poco más brillante al pasar el cursor */
 }
 
 .publicacion .publicar {

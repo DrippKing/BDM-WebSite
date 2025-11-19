@@ -40,13 +40,20 @@
                 <?php endif; ?>
                 
                 <?php // AÑADIR ESTE BLOQUE: Enlace al panel de administración ?>
-                <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1): ?>
+                <?php $currentPage = $_GET['page'] ?? 'home'; ?>
+                <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1 && $currentPage !== 'admin_approvals'): ?>
                     <li class="nav-item">
-                       <a class="nav-link mt6" href="index.php?page=approve_posts">Panel de Admin</a>
+                       <a class="nav-link mt6" href="index.php?page=admin_approvals">Panel de Admin</a>
                     </li>
                 <?php endif; ?>
             </ul>
             
+            <!-- Barra de Búsqueda -->
+            <form class="d-flex mx-auto" role="search" action="index.php" method="GET">
+                <input type="hidden" name="page" value="search_results">
+                <input class="form-control me-2" type="search" name="query" placeholder="Buscar..." aria-label="Buscar">
+            </form>
+
             <div class="profile-container">
                 <?php if (isset($_SESSION['username'])): ?>
                     <?php

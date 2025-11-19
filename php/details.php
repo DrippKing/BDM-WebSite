@@ -24,7 +24,7 @@ if (!empty($edicion_param)) {
             $world_cup_data = $result->fetch_assoc();
             $edicion_nombre = $world_cup_data['Name'];
             $worldcup_id = $world_cup_data['ID_WorldCup_Year_PK'];
-            $sql_posts = "SELECT p.ID_Post_PK, p.Content_Title, p.Content_Body, p.Upload_Date, u.Nametag, u.Profile_Picture
+            $sql_posts = "SELECT p.ID_Post_PK, p.Content_Title, p.Content_Body, p.Content_Multimedia, p.Upload_Date, u.Nametag, u.Profile_Picture
                  FROM posts p
                  JOIN users u ON p.ID_User_FK = u.ID_User_PK";
             
@@ -148,6 +148,21 @@ if (!empty($edicion_param)) {
                                         
                                         <div class="post-content">
                                             <p class="post-title"><?php echo htmlspecialchars($post['Content_Title']); ?></p>
+                                            <?php if (!empty($post['Content_Multimedia'])): ?>
+                                                <?php
+                                                    $media_path = 'assets/users/posts_media/' . rawurlencode(htmlspecialchars($post['Content_Multimedia']));
+                                                    $extension = strtolower(pathinfo($media_path, PATHINFO_EXTENSION));
+                                                    $image_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                                                    $video_ext = ['mp4', 'mov', 'avi', 'webm'];
+                                                ?>
+                                                <div class="post-media-container mb-3">
+                                                    <?php if (in_array($extension, $image_ext)): ?>
+                                                        <img src="<?php echo $media_path; ?>" class="img-fluid rounded" alt="Contenido multimedia de la publicación">
+                                                    <?php elseif (in_array($extension, $video_ext)): ?>
+                                                        <video src="<?php echo $media_path; ?>" class="img-fluid rounded" controls></video>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endif; ?>
                                             <p><?php echo nl2br(htmlspecialchars($post['Content_Body'])); ?></p>
                                         </div>
                                     </div>
@@ -209,6 +224,10 @@ if (!empty($edicion_param)) {
     </div>
 
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    <script>
+        // Pasamos el nombre de usuario de la sesión de PHP a una variable de JavaScript
+        const currentUsername = "<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>";
+    </script>
     <script src="js/main.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {

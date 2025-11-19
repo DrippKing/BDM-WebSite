@@ -292,3 +292,30 @@ body {
     }
 }
 
+/* --- Custom Backgrounds --- */
+.bg-transparent-dark {
+    background-color: #25364a !important; /* Mismo color que el fondo de la barra lateral expandida */
+}
+
+/* --- Custom Form Styles inside dark containers --- */
+.bg-transparent-dark .form-control {
+    background-color: rgba(0, 20, 43, 0.6); /* Fondo oscuro semi-transparente */
+    color: #ffffff;
+    border: 1px solid #00C1A7;
+    font-family: Helvetica, sans-serif; /* Fuente estándar para inputs */
+}
+
+.bg-transparent-dark .form-control:focus {
+    background-color: rgba(0, 20, 43, 0.8);
+    color: #ffffff;
+    border-color: #00ffdd;
+    box-shadow: 0 0 10px rgba(0, 255, 221, 0.5);
+}
+
+.bg-transparent-dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-transparent-dark .form-label {
+    color: #ffffff;
+}

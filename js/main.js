@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const now = new Date();
             const timeIso = now.toISOString();
             const commentObj = {
-                author: 'Tú',
+                author: typeof currentUsername !== 'undefined' && currentUsername ? currentUsername : 'Tú',
                 time: timeIso,
                 text: text
             };

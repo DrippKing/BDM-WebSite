@@ -25,11 +25,17 @@ $error_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Detección temprana de subida de archivo demasiado grande para el servidor
+    if (empty($_POST) && empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0) {
+        $error_message = 'El archivo que intentas subir es demasiado grande para el servidor. Por favor, elige un archivo más pequeño.';
+    } else {
+
     $post_title   = trim($_POST['post_title']);
     $post_content = trim($_POST['post_content']);
     $category_id  = $_POST['post_category'] ?? null;
     $user_id      = $_SESSION['user_id'];
     $worldcup_id  = $_GET['worldcup_id'] ?? null;
+    $media_file   = $_FILES['post_media'] ?? null;
 
     // VALIDACIÓN
     if (empty($post_title) || empty($post_content) || empty($worldcup_id) || empty($category_id)) {
@@ -37,15 +43,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Guardar la hora de publicación en la hora local del servidor.
         $upload_date = date('Y-m-d H:i:s');
+        $media_filename = null;
+
+        // Procesar subida de archivo si existe
+        if ($media_file && $media_file['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = __DIR__ . '/../assets/users/posts_media/';
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            
+            $file_extension = strtolower(pathinfo($media_file['name'], PATHINFO_EXTENSION));
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'mov', 'avi'];
+
+            if (in_array($file_extension, $allowed_extensions) && $media_file['size'] <= 10000000) { // Límite de 10MB
+                $media_filename = uniqid('post_', true) . '.' . $file_extension;
+                $upload_path = $upload_dir . $media_filename;
+
+                if (!move_uploaded_file($media_file['tmp_name'], $upload_path)) {
+                    $error_message = "Error al mover el archivo subido.";
+                    $media_filename = null; // Anular si falla la subida
+                }
+            } else {
+                $error_message = "Archivo no válido o demasiado grande (máx 10MB). Formatos permitidos: JPG, PNG, GIF, WEBP, MP4, MOV, AVI.";
+            }
+        }
 
         // Si el usuario es Administrador (role_id = 1), la publicación es visible de inmediato.
         // Si es un usuario normal, la publicación queda pendiente (Visibility_State = 0).
         $is_admin = (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1);
         $visibility = $is_admin ? 1 : 0; // 1 = visible, 0 = pendiente
 
-        $sql = "INSERT INTO posts (Content_Title, Content_Body, Upload_Date, ID_WorldCup_Year_FK, ID_User_FK, Visibility_State) VALUES (?, ?, ?, ?, ?, ?)";
+        // Si hubo un error con el archivo, no continuamos con la inserción.
+        if (!empty($error_message)) {
+            // El mensaje de error ya está seteado, el script terminará y lo mostrará.
+        } else {
+            $sql = "INSERT INTO posts (Content_Title, Content_Body, Content_Multimedia, Upload_Date, ID_WorldCup_Year_FK, ID_User_FK, Visibility_State) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssiii", $post_title, $post_content, $upload_date, $worldcup_id, $user_id, $visibility);
+            $stmt->bind_param("ssssiii", $post_title, $post_content, $media_filename, $upload_date, $worldcup_id, $user_id, $visibility);
 
         if ($stmt->execute()) {
             $new_post_id = $stmt->insert_id;
@@ -69,20 +103,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     $stmt_cat_name->close();
                 }
-                // Redirigir a la página de detalles del mundial filtrando por la categoría seleccionada (si se obtuvo el nombre)
-                $redirect = "index.php?page=details&edicion=" . urlencode($_GET['edicion_name']);
-                if (!empty($category_name)) {
-                    $redirect .= "&category=" . urlencode($category_name);
+
+                // Redirigir según el estado de visibilidad
+                if ($visibility === 1) { // Si es admin o la política cambia, va a la página de detalles
+                    $redirect = "index.php?page=details&edicion=" . urlencode($_GET['edicion_name']);
+                    if (!empty($category_name)) {
+                        $redirect .= "&category=" . urlencode($category_name);
+                    }
+                } else { // Si es un usuario normal, va a la página de "publicación pendiente"
+                    $redirect = "index.php?page=post_pending";
                 }
                 header("Location: " . $redirect);
                 exit;
             } else {
                 $error_message = "Publicación creada, pero hubo un error al asignar la categoría: " . $stmt_cat_post->error;
             }
-        } else {
+        } else { // Este else corresponde al if ($stmt->execute())
             $error_message = "Error al guardar la publicación: " . $stmt->error;
         }
     }
+    } // Cierre del 'else' para la detección temprana
+}
 }
 ?>
 <!DOCTYPE html>
@@ -111,7 +152,7 @@ require 'html/templates/navbar.php';
 
 <div class="makepost-container">
 
-<form class="publicacion" method="POST"
+<form class="publicacion" method="POST" enctype="multipart/form-data"
       action="index.php?page=makepost&worldcup_id=<?php 
           echo htmlspecialchars($_GET['worldcup_id'] ?? ''); 
       ?>&edicion_name=<?php 
@@ -159,17 +200,25 @@ require 'html/templates/navbar.php';
     </div>
 
     <div class="acciones">
-        <button type="button" class="btn-accion"> Foto/video</button>
-        <button type="button" class="btn-accion"> Emoción</button>
-        <button type="button" class="btn-accion"># Hashtag</button>
+        <!-- Botón real que activa el input de archivo -->
+        <button type="button" id="btn-add-media" class="btn-accion">Foto/video</button>
+        <!-- Input de archivo oculto -->
+        <input type="file" id="post_media" name="post_media" accept="image/*,video/*" style="display:none;">
+        <!-- Contenedor para mostrar el nombre del archivo seleccionado -->
+        <span id="file-name-display" class="ms-3 text-white-50"></span>
     </div>
 
     <button type="submit" class="publicar">Publicar</button>
 </form>
 
 </div>
-
 <script src="js/bootstrap/bootstrap.bundle.js"></script>
 <script src="js/main.js"></script>
+<script>
+    document.getElementById('btn-add-media').addEventListener('click', () => document.getElementById('post_media').click());
+    document.getElementById('post_media').addEventListener('change', (event) => {
+        document.getElementById('file-name-display').textContent = event.target.files[0] ? event.target.files[0].name : '';
+    });
+</script>
 </body>
 </html>
