@@ -107,14 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (move_uploaded_file($image['tmp_name'], $image_path)) {
                     // 3. Insertar en la tabla worldcup_editions
-                    // Llamar al Stored Procedure para insertar o actualizar el mundial
-                    $stmt = $conn->prepare("CALL sp_CreateOrUpdateWorldCup(?, ?, ?, ?, ?)");
+                    $stmt = $conn->prepare("INSERT INTO worldcup_editions (ID_WorldCup_Year_PK, Name, ID_Hashtag_FK, Official_Artwork_Multimedia, Final_Winner) VALUES (?, ?, ?, ?, ?)");
                     $stmt->bind_param("isiss", $mundial_year, $mundial_name, $hashtag_id, $db_image_path, $mundial_winner);
                     
                     if ($stmt->execute()) {
-                        $message = '<div class="alert alert-success">Mundial creado o actualizado con éxito.</div>';
+                        $message = '<div class="alert alert-success">Mundial creado con éxito.</div>';
                     } else {
-                        $message = '<div class="alert alert-danger">Error al guardar el mundial en la base de datos.</div>';
+                        $message = '<div class="alert alert-danger">Error al guardar el mundial en la base de datos. Es posible que el año ya exista.</div>';
                     }
                     $stmt->close();
                 } else {
