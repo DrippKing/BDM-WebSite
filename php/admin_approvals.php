@@ -65,6 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Validación de campos
         if (empty($mundial_year) || empty($mundial_name) || empty($mundial_winner) || !isset($image) || $image['error'] !== UPLOAD_ERR_OK) {
             $message = '<div class="alert alert-danger">Error: Todos los campos son obligatorios y la imagen debe subirse correctamente.</div>';
+        } elseif ($mundial_year < 2026 || $mundial_year > 2066 || ($mundial_year - 2026) % 4 !== 0) {
+            // Validación específica para el año del mundial
+            $message = '<div class="alert alert-danger">Error: El año del mundial no es válido. Debe ser entre 2026 y 2066, en intervalos de 4 años.</div>';
         } else {
             // 1. Lógica para el Hashtag
             $hashtag_name = strtolower(str_replace(' ', '', trim($mundial_name)));
@@ -92,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // 2. Si tenemos un hashtag, procedemos con la subida de imagen y la inserción
             if ($hashtag_id !== null) {
-                $upload_dir = __DIR__ . '/../img/mundiales/';
+                $upload_dir = __DIR__ . '/../assets/fifa world cup posters/';
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0777, true);
                 }
@@ -100,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $image_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
                 $image_filename = uniqid('mundial_', true) . '.' . $image_extension;
                 $image_path = $upload_dir . $image_filename;
-                $db_image_path = 'img/mundiales/' . $image_filename; // Ruta relativa para la BD
+                $db_image_path = '' . $image_filename; // Ruta relativa para la BD
 
                 if (move_uploaded_file($image['tmp_name'], $image_path)) {
                     // 3. Insertar en la tabla worldcup_editions
@@ -228,7 +231,7 @@ if ($result) {
                         <form method="POST" action="" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-8 mb-3"><label for="mundial_name" class="form-label">Nombre</label><input type="text" class="form-control" id="mundial_name" name="mundial_name" required></div>
-                                <div class="col-sm-4 mb-3"><label for="mundial_year" class="form-label">Año</label><input type="number" class="form-control" id="mundial_year" name="mundial_year" required></div>
+                                <div class="col-sm-4 mb-3"><label for="mundial_year" class="form-label">Año</label><input type="number" class="form-control" id="mundial_year" name="mundial_year" min="2026" max="2066" step="4" required></div>
                             </div>
                             <div class="mb-3"><label for="mundial_winner" class="form-label">Ganador</label><input type="text" class="form-control" id="mundial_winner" name="mundial_winner" required></div>
                             <div class="mb-3"><label for="mundial_image" class="form-label">Arte Oficial</label><input class="form-control" type="file" id="mundial_image" name="mundial_image" accept="image/*" required></div>

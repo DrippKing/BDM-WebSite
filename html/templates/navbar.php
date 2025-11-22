@@ -49,11 +49,11 @@
             </ul>
             
             <!-- Barra de Búsqueda -->
-            <form class="d-flex mx-auto" role="search" action="index.php" method="GET">
+<!--             <form class="d-flex mx-auto" role="search" action="index.php" method="GET">
                 <input type="hidden" name="page" value="search_results">
                 <input class="form-control me-2" type="search" name="query" placeholder="Buscar..." aria-label="Buscar">
             </form>
-
+ -->
             <div class="profile-container">
                 <?php if (isset($_SESSION['username'])): ?>
                     <?php
