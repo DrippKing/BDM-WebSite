@@ -1,4 +1,7 @@
 <?php
+// // --- CÓDIGO DE DEBUG TEMPORAL ---
+// die('<h1>¡ÉXITO! El .htaccess me redirigió aquí correctamente.</h1>');
+// // ---------------------------------
 session_start();
 require_once 'php/db_connect.php';
 
