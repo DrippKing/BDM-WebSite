@@ -38,12 +38,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // 2. Validar que los campos no estén vacíos (puedes añadir más validaciones)
-    // Comprobamos que los campos obligatorios estén presentes. Para gender verificamos null
-    if (empty($nametag) || empty($email) || empty($password) || empty($firstname) || $gender === null) {
-        $error_message = "Por favor, completa todos los campos obligatorios.";
+    // 2. Validaciones del lado del servidor
+    $errors = [];
+    if (empty($firstname) || strlen($firstname) > 30) $errors[] = "El nombre debe tener entre 1 y 30 caracteres.";
+    if (empty($lastname) || strlen($lastname) > 30) $errors[] = "El apellido debe tener entre 1 y 30 caracteres.";
+    if (empty($nametag) || strlen($nametag) > 20) $errors[] = "El nombre de usuario debe tener entre 1 y 20 caracteres.";
+    if (empty($email) || strlen($email) > 30) $errors[] = "El correo debe tener entre 1 y 30 caracteres.";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "El formato del correo electrónico no es válido.";
+    if (empty($password)) $errors[] = "La contraseña es obligatoria.";
+    if ($gender === null) $errors[] = "Debes seleccionar un género.";
+    if (empty($country)) $errors[] = "Debes seleccionar un país.";
+    if (!preg_match('/^[0-9]{10}$/', $phone)) $errors[] = "El número de teléfono debe contener exactamente 10 dígitos numéricos.";
+    
+    if (!empty($birthdate)) {
+        $birth_year = (int)date('Y', strtotime($birthdate));
+        if ($birth_year < 1950 || $birth_year > 2015) {
+            $errors[] = "El año de nacimiento debe estar entre 1950 y 2015.";
+        }
     } else {
-        // Procesar subida de imagen (opcional)
+        $errors[] = "La fecha de nacimiento es obligatoria.";
+    }
+
+    if (empty($errors)) {
         $profile_picture = 'default.jpg';
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== UPLOAD_ERR_NO_FILE) {
             $file = $_FILES['profile_image'];
@@ -76,12 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // 4. Preparar la consulta SQL para insertar el usuario (incluyendo la foto)
         if ($error_message === '') {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users (Nametag, Password, First_Name, Last_Name, Birthdate, Gender, ID_Country_FK, Phone_Number, Email, ID_Role_FK, Profile_Picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?)";
             $stmt = $conn->prepare($sql);
             if ($stmt) {
                 // 5. Vincular los parámetros y ejecutar la consulta
-                $stmt->bind_param("ssssssisss", $nametag, $hashed_password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email, $profile_picture);
+                $stmt->bind_param("sssssiisss", $nametag, $password, $firstname, $lastname, $birthdate, $gender, $country, $phone, $email, $profile_picture);
                 if ($stmt->execute()) {
                     $success_message = "¡Registro exitoso! Ahora puedes iniciar sesión.";
                     // Vaciamos las variables para limpiar el formulario solo en caso de éxito.
@@ -107,6 +122,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error_message = "Error al preparar la consulta: " . $conn->error;
             }
         }
+    } else {
+        $error_message = implode("<br>", $errors);
     }
 }
 ?>
@@ -152,15 +169,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="firstname" class="form-label w-100 text-center custom-label">Nombre/s</label>
-                    <input type="text" class="form-control SearchTopic" id="firstname" name="firstname" placeholder="Nombre" value="<?php echo htmlspecialchars($firstname); ?>" required>
+                    <input type="text" class="form-control SearchTopic" id="firstname" name="firstname" placeholder="Nombre" value="<?php echo htmlspecialchars($firstname); ?>" required maxlength="30">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="lastname" class="form-label w-100 text-center custom-label">Apellido/s</label>
-                    <input type="text" class="form-control SearchTopic" id="lastname" name="lastname" placeholder="Apellido" value="<?php echo htmlspecialchars($lastname); ?>" required>
+                    <input type="text" class="form-control SearchTopic" id="lastname" name="lastname" placeholder="Apellido" value="<?php echo htmlspecialchars($lastname); ?>" required maxlength="30">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="birthdate" class="form-label w-100 text-center custom-label">Fecha de nacimiento</label>
-                    <input type="date" class="form-control SearchTopic" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($birthdate); ?>" required>
+                    <input type="date" class="form-control SearchTopic" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($birthdate); ?>" required min="1950-01-01" max="2015-12-31">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label class="form-label w-100 text-center custom-label">Sexo</label>
@@ -195,15 +212,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="phonenumber" class="form-label w-100 text-center custom-label">Numero de teléfono</label>
-                    <input type="tel" class="form-control SearchTopic" id="phonenumber" name="phonenumber" placeholder="00 0000 0000" value="<?php echo htmlspecialchars($phone); ?>" required>
+                    <input type="tel" class="form-control SearchTopic" id="phonenumber" name="phonenumber" placeholder="10 dígitos numéricos" value="<?php echo htmlspecialchars($phone); ?>" required pattern="[0-9]{10}" maxlength="10" title="El teléfono debe contener 10 dígitos numéricos.">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="username" class="form-label w-100 text-center custom-label">Nombre de usuario</label>
-                    <input type="text" class="form-control SearchTopic" id="username" name="username" placeholder="Sobrenombre" value="<?php echo htmlspecialchars($nametag); ?>" required>
+                    <input type="text" class="form-control SearchTopic" id="username" name="username" placeholder="Sobrenombre" value="<?php echo htmlspecialchars($nametag); ?>" required maxlength="20">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="email" class="form-label w-100 text-center custom-label">Correo electrónico</label>
-                    <input type="email" class="form-control SearchTopic" id="email" name="email" placeholder="Correo electrónico" value="<?php echo htmlspecialchars($email); ?>" required>
+                    <input type="email" class="form-control SearchTopic" id="email" name="email" placeholder="Correo electrónico" value="<?php echo htmlspecialchars($email); ?>" required maxlength="30">
                 </div>
                 <div class="mb-3 d-flex flex-column align-items-center">
                     <label for="password" class="form-label w-100 text-center custom-label">Contraseña</label>
